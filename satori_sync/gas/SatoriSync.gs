@@ -132,7 +132,7 @@ function satoriSync() {
 
 /**
  * APIの動作確認用：スクリプトプロパティ SATORI_TEST_EMAIL のカスタマー1件に「対応中」を送り、結果をログに出す。
- * 情報獲得経路（collection_route）なしで更新できるか、既存の値が変わらないかを確認するために使う。
+ * 送信が通るか、情報獲得経路（collection_route）が既存の値のまま変わらないかを確認するために使う。
  */
 function satoriTestOne() {
   var email = PropertiesService.getScriptProperties().getProperty('SATORI_TEST_EMAIL');
