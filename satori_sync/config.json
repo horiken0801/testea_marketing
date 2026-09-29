@@ -24,7 +24,12 @@
     "permission_denied_value": "拒否",
     "status_column": "custom:custom_situation",
     "tags_column": "tags",
-    "collection_route_column": "collection_route"
+    "collection_route_column": "collection_route",
+    "status_column_candidates": [
+      "custom:custom_situation",
+      "現在の状態",
+      "custom_situation"
+    ]
   },
   "_api_説明": "--apply でSATORI APIに送るときの設定。status_custom_field は「現在の状態」カスタム項目の識別名。",
   "api": {

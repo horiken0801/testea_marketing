@@ -214,9 +214,13 @@ def build_master_index(rows, config, as_of):
 
         for email in emails:
             entry = index.setdefault(email, {"do_not_send": False, "status": None, "rank": None,
-                                             "reason": "", "inquiry": None})
+                                             "reason": "", "inquiry": None, "active": False, "latest_inquiry": None})
             entry["do_not_send"] = entry["do_not_send"] or do_not_send
+            if inquiry and (entry["latest_inquiry"] is None or inquiry > entry["latest_inquiry"]):
+                entry["latest_inquiry"] = inquiry
             if status is None:
+                # 締め日より後に問合せ・対応がある行（＝対応中）
+                entry["active"] = entry["active"] or (not spam and inquiry is not None)
                 continue
             # 同じ在籍なら再入会の行を優先（再入会の在籍はSATORIに書き込むため）
             rank = (priority.get(status, len(priority)), reason != REJOINED, -row_no)
@@ -250,14 +254,16 @@ def plan_changes(master_index, satori_rows, config):
             report.append([original_email, "配信許可", current_permission, denied, "送付禁止フラグ"])
 
         current_status = normalize_text(row.get(s["status_column"], ""))
-        writable = entry["status"] in config["write_statuses"] or (
+        # 同じメールアドレスに対応中の問合せがあれば、古い行から判定した未決・元在は送らない
+        stale = entry["active"] and entry["status"] in (config["status_values"]["pending"], config["status_values"]["former"])
+        writable = not stale and entry["status"] in config["write_statuses"] or (
             config.get("write_rejoined") and entry["reason"] == REJOINED)
         if writable and current_status != entry["status"]:
             status_updates.append({"email": original_email, "value": entry["status"], "reason": entry["reason"]})
             report.append([original_email, "現在の状態", current_status, entry["status"], entry["reason"]])
 
         current_tags = [normalize_text(t) for t in row.get(s["tags_column"], "").split(",")]
-        if (entry["status"] in tag_cfg["statuses"] and entry["inquiry"] and entry["inquiry"] >= tag_since
+        if (not stale and entry["status"] in tag_cfg["statuses"] and entry["inquiry"] and entry["inquiry"] >= tag_since
                 and tag_cfg["name"] not in current_tags):
             tag_updates.append({"email": original_email, "value": tag_cfg["name"]})
             report.append([original_email, "タグ追加", "", tag_cfg["name"],
@@ -308,6 +314,70 @@ def write_csv(path, header, rows, encoding):
         writer.writerows(rows)
 
 
+def expected_status(entry, config):
+    """新規状況表から見て SATORI の「現在の状態」にあるべき値（None は「書き込み対象外」）。"""
+    values = config["status_values"]
+    if entry["active"] and entry["status"] in (values["pending"], values["former"]):
+        return None
+    if entry["status"] in config["write_statuses"] or (config.get("write_rejoined") and entry["reason"] == REJOINED):
+        return entry["status"]
+    return None
+
+
+def verify(master_index, satori_header, satori_rows, config):
+    """取り込み後の SATORI エクスポートと新規状況表を突き合わせ、差異の一覧を返す。
+
+    重要度 高: 新規の問合せ者に以前の方向けの文面が届く恐れがあるもの
+    """
+    s, tag_cfg, values = config["satori"], config["tag"], config["status_values"]
+    status_col = next((c for c in s["status_column_candidates"] if c in satori_header), None)
+    if status_col is None:
+        raise SystemExit("SATORIのCSVに現在の状態の列（" + " / ".join(s["status_column_candidates"]) + "）がありません。"
+                         "エクスポート時に現在の状態を含めてください。")
+    since = datetime.date.fromisoformat(tag_cfg["inquiry_since"])
+    old_statuses = (values["pending"], values["former"])
+    issues = []
+
+    for row in satori_rows:
+        emails = extract_emails(row.get(s["email_column"], ""))
+        if not emails:
+            continue
+        email, entry = normalize_text(row[s["email_column"]]), master_index.get(emails[0])
+        actual = normalize_text(row.get(status_col, ""))
+        tags = [normalize_text(t) for t in row.get(s["tags_column"], "").split(",")]
+        has_tag = tag_cfg["name"] in tags
+
+        if entry is None:
+            if actual in old_statuses and not has_tag:
+                issues.append(["中", email, actual, "", "新規状況表にメールアドレスが無いが、以前の方向けの対象になっている"])
+            continue
+
+        latest = entry["latest_inquiry"]
+        recent = latest is not None and latest >= since
+        expected = expected_status(entry, config)
+
+        if actual in old_statuses and entry["active"]:
+            issues.append(["高", email, actual, "（対応中）",
+                           f"新規状況表では対応中（最新の問合せ {latest:%Y/%m/%d}）なのに{actual}になっている" if latest else
+                           f"新規状況表では対応中なのに{actual}になっている"])
+        elif actual in old_statuses and recent and not has_tag:
+            issues.append(["高", email, actual, expected or "",
+                           f"{latest:%Y/%m/%d}の問合せ者なのにタグ「{tag_cfg['name']}」が無い（以前の方向けの文面が届く恐れ）"])
+        elif actual in old_statuses and expected != actual:
+            issues.append(["中", email, actual, expected or "", "新規状況表の判定と異なる"])
+        elif expected and actual != expected:
+            issues.append(["低", email, actual, expected, "新規状況表の判定がSATORIに反映されていない"])
+
+        if has_tag and actual not in old_statuses:
+            issues.append(["低", email, actual, expected or "", f"タグ「{tag_cfg['name']}」があるが未決・元在ではない"])
+        if entry["do_not_send"] and normalize_text(row.get(s["permission_column"], "")) != s["permission_denied_value"]:
+            issues.append(["高", email, normalize_text(row.get(s["permission_column"], "")), s["permission_denied_value"],
+                           "送付禁止フラグがあるのに配信許可が拒否になっていない"])
+
+    order = {"高": 0, "中": 1, "低": 2}
+    return sorted(issues, key=lambda i: order[i[0]])
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--master", required=True, help="新規状況表v2.0_マスター のCSV")
@@ -318,6 +388,8 @@ def main(argv=None):
     parser.add_argument("--apply", action="store_true", help="SATORI APIで直接反映する（付けなければCSV出力のみ）")
     parser.add_argument("--only", action="append", choices=["permission", "status", "tag"],
                         help="--apply で送る内容を絞る（複数指定可。既定: すべて）")
+    parser.add_argument("--verify", action="store_true",
+                        help="取り込み後のSATORIエクスポートと突き合わせて差異レポート（差異レポート.csv）を出す")
     parser.add_argument("--config", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json"))
     args = parser.parse_args(argv)
 
@@ -331,6 +403,18 @@ def main(argv=None):
         print(f"注意: SATORIのCSVに「{s['status_column']}」が無いため、現在の状態は判定できた人全員に送ります。", file=sys.stderr)
 
     master_index = build_master_index(master_rows, config, args.as_of)
+    if args.verify:
+        issues = verify(master_index, satori_header, satori_rows, config)
+        os.makedirs(args.out, exist_ok=True)
+        write_csv(os.path.join(args.out, "差異レポート.csv"), ["重要度", "メールアドレス", "SATORIの現在の状態", "新規状況表の判定", "内容"],
+                  issues, config.get("import_encoding", "cp932"))
+        counts = collections.Counter(i[0] for i in issues)
+        print(f"差異: 高 {counts['高']}件 / 中 {counts['中']}件 / 低 {counts['低']}件")
+        for level, _, _, _, message in issues:
+            if level == "高":
+                print(f"  [高] {message}")
+        print(f"出力先: {os.path.abspath(os.path.join(args.out, '差異レポート.csv'))}")
+        return
     permission_updates, status_updates, tag_updates, report, unmatched, routes = plan_changes(master_index, satori_rows, config)
 
     os.makedirs(args.out, exist_ok=True)

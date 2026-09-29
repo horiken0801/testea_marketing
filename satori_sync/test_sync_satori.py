@@ -25,13 +25,15 @@ MASTER_CSV = """校舎,問合日,名前,初期対応へのレス,面談実施,�
 田町校,06/10,旧シート,,,,,,md3@example.com,,未対応,FALSE,FALSE
 田町校,09/05,旧シート,,,,,,md4@example.com,,未対応,FALSE,FALSE
 駒込校,2019-01-01,元在,,,,,,rejoin@example.com,,元在,FALSE,FALSE
+初台校,2026-02-23,2月に停止,,,,,,again@example.com,,未対応,FALSE,FALSE
+初台校,2026-09-05,9月に再問合せ,,,,,,again@example.com,,未対応,FALSE,FALSE
 駒込校,2026-04-01,再入会,,04/05,,04/20,TRUE,rejoin@example.com,,入会,FALSE,FALSE
 """
 
 SATORI_EMAILS = ["taro@example.com", "old@example.com", "hanako@example.com", "b@example.com",
                  "sales@example.com", "sept@example.com", "new@example.com", "may@example.com",
                  "already@example.com", "md1@example.com", "md2@example.com", "md3@example.com",
-                 "md4@example.com", "rejoin@example.com", "other@example.com"]
+                 "md4@example.com", "rejoin@example.com", "again@example.com", "other@example.com"]
 
 
 def satori_row(e):
@@ -81,6 +83,7 @@ class SyncSatoriTest(unittest.TestCase):
             "md2@example.com": "未決",     # 年なし 2025/12/15 問合せ・2026/01/10 面談
             "md3@example.com": "未決",     # 年なし 2026/06/10 問合せ
         })
+        # again: 2月の問合せは止まっているが9月に再問合せして対応中 → 未決にしない
         # sept(9月も対応中)・new(9月問合せ)・sales(営業)・md4(2025/09/05? → 年推定で2026/09/05) は送らない
 
     def test_tag_for_recent_pending_without_existing_tag(self):
@@ -110,6 +113,32 @@ class SyncSatoriTest(unittest.TestCase):
     def test_reads_utf8_satori_export(self):
         read = self.run_sync(satori_encoding="utf-8")
         self.assertEqual(len(read("変更レポート.csv")), 14)
+
+
+class VerifyTest(unittest.TestCase):
+    AFTER_IMPORT = {  # email: (配信許可, 現在の状態, タグ)
+        "taro@example.com": ("拒否", "未決", "新規_未決元在"),   # 正しい
+        "again@example.com": ("承認", "未決", ""),             # 9月に再問合せ・対応中なのに未決 → 高
+        "md3@example.com": ("承認", "未決", ""),               # 6月の問合せなのにタグなし → 高
+        "b@example.com": ("承認", "元在", ""),                 # 送付禁止なのに承認 → 高
+        "old@example.com": ("承認", "", ""),                   # 未反映 → 低
+        "sept@example.com": ("承認", "", ""),                  # 対応中で空 → 差異なし
+    }
+
+    def test_verify_flags_risks(self):
+        tmp = tempfile.mkdtemp()
+        master, satori, out = (os.path.join(tmp, n) for n in ("m.csv", "s.csv", "out"))
+        with open(master, "w", encoding="utf-8") as f:
+            f.write(MASTER_CSV)
+        with open(satori, "w", encoding="cp932") as f:
+            f.write("email,delivery_permission,現在の状態,tags\n")
+            for e, (p, st, tag) in self.AFTER_IMPORT.items():
+                f.write(f"{e},{p},{st},{tag}\n")
+        sync_satori.main(["--master", master, "--satori", satori, "--out", out, "--as-of", "2026-09-29", "--verify"])
+        with open(os.path.join(out, "差異レポート.csv"), encoding="cp932", newline="") as f:
+            issues = {(r[0], r[1]) for r in list(csv.reader(f))[1:]}
+        self.assertEqual(issues, {("高", "again@example.com"), ("高", "md3@example.com"),
+                                  ("高", "b@example.com"), ("低", "old@example.com")})
 
 
 class DateTest(unittest.TestCase):
