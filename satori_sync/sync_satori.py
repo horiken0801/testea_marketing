@@ -332,8 +332,8 @@ def verify(master_index, satori_header, satori_rows, config):
     s, tag_cfg, values = config["satori"], config["tag"], config["status_values"]
     status_col = next((c for c in s["status_column_candidates"] if c in satori_header), None)
     if status_col is None:
-        raise SystemExit("SATORIのCSVに現在の状態の列（" + " / ".join(s["status_column_candidates"]) + "）がありません。"
-                         "エクスポート時に現在の状態を含めてください。")
+        print("注意: SATORIのCSVに現在の状態の列が無いため、配信許可とタグだけを確認します。"
+              "現在の状態も確認するには、エクスポート時に現在の状態（custom_situation）を含めてください。", file=sys.stderr)
     since = datetime.date.fromisoformat(tag_cfg["inquiry_since"])
     old_statuses = (values["pending"], values["former"])
     issues = []
@@ -343,18 +343,32 @@ def verify(master_index, satori_header, satori_rows, config):
         if not emails:
             continue
         email, entry = normalize_text(row[s["email_column"]]), master_index.get(emails[0])
-        actual = normalize_text(row.get(status_col, ""))
+        actual = normalize_text(row.get(status_col, "")) if status_col else None
         tags = [normalize_text(t) for t in row.get(s["tags_column"], "").split(",")]
         has_tag = tag_cfg["name"] in tags
 
         if entry is None:
-            if actual in old_statuses and not has_tag:
+            if actual and actual in old_statuses and not has_tag:
                 issues.append(["中", email, actual, "", "新規状況表にメールアドレスが無いが、以前の方向けの対象になっている"])
             continue
 
         latest = entry["latest_inquiry"]
         recent = latest is not None and latest >= since
         expected = expected_status(entry, config)
+        tag_expected = expected in tag_cfg["statuses"] and entry["inquiry"] is not None and entry["inquiry"] >= since
+
+        if entry["do_not_send"] and normalize_text(row.get(s["permission_column"], "")) != s["permission_denied_value"]:
+            issues.append(["高", email, normalize_text(row.get(s["permission_column"], "")), s["permission_denied_value"],
+                           "送付禁止フラグがあるのに配信許可が拒否になっていない"])
+
+        if status_col is None:
+            if has_tag and entry["active"]:
+                issues.append(["高", email, "", "（対応中）", f"対応中なのにタグ「{tag_cfg['name']}」が付いている"])
+            elif has_tag and not tag_expected:
+                issues.append(["中", email, "", expected or "", f"タグ「{tag_cfg['name']}」の対象外なのに付いている"])
+            elif tag_expected and not has_tag:
+                issues.append(["高", email, "", expected, f"{entry['inquiry']:%Y/%m/%d}の問合せ者なのにタグ「{tag_cfg['name']}」が無い"])
+            continue
 
         if actual in old_statuses and entry["active"]:
             issues.append(["高", email, actual, "（対応中）",
@@ -370,9 +384,6 @@ def verify(master_index, satori_header, satori_rows, config):
 
         if has_tag and actual not in old_statuses:
             issues.append(["低", email, actual, expected or "", f"タグ「{tag_cfg['name']}」があるが未決・元在ではない"])
-        if entry["do_not_send"] and normalize_text(row.get(s["permission_column"], "")) != s["permission_denied_value"]:
-            issues.append(["高", email, normalize_text(row.get(s["permission_column"], "")), s["permission_denied_value"],
-                           "送付禁止フラグがあるのに配信許可が拒否になっていない"])
 
     order = {"高": 0, "中": 1, "低": 2}
     return sorted(issues, key=lambda i: order[i[0]])
