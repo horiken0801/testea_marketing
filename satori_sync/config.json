@@ -1,40 +1,61 @@
 {
   "_説明": "新規状況表v2.0 → SATORI 連携の設定。列名・値はSATORIの実際の項目名に合わせて調整してください。",
-
   "master": {
     "email_column": "メールアドレス",
     "status_column": "在籍ステータス",
     "do_not_send_column": "送付禁止フラグ",
     "spam_column": "営業・取材・スパムフラグ",
     "inquiry_date_column": "問合日",
-    "activity_date_columns": ["問合日", "初期対応へのレス", "面談実施", "体験実施"],
-    "enrolled_columns": ["入会", "再入会"],
-    "withdrawn_column": "退会日"
+    "activity_date_columns": [
+      "問合日",
+      "初期対応へのレス",
+      "面談実施",
+      "体験実施"
+    ],
+    "enrolled_columns": [
+      "入会",
+      "再入会"
+    ],
+    "withdrawn_column": "退会日",
+    "campus_column": "校舎"
   },
-
   "_satori_説明": "SATORIのカスタマーエクスポートCSVの列名。現在の状態(custom_situation)はエクスポートに含まれないため、判定できた人には毎回送信する。",
   "satori": {
     "email_column": "email",
     "permission_column": "delivery_permission",
     "permission_denied_value": "拒否",
-    "status_column": "custom:custom_situation"
+    "status_column": "custom:custom_situation",
+    "tags_column": "tags",
+    "collection_route_column": "collection_route"
   },
-
   "_api_説明": "--apply でSATORI APIに送るときの設定。status_custom_field は「現在の状態」カスタム項目の識別名。",
   "api": {
     "delivery_permission_reject": "reject",
-    "status_custom_field": "custom_situation"
+    "status_custom_field": "custom_situation",
+    "collection_route_fallback": "新規状況表v2.0"
   },
-
   "_status_values_説明": "SATORIの「現在の状態」に書き込む値。",
   "status_values": {
     "pending": "未決",
     "former": "元在",
     "enrolled": "在籍"
   },
-
   "_status_priority_説明": "同じメールアドレスが複数行（兄弟など）にある場合、先に書かれた状態を優先します。同順位なら下の行（新しい行）を優先。",
-  "status_priority": ["在籍", "未決", "元在"],
-
+  "status_priority": [
+    "在籍",
+    "未決",
+    "元在"
+  ],
+  "_tag_説明": "inquiry_since 以降の問合せで、今回 未決・元在 と判定された人にタグを追加する（既にタグがある人は除く）。",
+  "tag": {
+    "name": "新規_未決元在",
+    "inquiry_since": "2026-06-01",
+    "statuses": [
+      "未決",
+      "元在"
+    ]
+  },
+  "_year_inference_anchor_説明": "年なし（MM/DD）の問合日の年を推定する基準日。null なら --as-of。旧シート統合分の年がずれないよう 2026-09-29 に固定。",
+  "year_inference_anchor": "2026-09-29",
   "output_encoding": "utf-8-sig"
 }
