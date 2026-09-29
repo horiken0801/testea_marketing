@@ -16,7 +16,7 @@
  *   SATORI_API_KEY / SATORI_SECRET_KEY / COMPANY_KEY / COMPANY_SECRET
  * バルクAPIでは情報獲得経路（collection_route）が必須（2026/09/29 のテストで確認）。スクリプトプロパティ SATORI_SEND_ROUTE を "true" にし、
  * 既存の値を変えないよう「SATORI登録済み」シート（A列: email、B列: 情報獲得経路）の値を送る。
- * シートに無い人は、既存の handleBackgroundSync と同じく「なにで知ったか」（空なら SATORI通常問い合わせフォーム）を送る。
+ * シートに無い人・シートの経路が空の人は「その他」を送る（routeDefault）。
  * 安全のため、スクリプトプロパティ SATORI_DRY_RUN が "false" になるまでは送信せず、
  * 「SATORI連携プレビュー」シートに送る予定の内容を書き出すだけにする。
  */
@@ -41,7 +41,10 @@ var SATORI_CONF = {
     activity: ['問合日', '初期対応へのレス', '面談実施', '体験実施'],
     route: 'なにで知ったか',
   },
-  routeDefault: 'SATORI通常問い合わせフォーム',
+  // 情報獲得経路が分からない人に送る値
+  routeDefault: 'その他',
+  // true にすると、分からない人には「なにで知ったか」を送る（既存の handleBackgroundSync と同じ）
+  routeFromSheet: false,
   statusField: 'custom_situation',
   permissionDenied: '拒否',
   tagName: '新規_未決元在',
@@ -295,12 +298,13 @@ function satoriRegistry_() {
 
 /**
  * 情報獲得経路（collection_route）はAPIで必須のため、既存の値を変えないよう
- * SATORI登録済みシートの値 → 新規状況表の「なにで知ったか」→ 既定値 の順で決める。
+ * SATORI登録済みシートの値 →（routeFromSheet なら「なにで知ったか」）→ 既定値「その他」の順で決める。
  */
 function satoriRoutes_(emails, desired, registry) {
   var routes = {};
   emails.forEach(function (email) {
-    var route = (registry && registry.routes[email]) || (desired[email] && desired[email].route) || SATORI_CONF.routeDefault;
+    var route = (registry && registry.routes[email]) ||
+      (SATORI_CONF.routeFromSheet && desired[email] && desired[email].route) || SATORI_CONF.routeDefault;
     routes[email] = { route: route };
   });
   return routes;

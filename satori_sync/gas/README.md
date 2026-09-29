@@ -28,7 +28,7 @@
    新しいシート「SATORI登録済み」を作り、SATORIのカスタマーエクスポートの email を A列、collection_route を B列に貼る。
    スクリプトプロパティ `SATORI_SEND_ROUTE` を `true` にする。
    - 送信時は SATORI 登録済みの値をそのまま送るので、既存の情報獲得経路は変わりません。
-   - シートに無い人・経路が空の人は、既存の `handleBackgroundSync` と同じく「なにで知ったか」（空なら SATORI通常問い合わせフォーム）を送ります。
+   - シートに無い人・経路が空の人は「その他」を送ります（`SATORI_CONF.routeDefault`）。`routeFromSheet` を true にすると「なにで知ったか」を送ります。
 5. **API の動作確認**: スクリプトプロパティ `SATORI_TEST_EMAIL` にテスト用カスタマーのメールアドレスを入れ、
    `satoriTestOne` を実行して実行ログを確認する。`failed_rows` が空なら成功。
    SATORI でそのカスタマーの現在の状態が「対応中」になり、情報獲得経路が変わっていないことを確認。
