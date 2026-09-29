@@ -51,10 +51,12 @@ SATORI の「CSVインポート（カスタマー更新）」に使うCSVを作�
    ```
 
 4. `output/変更レポート.csv` を開いて、変更内容が正しいか確認
-5. SATORI のカスタマーインポートで、メールアドレスをキーにして次のファイルを取り込む（または下の `--apply`）
-   - `satori_import_配信拒否.csv`
-   - `satori_import_現在の状態.csv`
-   - `satori_import_タグ.csv`
+5. SATORI 管理画面の「一括登録」で `satori_import_一括登録.csv` を取り込む（または下の `--apply`）
+   - 文字コード: **Shift-JIS (Windows-31J)**
+   - カスタマー更新: **はい**
+   - 空白で上書きする: **いいえ**（空欄の項目は既存の値のまま残ります。タグは追加のみで既存タグは消えません）
+
+   項目ごとの `satori_import_配信拒否.csv` / `satori_import_現在の状態.csv` / `satori_import_タグ.csv`（UTF-8）も出力されます。
 
 `SATORI未登録_送付禁止.csv` には、送付禁止なのにSATORIにメールアドレスが見つからなかった人が入ります（必要に応じて確認してください）。
 

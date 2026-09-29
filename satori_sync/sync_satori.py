@@ -9,6 +9,7 @@
   - satori_import_配信拒否.csv   : 送付禁止フラグが付いた顧客の 配信許可 を「拒否」にするインポート用CSV
   - satori_import_現在の状態.csv : 未決・元在・在籍 を 現在の状態 に反映するインポート用CSV
   - satori_import_タグ.csv       : 新たに未決・元在になった最近の問合せ者に付けるタグ
+  - satori_import_一括登録.csv   : 上の3つを1ファイルにまとめたもの（SATORI管理画面の一括登録用・Shift_JIS）
   - 変更レポート.csv             : 何をどう変えるかの一覧（確認用）
   - SATORI未登録_送付禁止.csv    : 送付禁止だがSATORIにメールアドレスが見つからなかった顧客
 
@@ -276,6 +277,21 @@ def build_api_rows(permission_updates, status_updates, tag_updates, routes, conf
     return header, list(rows.values())
 
 
+def build_import_rows(permission_updates, status_updates, tag_updates, config):
+    """SATORI管理画面の「一括登録」用に、変更内容を1メールアドレス1行にまとめる。
+
+    取り込み時に「カスタマー更新: はい」「空白で上書きする: いいえ」を選ぶこと（空欄の項目は既存の値のまま、タグは追加のみ）。
+    """
+    status_col = f"custom:{config['api']['status_custom_field']}"
+    header = ["email", "delivery_permission", status_col, "tags"]
+    rows = {}
+    for updates, col in ((permission_updates, "delivery_permission"), (status_updates, status_col), (tag_updates, "tags")):
+        for u in updates:
+            rows.setdefault(u["email"], dict.fromkeys(header, ""))
+            rows[u["email"]].update({"email": u["email"], col: u["value"]})
+    return header, [[r[h] for h in header] for r in rows.values()]
+
+
 def write_csv(path, header, rows, encoding):
     with open(path, "w", newline="", encoding=encoding) as f:
         writer = csv.writer(f)
@@ -315,6 +331,9 @@ def main(argv=None):
                                   ("satori_import_現在の状態.csv", ["email", status_col], status_updates),
                                   ("satori_import_タグ.csv", ["email", "append_tags"], tag_updates)):
         write_csv(os.path.join(args.out, name), header, [[u["email"], u["value"]] for u in updates], enc)
+    import_header, import_rows = build_import_rows(permission_updates, status_updates, tag_updates, config)
+    write_csv(os.path.join(args.out, "satori_import_一括登録.csv"), import_header, import_rows,
+              config.get("import_encoding", "cp932"))
     write_csv(os.path.join(args.out, "変更レポート.csv"), ["メールアドレス", "項目", "変更前", "変更後", "理由"], report, enc)
     write_csv(os.path.join(args.out, "SATORI未登録_送付禁止.csv"), ["メールアドレス"], [[e] for e in unmatched], enc)
 
@@ -325,6 +344,7 @@ def main(argv=None):
     print(f"現在の状態を送信: {len(status_updates)}件 " + " / ".join(f"{k} {v}件" for k, v in status_counts.most_common()))
     print(f"タグ「{config['tag']['name']}」を追加: {len(tag_updates)}件")
     print(f"送付禁止だがSATORI未登録: {len(unmatched)}件")
+    print(f"一括登録用CSV: {len(import_rows)}件")
     print(f"出力先: {os.path.abspath(args.out)}")
 
     if args.apply:

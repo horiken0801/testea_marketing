@@ -47,6 +47,7 @@ class SyncSatoriTest(unittest.TestCase):
         master = os.path.join(tmp, "master.csv")
         satori = os.path.join(tmp, "satori.csv")
         out = os.path.join(tmp, "out")
+        self.last_out = out
         with open(master, "w", encoding="utf-8") as f:
             f.write(MASTER_CSV)
         with open(satori, "w", encoding=satori_encoding) as f:
@@ -83,6 +84,15 @@ class SyncSatoriTest(unittest.TestCase):
         read = self.run_sync()
         self.assertEqual(read("satori_import_タグ.csv"),
                          [["taro@example.com", "新規_未決元在"], ["md3@example.com", "新規_未決元在"]])
+
+    def test_combined_import_csv_is_shift_jis_with_blanks(self):
+        self.run_sync()
+        with open(os.path.join(self.last_out, "satori_import_一括登録.csv"), encoding="cp932", newline="") as f:
+            rows = list(csv.reader(f))
+        self.assertEqual(rows[0], ["email", "delivery_permission", "custom:custom_situation", "tags"])
+        self.assertIn(["taro@example.com", "拒否", "未決", "新規_未決元在"], rows)
+        self.assertIn(["old@example.com", "", "未決", ""], rows)
+        self.assertIn(["already@example.com", "", "未決", ""], rows)
 
     def test_unmatched_do_not_send_reported(self):
         read = self.run_sync()
