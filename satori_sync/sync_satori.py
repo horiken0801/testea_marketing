@@ -241,7 +241,8 @@ def plan_changes(master_index, satori_rows, config):
             report.append([original_email, "配信許可", current_permission, denied, "送付禁止フラグ"])
 
         current_status = normalize_text(row.get(s["status_column"], ""))
-        if entry["status"] and current_status != entry["status"]:
+        writable = entry["status"] in config["write_statuses"]
+        if writable and current_status != entry["status"]:
             status_updates.append({"email": original_email, "value": entry["status"]})
             report.append([original_email, "現在の状態", current_status, entry["status"], entry["reason"]])
 
@@ -290,6 +291,8 @@ def main(argv=None):
     parser.add_argument("--as-of", type=datetime.date.fromisoformat, default=datetime.date.today(),
                         help="基準日 YYYY-MM-DD（既定: 今日）。前月末までに対応が止まっている問合せを未決とする")
     parser.add_argument("--apply", action="store_true", help="SATORI APIで直接反映する（付けなければCSV出力のみ）")
+    parser.add_argument("--only", action="append", choices=["permission", "status", "tag"],
+                        help="--apply で送る内容を絞る（複数指定可。既定: すべて）")
     parser.add_argument("--config", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json"))
     args = parser.parse_args(argv)
 
@@ -325,7 +328,10 @@ def main(argv=None):
     print(f"出力先: {os.path.abspath(args.out)}")
 
     if args.apply:
-        apply_via_api(permission_updates, status_updates, tag_updates, routes, config)
+        only = set(args.only or ["permission", "status", "tag"])
+        apply_via_api(permission_updates if "permission" in only else [],
+                      status_updates if "status" in only else [],
+                      tag_updates if "tag" in only else [], routes, config)
 
 
 def apply_via_api(permission_updates, status_updates, tag_updates, routes, config):

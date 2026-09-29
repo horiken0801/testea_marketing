@@ -16,10 +16,12 @@ SATORI の「CSVインポート（カスタマー更新）」に使うCSVを作�
 | 条件 | 現在の状態 |
 |------|-----------|
 | 退会日あり | 元在 |
-| 入会日あり・再入会にチェック | 在籍 |
+| 入会日あり・再入会にチェック | 在籍（※SATORIには書き込まない） |
 | 在籍ステータスが「元在」 | 元在 |
 | 締め日までの問合せで、問合日・初期対応へのレス・面談実施・体験実施が **すべて締め日以前**（締め日までに対応が止まっている） | 未決 |
 | 上のどれにも当たらない（締め日後に対応あり・締め日後の問合せ） | 送らない（SATORIの値はそのまま） |
+
+※ 在籍は退会の記録が無く現役かどうか判別できないため、`write_statuses` で書き込み対象から外しています（兄弟の未決抑止の判定にだけ使います）。
 
 同じメールアドレスが複数行にある場合は 在籍 ＞ 未決 ＞ 元在 の順で優先します（兄弟の誰かが在籍中なら未決メールを送らない）。
 
@@ -71,6 +73,8 @@ export SATORI_COMPANY_SECRET=...  # カンパニーシークレットキー
 python3 sync_satori.py --master master.csv --satori satori.csv
 # 問題なければ反映
 python3 sync_satori.py --master master.csv --satori satori.csv --apply
+# 一部だけ送る場合（例: 配信拒否だけ）
+python3 sync_satori.py --master master.csv --satori satori.csv --apply --only permission
 ```
 
 - SATORI のAPIにはカスタマーを検索する機能がなく、upsert は未登録のメールアドレスを新規登録してしまいます。
@@ -101,6 +105,7 @@ SATORI の項目名や選択肢の値が実際と違う場合は、`config.json`
 - `satori.permission_column` / `permission_denied_value`: 配信許可の列名と「拒否」の値
 - `satori.status_column`: 現在の状態の列名
 - `status_values`: 現在の状態に書き込む値（未決・元在・在籍）
+- `write_statuses`: SATORIに書き込む状態（既定: 未決・元在）
 - `tag`: 付けるタグ名・対象の問合日・対象の状態
 - `year_inference_anchor`: 年なし日付の年推定の基準日
 - `master.activity_date_columns`: 未決判定で「最後の対応日」を見る列

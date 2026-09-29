@@ -69,7 +69,6 @@ class SyncSatoriTest(unittest.TestCase):
         self.assertEqual(dict(read("satori_import_現在の状態.csv")), {
             "taro@example.com": "未決",    # 最後の対応が8月
             "old@example.com": "未決",     # 2017年の問合せで対応なし
-            "hanako@example.com": "在籍",  # 兄は元在だが弟が再入会 → 在籍を優先
             "b@example.com": "元在",       # 退会日あり
             "may@example.com": "未決",
             "already@example.com": "未決",  # 2021年の問合せで対応なし
@@ -77,6 +76,7 @@ class SyncSatoriTest(unittest.TestCase):
             "md2@example.com": "未決",     # 年なし 2025/12/15 問合せ・2026/01/10 面談
             "md3@example.com": "未決",     # 年なし 2026/06/10 問合せ
         })
+        # hanako: 兄は元在だが弟が再入会 → 在籍が優先されるが、在籍は書き込まない
         # sept(9月も対応中)・new(9月問合せ)・sales(営業)・md4(2025/09/05? → 年推定で2026/09/05) は送らない
 
     def test_tag_for_recent_pending_without_existing_tag(self):
@@ -90,7 +90,7 @@ class SyncSatoriTest(unittest.TestCase):
 
     def test_reads_utf8_satori_export(self):
         read = self.run_sync(satori_encoding="utf-8")
-        self.assertEqual(len(read("変更レポート.csv")), 13)
+        self.assertEqual(len(read("変更レポート.csv")), 12)
 
 
 class DateTest(unittest.TestCase):
