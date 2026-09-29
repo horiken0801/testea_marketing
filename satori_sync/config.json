@@ -12,12 +12,10 @@
       "面談実施",
       "体験実施"
     ],
-    "enrolled_columns": [
-      "入会",
-      "再入会"
-    ],
     "withdrawn_column": "退会日",
-    "campus_column": "校舎"
+    "campus_column": "校舎",
+    "enrollment_date_column": "入会",
+    "rejoin_column": "再入会"
   },
   "_satori_説明": "SATORIのカスタマーエクスポートCSVの列名。現在の状態(custom_situation)はエクスポートに含まれないため、判定できた人には毎回送信する。",
   "satori": {
@@ -51,6 +49,8 @@
     "未決",
     "元在"
   ],
+  "_write_rejoined_説明": "true なら、再入会にチェックがあり入会日もある人は 在籍 を書き込む（再入会で元在・未決から戻った人）。",
+  "write_rejoined": true,
   "_tag_説明": "inquiry_since 以降の問合せで、今回 未決・元在 と判定された人にタグを追加する（既にタグがある人は除く）。",
   "tag": {
     "name": "新規_未決元在",

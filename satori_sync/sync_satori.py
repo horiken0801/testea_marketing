@@ -9,6 +9,7 @@
   - satori_import_配信拒否.csv   : 送付禁止フラグが付いた顧客の 配信許可 を「拒否」にするインポート用CSV
   - satori_import_現在の状態.csv : 未決・元在・在籍 を 現在の状態 に反映するインポート用CSV
   - satori_import_タグ.csv       : 新たに未決・元在になった最近の問合せ者に付けるタグ
+  - satori_import_再入会_在籍.csv : 再入会（再入会にチェック・入会日あり）の人の 現在の状態 を「在籍」にする一括登録用CSV
   - satori_import_一括登録.csv   : 上の3つを1ファイルにまとめたもの（SATORI管理画面の一括登録用・Shift_JIS）
   - 変更レポート.csv             : 何をどう変えるかの一覧（確認用）
   - SATORI未登録_送付禁止.csv    : 送付禁止だがSATORIにメールアドレスが見つからなかった顧客
@@ -35,6 +36,7 @@ FULL_DATE_RE = re.compile(r"(\d{4})[-/.年](\d{1,2})[-/.月](\d{1,2})")
 MONTH_DAY_RE = re.compile(r"(?<![\d/])(\d{1,2})/(\d{1,2})(?![\d/])")
 TRUTHY = {"true", "1", "yes", "y", "on", "はい", "済", "○", "〇", "◯", "✓", "✔", "☑", "レ"}
 INPUT_ENCODINGS = ("utf-8-sig", "cp932")
+REJOINED = "再入会（再入会にチェック・入会日あり）"
 # 年なし日付（MM/DD）が前の行より何日以上「進んで」いたら年をまたいだとみなすか（行を遡りながら判定）
 YEAR_WRAP_DAYS = 120
 
@@ -166,7 +168,7 @@ def derive_status(row, inquiry, config, as_of):
     """1行分の顧客データから SATORI の「現在の状態」に書く値と理由を決める。決められなければ (None, "")。
 
     - 退会日あり                                → 元在
-    - 入会日あり・再入会にチェック                → 在籍
+    - 入会日あり・再入会にチェック                → 在籍（再入会＋入会日ありのときだけ REJOINED）
     - 在籍ステータスが「元在」                    → 元在
     - 前月末までの問合せで、問合日・対応日付が
       全て前月末以前（＝前月末までに対応が止まっている） → 未決
@@ -174,7 +176,11 @@ def derive_status(row, inquiry, config, as_of):
     m, values = config["master"], config["status_values"]
     if has_date(row.get(m["withdrawn_column"], "")):
         return values["former"], "退会日あり"
-    if any(has_date(row.get(c, "")) or is_checked(row.get(c, "")) for c in m["enrolled_columns"]):
+    enrolled_date = has_date(row.get(m["enrollment_date_column"], ""))
+    rejoined = is_checked(row.get(m["rejoin_column"], "")) or has_date(row.get(m["rejoin_column"], ""))
+    if rejoined and enrolled_date:
+        return values["enrolled"], REJOINED
+    if enrolled_date or rejoined:
         return values["enrolled"], "入会あり"
     if normalize_text(row.get(m["status_column"], "")) == values["former"]:
         return values["former"], f"在籍ステータス: {values['former']}"
@@ -242,9 +248,10 @@ def plan_changes(master_index, satori_rows, config):
             report.append([original_email, "配信許可", current_permission, denied, "送付禁止フラグ"])
 
         current_status = normalize_text(row.get(s["status_column"], ""))
-        writable = entry["status"] in config["write_statuses"]
+        writable = entry["status"] in config["write_statuses"] or (
+            config.get("write_rejoined") and entry["reason"] == REJOINED)
         if writable and current_status != entry["status"]:
-            status_updates.append({"email": original_email, "value": entry["status"]})
+            status_updates.append({"email": original_email, "value": entry["status"], "reason": entry["reason"]})
             report.append([original_email, "現在の状態", current_status, entry["status"], entry["reason"]])
 
         current_tags = [normalize_text(t) for t in row.get(s["tags_column"], "").split(",")]
@@ -331,7 +338,11 @@ def main(argv=None):
                                   ("satori_import_現在の状態.csv", ["email", status_col], status_updates),
                                   ("satori_import_タグ.csv", ["email", "append_tags"], tag_updates)):
         write_csv(os.path.join(args.out, name), header, [[u["email"], u["value"]] for u in updates], enc)
+    rejoined_updates = [u for u in status_updates if u["reason"] == REJOINED]
+    _, rejoined_rows = build_import_rows([], rejoined_updates, [], config)
     import_header, import_rows = build_import_rows(permission_updates, status_updates, tag_updates, config)
+    write_csv(os.path.join(args.out, "satori_import_再入会_在籍.csv"), import_header, rejoined_rows,
+              config.get("import_encoding", "cp932"))
     write_csv(os.path.join(args.out, "satori_import_一括登録.csv"), import_header, import_rows,
               config.get("import_encoding", "cp932"))
     write_csv(os.path.join(args.out, "変更レポート.csv"), ["メールアドレス", "項目", "変更前", "変更後", "理由"], report, enc)
@@ -344,7 +355,7 @@ def main(argv=None):
     print(f"現在の状態を送信: {len(status_updates)}件 " + " / ".join(f"{k} {v}件" for k, v in status_counts.most_common()))
     print(f"タグ「{config['tag']['name']}」を追加: {len(tag_updates)}件")
     print(f"送付禁止だがSATORI未登録: {len(unmatched)}件")
-    print(f"一括登録用CSV: {len(import_rows)}件")
+    print(f"一括登録用CSV: {len(import_rows)}件（うち再入会→在籍 {len(rejoined_rows)}件は satori_import_再入会_在籍.csv にも出力）")
     print(f"出力先: {os.path.abspath(args.out)}")
 
     if args.apply:

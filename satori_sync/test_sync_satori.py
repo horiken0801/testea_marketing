@@ -24,12 +24,14 @@ MASTER_CSV = """校舎,問合日,名前,初期対応へのレス,面談実施,�
 田町校,12/15,旧シート,,01/10,,,,md2@example.com,,面談実施済,FALSE,FALSE
 田町校,06/10,旧シート,,,,,,md3@example.com,,未対応,FALSE,FALSE
 田町校,09/05,旧シート,,,,,,md4@example.com,,未対応,FALSE,FALSE
+駒込校,2019-01-01,元在,,,,,,rejoin@example.com,,元在,FALSE,FALSE
+駒込校,2026-04-01,再入会,,04/05,,04/20,TRUE,rejoin@example.com,,入会,FALSE,FALSE
 """
 
 SATORI_EMAILS = ["taro@example.com", "old@example.com", "hanako@example.com", "b@example.com",
                  "sales@example.com", "sept@example.com", "new@example.com", "may@example.com",
                  "already@example.com", "md1@example.com", "md2@example.com", "md3@example.com",
-                 "md4@example.com", "other@example.com"]
+                 "md4@example.com", "rejoin@example.com", "other@example.com"]
 
 
 def satori_row(e):
@@ -73,11 +75,12 @@ class SyncSatoriTest(unittest.TestCase):
             "b@example.com": "元在",       # 退会日あり
             "may@example.com": "未決",
             "already@example.com": "未決",  # 2021年の問合せで対応なし
+            "rejoin@example.com": "在籍",   # 元在 → 再入会（チェック・入会日あり）
             "md1@example.com": "未決",     # 年なし 2025/11/20 問合せ・11/25 面談
             "md2@example.com": "未決",     # 年なし 2025/12/15 問合せ・2026/01/10 面談
             "md3@example.com": "未決",     # 年なし 2026/06/10 問合せ
         })
-        # hanako: 兄は元在だが弟が再入会 → 在籍が優先されるが、在籍は書き込まない
+        # hanako: 弟は再入会チェックのみ（入会日なし）→ 在籍扱いで未決・元在は送らないが、在籍も書き込まない
         # sept(9月も対応中)・new(9月問合せ)・sales(営業)・md4(2025/09/05? → 年推定で2026/09/05) は送らない
 
     def test_tag_for_recent_pending_without_existing_tag(self):
@@ -94,13 +97,18 @@ class SyncSatoriTest(unittest.TestCase):
         self.assertIn(["old@example.com", "", "未決", ""], rows)
         self.assertIn(["already@example.com", "", "未決", ""], rows)
 
+    def test_rejoined_csv(self):
+        self.run_sync()
+        with open(os.path.join(self.last_out, "satori_import_再入会_在籍.csv"), encoding="cp932", newline="") as f:
+            self.assertEqual(list(csv.reader(f))[1:], [["rejoin@example.com", "", "在籍", ""]])
+
     def test_unmatched_do_not_send_reported(self):
         read = self.run_sync()
         self.assertEqual(read("SATORI未登録_送付禁止.csv"), [["a@example.com"], ["nobody@example.com"]])
 
     def test_reads_utf8_satori_export(self):
         read = self.run_sync(satori_encoding="utf-8")
-        self.assertEqual(len(read("変更レポート.csv")), 12)
+        self.assertEqual(len(read("変更レポート.csv")), 13)
 
 
 class DateTest(unittest.TestCase):
