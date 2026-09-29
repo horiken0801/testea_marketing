@@ -15,6 +15,12 @@
     "status_column": "現在の状態"
   },
 
+  "_api_説明": "--apply でSATORI APIに送るときの設定。status_custom_field には「現在の状態」カスタム項目の識別名を入れる（null の間は現在の状態をAPIで更新しない）。",
+  "api": {
+    "delivery_permission_reject": "reject",
+    "status_custom_field": null
+  },
+
   "_status_mapping_説明": "左: 新規状況表の在籍ステータス / 右: SATORIの「現在の状態」に書き込む値。ここに無い値のステータスはSATORIへ反映しません。",
   "status_mapping": {
     "未決": "未決",

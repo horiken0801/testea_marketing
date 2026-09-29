@@ -13,6 +13,9 @@
 
 SATORI側に既に存在するカスタマー（メールアドレス一致）だけを対象にし、
 配信許可は「拒否」への変更のみ行う（拒否→許可には戻さない）。
+
+--apply を付けると、上記の変更を SATORI のカスタマーバルクAPI（upsert）で直接反映する。
+APIキーは環境変数 SATORI_USER_KEY / SATORI_USER_SECRET / SATORI_COMPANY_KEY / SATORI_COMPANY_SECRET で渡す。
 """
 
 import argparse
@@ -120,6 +123,22 @@ def plan_changes(master_index, satori_rows, config):
     return permission_updates, status_updates, report, unmatched_do_not_send
 
 
+def build_api_rows(permission_updates, status_updates, config):
+    """変更内容を バルクAPI 用の行（1メールアドレス1行）にまとめる。"""
+    s, api = config["satori"], config["api"]
+    status_field = api.get("status_custom_field")
+    header = ["email", "delivery_permission"] + ([f"custom:{status_field}"] if status_field else [])
+    rows = {}
+    for u in permission_updates:
+        email = u[s["email_column"]]
+        rows.setdefault(email, {"email": email})["delivery_permission"] = api["delivery_permission_reject"]
+    if status_field:
+        for u in status_updates:
+            email = u[s["email_column"]]
+            rows.setdefault(email, {"email": email})[f"custom:{status_field}"] = u[s["status_column"]]
+    return header, list(rows.values())
+
+
 def write_csv(path, header, rows, encoding):
     with open(path, "w", newline="", encoding=encoding) as f:
         writer = csv.writer(f)
@@ -133,6 +152,7 @@ def main(argv=None):
     parser.add_argument("--master", required=True, help="新規状況表v2.0_マスター のCSV")
     parser.add_argument("--satori", required=True, help="SATORIからエクスポートしたカスタマーCSV")
     parser.add_argument("--out", default="output", help="出力先ディレクトリ (既定: output)")
+    parser.add_argument("--apply", action="store_true", help="SATORI APIで直接反映する（付けなければCSV出力のみ）")
     parser.add_argument("--config", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json"))
     args = parser.parse_args(argv)
 
@@ -166,6 +186,23 @@ def main(argv=None):
     print(f"現在の状態を更新: {len(status_updates)}件")
     print(f"送付禁止だがSATORI未登録: {len(unmatched)}件")
     print(f"出力先: {os.path.abspath(args.out)}")
+
+    if args.apply:
+        apply_via_api(permission_updates, status_updates, config)
+
+
+def apply_via_api(permission_updates, status_updates, config):
+    import satori_api
+
+    header, rows = build_api_rows(permission_updates, status_updates, config)
+    if not config["api"].get("status_custom_field") and status_updates:
+        print("注意: config.json の api.status_custom_field が未設定のため、現在の状態はAPIで反映しません。")
+    if not rows:
+        print("SATORIへ反映する変更はありません。")
+        return
+    credentials = satori_api.load_credentials()
+    for result in satori_api.upsert_and_wait(credentials, header, rows):
+        print(json.dumps(result, ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

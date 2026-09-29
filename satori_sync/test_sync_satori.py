@@ -2,7 +2,9 @@ import csv
 import os
 import tempfile
 import unittest
+from unittest import mock
 
+import satori_api
 import sync_satori
 
 MASTER_CSV = """校舎,問合日,名前,メールアドレス,在籍ステータス,営業・取材・スパムフラグ,送付禁止フラグ
@@ -61,6 +63,47 @@ class SyncSatoriTest(unittest.TestCase):
     def test_reads_shift_jis_satori_export(self):
         read = self.run_sync(satori_encoding="cp932")
         self.assertEqual(len(read("変更レポート.csv")), 4)
+
+
+class ApiRowsTest(unittest.TestCase):
+    PERMISSION = [{"メールアドレス": "a@example.com", "配信許可": "拒否"}]
+    STATUS = [{"メールアドレス": "a@example.com", "現在の状態": "未決"},
+              {"メールアドレス": "b@example.com", "現在の状態": "元在"}]
+
+    def config(self, field):
+        return {"satori": {"email_column": "メールアドレス", "status_column": "現在の状態"},
+                "api": {"delivery_permission_reject": "reject", "status_custom_field": field}}
+
+    def test_merges_rows_per_email_with_custom_field(self):
+        header, rows = sync_satori.build_api_rows(self.PERMISSION, self.STATUS, self.config("current_state"))
+        self.assertEqual(header, ["email", "delivery_permission", "custom:current_state"])
+        self.assertEqual(rows, [
+            {"email": "a@example.com", "delivery_permission": "reject", "custom:current_state": "未決"},
+            {"email": "b@example.com", "custom:current_state": "元在"},
+        ])
+        # 空欄は SATORI 側で上書きされない
+        self.assertEqual(satori_api.build_csv(header, rows).decode().splitlines()[2], "b@example.com,,元在")
+
+    def test_status_skipped_without_custom_field(self):
+        header, rows = sync_satori.build_api_rows(self.PERMISSION, self.STATUS, self.config(None))
+        self.assertEqual(header, ["email", "delivery_permission"])
+        self.assertEqual(rows, [{"email": "a@example.com", "delivery_permission": "reject"}])
+
+    def test_upsert_and_wait_polls_until_finished(self):
+        creds = dict.fromkeys(["user_key", "user_secret", "company_key", "company_secret"], "x")
+        with mock.patch.object(satori_api, "upsert", return_value={"status": 200, "message": {"process_code": "P1"}}) as up, \
+                mock.patch.object(satori_api, "status", side_effect=[
+                    {"status": 200, "message": {"process_status": "started"}},
+                    {"status": 200, "message": {"process_status": "finished", "success_count": 1}}]), \
+                mock.patch.object(satori_api.time, "sleep"):
+            results = satori_api.upsert_and_wait(creds, ["email"], [{"email": "a@example.com"}])
+        self.assertEqual(results, [{"process_status": "finished", "success_count": 1}])
+        self.assertEqual(up.call_count, 1)
+
+    def test_missing_credentials(self):
+        with mock.patch.dict(os.environ, {}, clear=True):
+            with self.assertRaises(SystemExit):
+                satori_api.load_credentials()
 
 
 if __name__ == "__main__":

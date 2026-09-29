@@ -25,6 +25,30 @@ SATORI の「CSVインポート（カスタマー更新）」に使うCSVを作�
 
 `SATORI未登録_送付禁止.csv` には、送付禁止なのにSATORIにメールアドレスが見つからなかった人が入ります（必要に応じて確認してください）。
 
+## SATORI APIで直接反映する（`--apply`）
+
+CSVを手でインポートする代わりに、SATORI のカスタマーバルクAPI（upsert）で直接反映できます。
+APIキーは **ファイルに書かず、環境変数で渡してください**。
+
+```bash
+export SATORI_USER_KEY=...        # ユーザーアクセスキー
+export SATORI_USER_SECRET=...     # ユーザーシークレットキー
+export SATORI_COMPANY_KEY=...     # カンパニーアクセスキー
+export SATORI_COMPANY_SECRET=...  # カンパニーシークレットキー
+
+# まずは --apply なしで実行し、output/変更レポート.csv を確認
+python3 sync_satori.py --master master.csv --satori satori.csv
+# 問題なければ反映
+python3 sync_satori.py --master master.csv --satori satori.csv --apply
+```
+
+- SATORI のAPIにはカスタマーを検索する機能がなく、upsert は未登録のメールアドレスを新規登録してしまいます。
+  そのため、API で反映する場合も **SATORIのエクスポートCSV（`--satori`）が必要** です（登録済みの人だけに絞るため）。
+- 配信許可は `delivery_permission=reject` で送ります。
+- 「現在の状態」はカスタム項目なので、`config.json` の `api.status_custom_field` に
+  **カスタム項目の識別名**（SATORI管理画面 → カスタム項目設定で確認）を入れると、APIで反映されます。未設定（`null`）の間は配信許可だけを反映します。
+- 送信後は処理完了まで待ち、SATORIから返ってきた成功・失敗件数を表示します。
+
 ## ルール
 
 - 対象は SATORI に既に登録されているカスタマーだけです（メールアドレスが一致した人）。新しいカスタマーは作りません。
