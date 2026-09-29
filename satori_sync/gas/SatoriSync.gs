@@ -14,8 +14,9 @@
  *
  * APIキーは既存のGASと同じスクリプトプロパティを使う（コードに書かない）:
  *   SATORI_API_KEY / SATORI_SECRET_KEY / COMPANY_KEY / COMPANY_SECRET
- * 情報獲得経路（collection_route）が必須と分かった場合は、スクリプトプロパティ SATORI_SEND_ROUTE を "true" にすると、
- * 既存の handleBackgroundSync と同じく「なにで知ったか」（空なら SATORI通常問い合わせフォーム）を送る。
+ * バルクAPIでは情報獲得経路（collection_route）が必須（2026/09/29 のテストで確認）。スクリプトプロパティ SATORI_SEND_ROUTE を "true" にし、
+ * 既存の値を変えないよう「SATORI登録済み」シート（A列: email、B列: 情報獲得経路）の値を送る。
+ * シートに無い人は、既存の handleBackgroundSync と同じく「なにで知ったか」（空なら SATORI通常問い合わせフォーム）を送る。
  * 安全のため、スクリプトプロパティ SATORI_DRY_RUN が "false" になるまでは送信せず、
  * 「SATORI連携プレビュー」シートに送る予定の内容を書き出すだけにする。
  */
@@ -25,6 +26,8 @@ var SATORI_CONF = {
   logSheetName: 'SATORI連携ログ',
   previewSheetName: 'SATORI連携プレビュー',
   registrySheetName: 'SATORI登録済み',
+  // true にすると「SATORI登録済み」シートに無い人には送らない（SATORIに新規登録させない）
+  restrictToRegistry: false,
   columns: {
     campus: '校舎',
     inquiry: '問合日',
@@ -105,7 +108,8 @@ function satoriSync() {
       var entry = log.byEmail[c.email];
       if (entry && entry.values[5]) return false;                            // 処理中
       if (entry && Number(entry.values[10]) >= SATORI_MAX_RETRY) return false; // 失敗が続いている
-      return !registry || registry[c.email];                                // SATORI未登録の人は新規作成しない
+      // restrictToRegistry なら SATORI未登録の人は送らない（新規作成しない）
+      return !(SATORI_CONF.restrictToRegistry && registry) || registry.emails[c.email];
     });
 
     if (satoriIsDryRun_()) {
@@ -116,7 +120,8 @@ function satoriSync() {
     var credentials = satoriCredentials_();
     for (var start = 0; start < changes.length; start += SATORI_CONF.maxRowsPerRequest) {
       var chunk = changes.slice(start, start + SATORI_CONF.maxRowsPerRequest);
-      var code = satoriUpsert_(credentials, satoriBuildCsv(chunk, SATORI_CONF, satoriSendRoute_() ? desired : null));
+      var routes = satoriSendRoute_() ? satoriRoutes_(chunk.map(function (c) { return c.email; }), desired, registry) : null;
+      var code = satoriUpsert_(credentials, satoriBuildCsv(chunk, SATORI_CONF, routes));
       satoriMarkPending_(log, chunk, code, desired);
       satoriFlushLog_(log);
     }
@@ -134,7 +139,7 @@ function satoriTestOne() {
   if (!email) throw new Error('スクリプトプロパティ SATORI_TEST_EMAIL にテスト用カスタマーのメールアドレスを設定してください。');
   var credentials = satoriCredentials_();
   var csv = satoriBuildCsv([{ email: email, status: SATORI_STATUS.ACTIVE, permission: '', appendTag: '', deleteTag: '' }], SATORI_CONF,
-    satoriSendRoute_() ? (function () { var d = {}; d[email] = { route: SATORI_CONF.routeDefault }; return d; })() : null);
+    satoriSendRoute_() ? satoriRoutes_([email], {}, satoriRegistry_()) : null);
   var code = satoriUpsert_(credentials, csv);
   Logger.log('process_code: ' + code);
   for (var i = 0; i < 12; i++) {
@@ -235,13 +240,9 @@ function satoriProcessPending_(log) {
   codes.forEach(function (code) {
     var result = satoriStatus_(credentials, code);
     if (result.process_status !== 'finished') return;
-    // 失敗行の row_number がヘッダーを数えるか分からないため、前後どちらの解釈でも失敗扱いにする
-    // （成功していた人は次回送り直すだけなので害はない）
+    // row_number はヘッダーを1行目として数える（データ1件目 = 2。2026/09/29 のテストで確認）
     var failed = {};
-    (result.failed_rows || []).forEach(function (f) {
-      failed[f.row_number] = f.message;
-      failed[f.row_number - 1] = failed[f.row_number - 1] || f.message;
-    });
+    (result.failed_rows || []).forEach(function (f) { failed[f.row_number - 1] = f.message; });
     byCode[code].forEach(function (email) {
       var v = log.byEmail[email].values.slice();
       var index = Number(v[6]);
@@ -275,15 +276,34 @@ function satoriWritePreview_(changes, desired) {
   sheet.getRange(1, 1, rows.length, rows[0].length).setValues(rows);
 }
 
-/** 「SATORI登録済み」シートのA列（メールアドレス）。シートが無ければ null（全員を対象にする）。 */
+/**
+ * 「SATORI登録済み」シート（A列: メールアドレス、B列: SATORIに登録済みの情報獲得経路）を読む。
+ * シートが無ければ null。SATORIのカスタマーエクスポートから作る。
+ */
 function satoriRegistry_() {
   var sheet = SpreadsheetApp.getActive().getSheetByName(SATORI_CONF.registrySheetName);
   if (!sheet || sheet.getLastRow() < 1) return null;
-  var registry = {};
-  sheet.getRange(1, 1, sheet.getLastRow(), 1).getDisplayValues().forEach(function (r) {
-    satoriExtractEmails(r[0]).forEach(function (e) { registry[e] = true; });
+  var registry = { emails: {}, routes: {} };
+  sheet.getRange(1, 1, sheet.getLastRow(), 2).getDisplayValues().forEach(function (r) {
+    satoriExtractEmails(r[0]).forEach(function (e) {
+      registry.emails[e] = true;
+      if (satoriNormalize(r[1])) registry.routes[e] = satoriNormalize(r[1]);
+    });
   });
   return registry;
+}
+
+/**
+ * 情報獲得経路（collection_route）はAPIで必須のため、既存の値を変えないよう
+ * SATORI登録済みシートの値 → 新規状況表の「なにで知ったか」→ 既定値 の順で決める。
+ */
+function satoriRoutes_(emails, desired, registry) {
+  var routes = {};
+  emails.forEach(function (email) {
+    var route = (registry && registry.routes[email]) || (desired[email] && desired[email].route) || SATORI_CONF.routeDefault;
+    routes[email] = { route: route };
+  });
+  return routes;
 }
 
 // ------------------------------------------------------------ SATORI API
