@@ -307,9 +307,7 @@ function satoriUpsert_(credentials, csv) {
   payload.identity_type = 'email';
   payload.customer_csv_file = Utilities.newBlob(csv, 'text/csv', 'customers.csv');
   var res = UrlFetchApp.fetch(SATORI_CONF.apiBase + '/upsert.json', { method: 'post', payload: payload, muteHttpExceptions: true });
-  var body = JSON.parse(res.getContentText());
-  var message = body.message || {};
-  var code = message.process_code || body.process_code;
+  var code = satoriPayload_(JSON.parse(res.getContentText())).process_code;
   if (res.getResponseCode() !== 200 || !code) throw new Error('SATORI upsert 失敗: HTTP ' + res.getResponseCode() + ' ' + res.getContentText());
   return code;
 }
@@ -317,9 +315,15 @@ function satoriUpsert_(credentials, csv) {
 function satoriStatus_(credentials, code) {
   var query = Object.keys(credentials).map(function (k) { return k + '=' + encodeURIComponent(credentials[k]); }).join('&');
   var res = UrlFetchApp.fetch(SATORI_CONF.apiBase + '/status.json?' + query + '&process_code=' + encodeURIComponent(code), { muteHttpExceptions: true });
-  var body = JSON.parse(res.getContentText());
   if (res.getResponseCode() !== 200) throw new Error('SATORI status 失敗: HTTP ' + res.getResponseCode() + ' ' + res.getContentText());
-  return body.message && typeof body.message === 'object' ? body.message : body;
+  return satoriPayload_(JSON.parse(res.getContentText()));
+}
+
+/** 応答の中身を取り出す。実際の応答は {"status":202,"message":"Accepted","body":{...}} の形（ドキュメントの例は message に入る形）。 */
+function satoriPayload_(response) {
+  if (response.body && typeof response.body === 'object') return response.body;
+  if (response.message && typeof response.message === 'object') return response.message;
+  return response;
 }
 
 // ------------------------------------------------------------ ユーティリティ

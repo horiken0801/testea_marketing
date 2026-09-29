@@ -77,11 +77,16 @@ def status(credentials, process_code):
     return _request(urllib.request.Request(f"{BASE_URL}/status.json?{query}", method="GET"))
 
 
+def payload(response):
+    """応答の中身。実際の応答は {"status":202,"message":"Accepted","body":{...}} の形（ドキュメントの例は message に入る形）。"""
+    for key in ("body", "message"):
+        if isinstance(response.get(key), dict):
+            return response[key]
+    return response
+
+
 def extract_process_code(response):
-    message = response.get("message")
-    if isinstance(message, dict):
-        return message.get("process_code")
-    return response.get("process_code")
+    return payload(response).get("process_code")
 
 
 def upsert_and_wait(credentials, header, rows, poll_interval=10, timeout=1800):
@@ -97,8 +102,7 @@ def upsert_and_wait(credentials, header, rows, poll_interval=10, timeout=1800):
 
         deadline = time.time() + timeout
         while True:
-            result = status(credentials, process_code)
-            message = result.get("message", result)
+            message = payload(status(credentials, process_code))
             if isinstance(message, dict) and message.get("process_status") == "finished":
                 results.append(message)
                 break

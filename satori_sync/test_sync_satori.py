@@ -185,10 +185,12 @@ class ApiRowsTest(unittest.TestCase):
 
     def test_upsert_and_wait_polls_until_finished(self):
         creds = dict.fromkeys(["user_key", "user_secret", "company_key", "company_secret"], "x")
-        with mock.patch.object(satori_api, "upsert", return_value={"status": 200, "message": {"process_code": "P1"}}) as up, \
+        # 実際のSATORIの応答形式（body に中身が入る）
+        accepted = {"status": 202, "message": "Accepted", "body": {"process_code": "P1"}}
+        with mock.patch.object(satori_api, "upsert", return_value=accepted) as up, \
                 mock.patch.object(satori_api, "status", side_effect=[
-                    {"status": 200, "message": {"process_status": "started"}},
-                    {"status": 200, "message": {"process_status": "finished", "succeeded_rows": []}}]), \
+                    {"status": 200, "body": {"process_status": "started"}},
+                    {"status": 200, "body": {"process_status": "finished", "succeeded_rows": []}}]), \
                 mock.patch.object(satori_api.time, "sleep"):
             results = satori_api.upsert_and_wait(creds, ["email"], [{"email": "a@example.com"}])
         self.assertEqual(results, [{"process_status": "finished", "succeeded_rows": []}])
