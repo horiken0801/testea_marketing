@@ -20,6 +20,7 @@ APIキーは環境変数 SATORI_USER_KEY / SATORI_USER_SECRET / SATORI_COMPANY_K
 
 import argparse
 import csv
+import datetime
 import json
 import os
 import re
@@ -64,10 +65,54 @@ def read_csv(path, required_column):
     raise SystemExit(f"{path}: 列「{required_column}」が見つかりません")
 
 
-def build_master_index(rows, config):
+DATE_RE = re.compile(r"(\d{4})[-/.年](\d{1,2})[-/.月](\d{1,2})")
+
+
+def parse_date(value):
+    """「2026-08-03 0:00:00」「2026/8/3」などから日付を取り出す。年のない日付や日付以外は None。"""
+    m = DATE_RE.search(normalize_text(value))
+    if not m:
+        return None
+    try:
+        return datetime.date(*map(int, m.groups()))
+    except ValueError:
+        return None
+
+
+def previous_month(as_of):
+    """基準日の前月の (初日, 末日)。9月に実行すると8月が判定対象になる。"""
+    last = as_of.replace(day=1) - datetime.timedelta(days=1)
+    return last.replace(day=1), last
+
+
+def derive_status(row, config, as_of):
+    """1行分の顧客データから SATORI の「現在の状態」に書く値と理由を決める。決められなければ (None, 理由)。
+
+    - 退会日あり                                   → 元在
+    - 入会・再入会の日付あり                         → 在籍
+    - 在籍ステータスが「元在」                       → 元在（旧リストの区分をそのまま使う）
+    - 前月末までの問合せで、問合日・対応日付のうち
+      最後の日付が前月中（＝前月で止まっている）      → 未決
+    """
+    m, values = config["master"], config["status_values"]
+    if parse_date(row.get(m["withdrawn_column"], "")):
+        return values["former"], "退会日あり"
+    if any(parse_date(row.get(c, "")) for c in m["enrolled_columns"]):
+        return values["enrolled"], "入会日あり"
+    if normalize_text(row.get(m["status_column"], "")) == values["former"]:
+        return values["former"], f"在籍ステータス: {values['former']}"
+
+    first, last = previous_month(as_of)
+    inquiry = parse_date(row.get(m["inquiry_date_column"], ""))
+    dates = [d for d in (parse_date(row.get(c, "")) for c in m["activity_date_columns"]) if d]
+    if inquiry and inquiry <= last and dates and first <= max(dates) <= last:
+        return values["pending"], f"{last.month}月で対応停止（最終 {max(dates):%Y/%m/%d}）"
+    return None, ""
+
+
+def build_master_index(rows, config, as_of):
     """メールアドレスごとに 送付禁止 と SATORIへ書き込む状態 を集約する。"""
     m = config["master"]
-    mapping = {normalize_text(k): v for k, v in config["status_mapping"].items()}
     priority = {s: i for i, s in enumerate(config["status_priority"])}
 
     index = {}
@@ -75,19 +120,18 @@ def build_master_index(rows, config):
         emails = extract_emails(row.get(m["email_column"], ""))
         if not emails:
             continue
-        spam = is_checked(row.get(m.get("spam_column", ""), ""))
         do_not_send = is_checked(row.get(m["do_not_send_column"], ""))
-        raw_status = normalize_text(row.get(m["status_column"], ""))
-        status = None if spam else mapping.get(raw_status)
+        spam = is_checked(row.get(m.get("spam_column", ""), ""))
+        status, reason = (None, "") if spam else derive_status(row, config, as_of)
 
         for email in emails:
-            entry = index.setdefault(email, {"do_not_send": False, "status": None, "rank": None, "raw_status": ""})
+            entry = index.setdefault(email, {"do_not_send": False, "status": None, "rank": None, "reason": ""})
             entry["do_not_send"] = entry["do_not_send"] or do_not_send
             if status is None:
                 continue
             rank = (priority.get(status, len(priority)), -row_no)
             if entry["rank"] is None or rank <= entry["rank"]:
-                entry.update(status=status, rank=rank, raw_status=raw_status)
+                entry.update(status=status, rank=rank, reason=reason)
     return index
 
 
@@ -117,7 +161,7 @@ def plan_changes(master_index, satori_rows, config):
         if entry["status"] and current_status != entry["status"]:
             status_updates.append({s["email_column"]: original_email, s["status_column"]: entry["status"]})
             report.append([original_email, s["status_column"], current_status, entry["status"],
-                           f"在籍ステータス: {entry['raw_status']}"])
+                           entry["reason"]])
 
     unmatched_do_not_send = sorted(e for e, v in master_index.items() if v["do_not_send"] and e not in matched)
     return permission_updates, status_updates, report, unmatched_do_not_send
@@ -152,6 +196,8 @@ def main(argv=None):
     parser.add_argument("--master", required=True, help="新規状況表v2.0_マスター のCSV")
     parser.add_argument("--satori", required=True, help="SATORIからエクスポートしたカスタマーCSV")
     parser.add_argument("--out", default="output", help="出力先ディレクトリ (既定: output)")
+    parser.add_argument("--as-of", type=datetime.date.fromisoformat, default=datetime.date.today(),
+                        help="基準日 YYYY-MM-DD（既定: 今日）。この前月で対応が止まっている問合せを未決とする")
     parser.add_argument("--apply", action="store_true", help="SATORI APIで直接反映する（付けなければCSV出力のみ）")
     parser.add_argument("--config", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json"))
     args = parser.parse_args(argv)
@@ -162,11 +208,12 @@ def main(argv=None):
 
     _, master_rows = read_csv(args.master, config["master"]["email_column"])
     satori_header, satori_rows = read_csv(args.satori, s["email_column"])
-    for col in (s["permission_column"], s["status_column"]):
-        if col not in satori_header:
-            print(f"警告: SATORIのCSVに列「{col}」がありません。現在値を空として比較します。", file=sys.stderr)
+    if s["permission_column"] not in satori_header:
+        print(f"警告: SATORIのCSVに列「{s['permission_column']}」がありません。現在値を空として比較します。", file=sys.stderr)
+    if s["status_column"] not in satori_header:
+        print(f"注意: SATORIのCSVに「{s['status_column']}」が無いため、現在の状態は判定できた人全員に送ります。", file=sys.stderr)
 
-    master_index = build_master_index(master_rows, config)
+    master_index = build_master_index(master_rows, config, args.as_of)
     permission_updates, status_updates, report, unmatched = plan_changes(master_index, satori_rows, config)
 
     os.makedirs(args.out, exist_ok=True)

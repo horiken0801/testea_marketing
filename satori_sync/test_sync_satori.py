@@ -1,4 +1,5 @@
 import csv
+import datetime
 import os
 import tempfile
 import unittest
@@ -7,28 +8,30 @@ from unittest import mock
 import satori_api
 import sync_satori
 
-MASTER_CSV = """校舎,問合日,名前,メールアドレス,在籍ステータス,営業・取材・スパムフラグ,送付禁止フラグ
-久我山校,2017-04-28,大金,Taro@Example.com,未決,FALSE,TRUE
-久我山校,2018-01-01,鈴木,ｈａｎａｋｏ＠ｅｘａｍｐｌｅ．ｃｏｍ,元在,FALSE,FALSE
-駒込校,2019-01-01,鈴木弟,hanako@example.com,入会,FALSE,FALSE
-日吉校,2020-01-01,佐藤,a@example.com / b@example.com,退会,FALSE,TRUE
-日吉校,2020-01-01,営業,sales@example.com,未対応,TRUE,FALSE
-日吉校,2021-01-01,田中,already@example.com,未決,FALSE,TRUE
-日吉校,2021-01-01,未登録,nobody@example.com,未決,FALSE,TRUE
+MASTER_CSV = """校舎,問合日,名前,初期対応へのレス,面談実施,体験実施,入会,再入会,メールアドレス,退会日,在籍ステータス,営業・取材・スパムフラグ,送付禁止フラグ
+久我山校,2026-07-10 0:00:00,8月で停止,2026/07/11,2026/08/05,,,,Taro@Example.com,,体験実施済,FALSE,TRUE
+久我山校,2017-04-28 0:00:00,旧未決,,,,,,old@example.com,,未決,FALSE,FALSE
+久我山校,2018-01-01,兄(元在),,,,,,ｈａｎａｋｏ＠ｅｘａｍｐｌｅ．ｃｏｍ,,元在,FALSE,FALSE
+駒込校,2025-01-01,弟(入会),,,,2025/02/01,,hanako@example.com,,入会,FALSE,FALSE
+日吉校,2024-01-01,退会,,,,2024/02/01,,a@example.com / b@example.com,2025/03/31,退会,FALSE,TRUE
+日吉校,2026-08-20,営業,,,,,,sales@example.com,,未対応,TRUE,FALSE
+日吉校,2026-08-25,9月も対応中,,2026/08/28,2026/09/03,,,sept@example.com,,体験実施済,FALSE,FALSE
+日吉校,2026-09-02,9月問合せ,,,,,,new@example.com,,未対応,FALSE,FALSE
+日吉校,2026-08-30,8月問合せ未対応,,,,,,aug@example.com,,未対応,FALSE,FALSE
+日吉校,2026-07-01,7月で停止,,2026/07/20,,,,july@example.com,,面談実施済,FALSE,FALSE
+日吉校,2021-01-01,既に拒否,,,,,,already@example.com,,,FALSE,TRUE
+日吉校,2021-01-01,未登録,,,,,,nobody@example.com,,,FALSE,TRUE
 """
 
-SATORI_CSV = """メールアドレス,姓,配信許可,現在の状態
-taro@example.com,大金,許可,
-hanako@example.com,鈴木,許可,元在
-b@example.com,佐藤,許可,元在
-sales@example.com,営業,許可,
-already@example.com,田中,拒否,未決
-other@example.com,他,許可,未決
-"""
+SATORI_EMAILS = ["taro@example.com", "old@example.com", "hanako@example.com", "b@example.com",
+                 "sales@example.com", "sept@example.com", "new@example.com", "aug@example.com",
+                 "july@example.com", "already@example.com", "other@example.com"]
+SATORI_CSV = "email,delivery_permission,delivery_status\n" + "".join(
+    f"{e},{'拒否' if e == 'already@example.com' else '承認'},正常\n" for e in SATORI_EMAILS)
 
 
 class SyncSatoriTest(unittest.TestCase):
-    def run_sync(self, satori_encoding="utf-8"):
+    def run_sync(self, satori_encoding="cp932"):
         tmp = tempfile.mkdtemp()
         master = os.path.join(tmp, "master.csv")
         satori = os.path.join(tmp, "satori.csv")
@@ -37,7 +40,7 @@ class SyncSatoriTest(unittest.TestCase):
             f.write(MASTER_CSV)
         with open(satori, "w", encoding=satori_encoding) as f:
             f.write(SATORI_CSV)
-        sync_satori.main(["--master", master, "--satori", satori, "--out", out])
+        sync_satori.main(["--master", master, "--satori", satori, "--out", out, "--as-of", "2026-09-29"])
 
         def read(name):
             with open(os.path.join(out, name), encoding="utf-8-sig", newline="") as f:
@@ -50,19 +53,33 @@ class SyncSatoriTest(unittest.TestCase):
         self.assertEqual(read("satori_import_配信拒否.csv"),
                          [["taro@example.com", "拒否"], ["b@example.com", "拒否"]])
 
-    def test_status_mapping_priority_and_spam_skip(self):
+    def test_status_rules(self):
         read = self.run_sync()
-        # hanako: 元在 と 入会(→在籍) の2行 → 在籍優先 / b: 退会→元在 は変更なし / sales: 営業フラグで対象外
-        self.assertEqual(read("satori_import_現在の状態.csv"),
-                         [["taro@example.com", "未決"], ["hanako@example.com", "在籍"]])
+        self.assertEqual(read("satori_import_現在の状態.csv"), [
+            ["taro@example.com", "未決"],    # 最後の対応が8月で止まっている
+            ["hanako@example.com", "在籍"],  # 兄は元在だが弟が入会 → 在籍を優先
+            ["b@example.com", "元在"],       # 退会日あり
+            ["aug@example.com", "未決"],     # 8月の問合せで対応なし
+        ])
+        # old(旧リストの未決)・sept(9月も対応中)・new(9月問合せ)・july(7月で停止)・sales(営業) は送らない
 
     def test_unmatched_do_not_send_reported(self):
         read = self.run_sync()
         self.assertEqual(read("SATORI未登録_送付禁止.csv"), [["a@example.com"], ["nobody@example.com"]])
 
-    def test_reads_shift_jis_satori_export(self):
-        read = self.run_sync(satori_encoding="cp932")
-        self.assertEqual(len(read("変更レポート.csv")), 4)
+    def test_reads_utf8_satori_export(self):
+        read = self.run_sync(satori_encoding="utf-8")
+        self.assertEqual(len(read("変更レポート.csv")), 6)
+
+
+class PreviousMonthTest(unittest.TestCase):
+    def test_january_wraps_to_previous_year(self):
+        self.assertEqual(sync_satori.previous_month(datetime.date(2027, 1, 15)),
+                         (datetime.date(2026, 12, 1), datetime.date(2026, 12, 31)))
+
+    def test_parse_date_ignores_dates_without_year(self):
+        self.assertIsNone(sync_satori.parse_date("02/01"))
+        self.assertEqual(sync_satori.parse_date("2026-08-05 0:00:00"), datetime.date(2026, 8, 5))
 
 
 class ApiRowsTest(unittest.TestCase):

@@ -1,38 +1,36 @@
 {
-  "_説明": "新規状況表v2.0 → SATORI 連携の設定。列名・値はSATORI管理画面の実際の項目名に合わせて調整してください。",
+  "_説明": "新規状況表v2.0 → SATORI 連携の設定。列名・値はSATORIの実際の項目名に合わせて調整してください。",
 
   "master": {
     "email_column": "メールアドレス",
     "status_column": "在籍ステータス",
     "do_not_send_column": "送付禁止フラグ",
-    "spam_column": "営業・取材・スパムフラグ"
+    "spam_column": "営業・取材・スパムフラグ",
+    "inquiry_date_column": "問合日",
+    "activity_date_columns": ["問合日", "初期対応へのレス", "面談実施", "体験実施"],
+    "enrolled_columns": ["入会", "再入会"],
+    "withdrawn_column": "退会日"
   },
 
+  "_satori_説明": "SATORIのカスタマーエクスポートCSVの列名。現在の状態(custom_situation)はエクスポートに含まれないため、判定できた人には毎回送信する。",
   "satori": {
-    "email_column": "メールアドレス",
-    "permission_column": "配信許可",
+    "email_column": "email",
+    "permission_column": "delivery_permission",
     "permission_denied_value": "拒否",
-    "status_column": "現在の状態"
+    "status_column": "custom:custom_situation"
   },
 
-  "_api_説明": "--apply でSATORI APIに送るときの設定。status_custom_field には「現在の状態」カスタム項目の識別名を入れる（null の間は現在の状態をAPIで更新しない）。",
+  "_api_説明": "--apply でSATORI APIに送るときの設定。status_custom_field は「現在の状態」カスタム項目の識別名。",
   "api": {
     "delivery_permission_reject": "reject",
-    "status_custom_field": null
+    "status_custom_field": "custom_situation"
   },
 
-  "_status_mapping_説明": "左: 新規状況表の在籍ステータス / 右: SATORIの「現在の状態」に書き込む値。ここに無い値のステータスはSATORIへ反映しません。",
-  "status_mapping": {
-    "未決": "未決",
-    "元在": "元在",
-    "在籍": "在籍",
-    "入会": "在籍",
-    "退会": "元在",
-    "未対応": "未決",
-    "アンケート回答済": "未決",
-    "面談実施済": "未決",
-    "体験実施済": "未決",
-    "体験実施済み": "未決"
+  "_status_values_説明": "SATORIの「現在の状態」に書き込む値。",
+  "status_values": {
+    "pending": "未決",
+    "former": "元在",
+    "enrolled": "在籍"
   },
 
   "_status_priority_説明": "同じメールアドレスが複数行（兄弟など）にある場合、先に書かれた状態を優先します。同順位なら下の行（新しい行）を優先。",
