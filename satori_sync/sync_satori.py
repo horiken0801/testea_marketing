@@ -9,7 +9,7 @@
   - satori_import_配信拒否.csv   : 送付禁止フラグが付いた顧客の 配信許可 を「拒否」にするインポート用CSV
   - satori_import_現在の状態.csv : 未決・元在・在籍 を 現在の状態 に反映するインポート用CSV
   - satori_import_タグ.csv       : 新たに未決・元在になった最近の問合せ者に付けるタグ
-  - satori_import_再入会_在籍.csv : 再入会（再入会にチェック・入会日あり）の人の 現在の状態 を「在籍」にする一括登録用CSV
+  - satori_import_再入会_在籍.csv : 再入会にチェックがある人の 現在の状態 を「在籍」にする一括登録用CSV
   - satori_import_一括登録.csv   : 上の3つを1ファイルにまとめたもの（SATORI管理画面の一括登録用・Shift_JIS）
   - 変更レポート.csv             : 何をどう変えるかの一覧（確認用）
   - SATORI未登録_送付禁止.csv    : 送付禁止だがSATORIにメールアドレスが見つからなかった顧客
@@ -36,7 +36,7 @@ FULL_DATE_RE = re.compile(r"(\d{4})[-/.年](\d{1,2})[-/.月](\d{1,2})")
 MONTH_DAY_RE = re.compile(r"(?<![\d/])(\d{1,2})/(\d{1,2})(?![\d/])")
 TRUTHY = {"true", "1", "yes", "y", "on", "はい", "済", "○", "〇", "◯", "✓", "✔", "☑", "レ"}
 INPUT_ENCODINGS = ("utf-8-sig", "cp932")
-REJOINED = "再入会（再入会にチェック・入会日あり）"
+REJOINED = "再入会（再入会にチェック）"
 # 年なし日付（MM/DD）が前の行より何日以上「進んで」いたら年をまたいだとみなすか（行を遡りながら判定）
 YEAR_WRAP_DAYS = 120
 
@@ -168,7 +168,8 @@ def derive_status(row, inquiry, config, as_of):
     """1行分の顧客データから SATORI の「現在の状態」に書く値と理由を決める。決められなければ (None, "")。
 
     - 退会日あり                                → 元在
-    - 入会日あり・再入会にチェック                → 在籍（再入会＋入会日ありのときだけ REJOINED）
+    - 再入会にチェック                            → 在籍（REJOINED。入会日の有無は問わない）
+    - 入会日あり                                  → 在籍
     - 在籍ステータスが「元在」                    → 元在
     - 前月末までの問合せで、問合日・対応日付が
       全て前月末以前（＝前月末までに対応が止まっている） → 未決
@@ -178,9 +179,9 @@ def derive_status(row, inquiry, config, as_of):
         return values["former"], "退会日あり"
     enrolled_date = has_date(row.get(m["enrollment_date_column"], ""))
     rejoined = is_checked(row.get(m["rejoin_column"], "")) or has_date(row.get(m["rejoin_column"], ""))
-    if rejoined and enrolled_date:
+    if rejoined:
         return values["enrolled"], REJOINED
-    if enrolled_date or rejoined:
+    if enrolled_date:
         return values["enrolled"], "入会あり"
     if normalize_text(row.get(m["status_column"], "")) == values["former"]:
         return values["former"], f"在籍ステータス: {values['former']}"
@@ -217,7 +218,8 @@ def build_master_index(rows, config, as_of):
             entry["do_not_send"] = entry["do_not_send"] or do_not_send
             if status is None:
                 continue
-            rank = (priority.get(status, len(priority)), -row_no)
+            # 同じ在籍なら再入会の行を優先（再入会の在籍はSATORIに書き込むため）
+            rank = (priority.get(status, len(priority)), reason != REJOINED, -row_no)
             if entry["rank"] is None or rank <= entry["rank"]:
                 entry.update(status=status, rank=rank, reason=reason, inquiry=inquiry)
     return index
