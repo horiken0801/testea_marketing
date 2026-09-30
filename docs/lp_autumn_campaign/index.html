@@ -169,14 +169,17 @@ body { padding-top: 0; }
 .hero-kw {
   display: inline-block;
   font-family: 'Yusei Magic', 'Zen Kaku Gothic New', sans-serif;
-  font-size: clamp(42px, 6.4vw, 78px);
+  /* 下限をvw基準にして狭い画面でも1行に収まるようにする(固定42px床が原因で
+     スマホ幅では強制的に2行折り返しになっていた) */
+  font-size: clamp(30px, 9.5vw, 78px);
   color: var(--orange);
   background-image: linear-gradient(transparent 66%, var(--marker) 66%);
   background-repeat: no-repeat;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
   padding: 0 .08em;
-  letter-spacing: .02em;
+  letter-spacing: .01em;
+  white-space: nowrap;
   transform: rotate(-1.5deg);
   text-shadow: 2px 2px 0 rgba(181,80,31,.12);
 }
@@ -219,7 +222,7 @@ body { padding-top: 0; }
   .hero-content { padding: 96px 16px 56px; }
   /* S01: スマホは40〜44px、行間1.25。「小3・4・5年生の、」は見出しの一部として同じ塊に見える大きさに */
   .hero-main-heading .pre-line { font-size: 20px; line-height: 1.25; margin-bottom: 4px; }
-  .hero-kw { font-size: 52px; line-height: 1.3; }
+  /* .hero-kw のサイズはベースのclamp(vw基準)に任せ、狭い画面でも1行に収まるようにする */
   .hero-offer-block { flex-direction: column; max-width: 100%; }
   .hero-offer-num .num-face { font-size: 56px; }
   .btn-lg, .btn { width: 100%; max-width: 100%; }
