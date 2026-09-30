@@ -118,8 +118,10 @@ button { font-family: inherit; }
 #site-header.scrolled { background: rgba(255,255,255,0.98); box-shadow: 0 2px 14px rgba(15,154,158,0.10); }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 20px; }
 /* A10: ロゴ画像はテキストロゴ(擬似SVG)化し、画像欠落時のレイアウト崩れを排除 */
-.header-logo { font-family: 'Inter', sans-serif; font-weight: 900; font-size: 22px; letter-spacing: .01em; color: var(--teal-dark); flex-shrink: 0; }
-.header-logo span { color: var(--orange); }
+/* 実ロゴ画像。white地の場合のみ使用(透過PNG・背景がティール系のため濃色面では使わない) */
+.header-logo { display: flex; align-items: center; flex-shrink: 0; }
+.header-logo img { height: 30px; width: auto; display: block; }
+@media (max-width:480px) { .header-logo img { height: 26px; } }
 .header-nav { display: flex; align-items: center; gap: 24px; list-style: none; }
 .header-nav a { font-size: 13px; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: 0.02em; transition: color 0.15s; white-space: nowrap; }
 .header-nav a:hover { color: var(--teal-dark); }
@@ -433,7 +435,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header id="site-header" role="banner">
   <div class="container">
     <div class="header-inner">
-      <a href="https://testea.net/" class="header-logo" aria-label="TESTEA 個別指導塾テスティー トップへ" target="_blank" rel="noopener">TEST<span>EA</span></a>
+      <a href="https://testea.net/" class="header-logo" aria-label="TESTEA 個別指導塾テスティー トップへ" target="_blank" rel="noopener">
+        <img src="images/testea-logo.png" alt="TESTEA 個別指導塾テスティー" width="804" height="117" loading="eager">
+      </a>
       <nav aria-label="メインナビゲーション">
         <ul class="header-nav">
           <li><a href="#philosophy">特徴</a></li>
