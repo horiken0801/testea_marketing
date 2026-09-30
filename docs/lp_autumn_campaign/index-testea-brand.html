@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P3BS96K');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="個別指導塾TESTEA 2026年秋期「中学受験準備応援キャンペーン」。対象は小学3・4・5年生(小6は対象外)。入会金22,000円で、週1コースを最大4コマ無料でお試しいただけます。2026年10月1日から2ヶ月間限定。">
+  <title>TESTEA 中学受験準備応援キャンペーン2026秋 | 週1コース4コマ無料</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- testea.netの見出しフォント(Avenir)に近い性格を持つPoppins + 本文は游ゴシック系(サイト本体に合わせる) -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   別案:テスティー公式サイト(testea.net)のトンマナ準拠デザイン
+   実サイトのCSSを確認し、以下を再現しています:
+   - メインカラー: ティール #00A8A0 / CTAボタン: コーラルピンク #FD6378
+   - 角丸はごく小さく(2〜4px)、box-shadowを使わないフラットな設計
+   - 見出しはAvenir系の性格を持つ英字フォント、本文は游�テシック/Noto Sans JP
+   - ボタンは矩形+矢印アイコン、hoverはopacity変化(サイト本体と同じ挙動)
+============================================================ */
+:root{
+  --teal:      #00A8A0;
+  --teal-dark: #008C85;
+  --coral:     #FD6378;
+  --coral-dark:#E14D62;
+  --ink:       #333333;
+  --muted:     #666666;
+  --bg-gray:   #F6F6F6;
+  --bg-gray2:  #F6F7F7;
+  --border:    #D7D7D7;
+  --white:     #FFFFFF;
+  /* サブアクセント(サイト内で科目タグ等に使われる多色) */
+  --acc-yellow-green:#A6C914;
+  --acc-cyan:  #12BFDB;
+  --acc-orange:#F97600;
+  --acc-pink:  #FF719A;
+  --radius:    3px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:"游ゴシック体","Yu Gothic",YuGothic,"Hiragino Kaku Gothic Pro","Noto Sans JP","メイリオ",Meiryo,sans-serif;
+  color:var(--ink);
+  line-height:1.85;
+  background:#fff;
+  padding-bottom:64px;
+}
+h1,h2,h3,.eng{font-family:'Poppins','Noto Sans JP',sans-serif;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+.container{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+/* ---- 共通ボタン(実サイトのbtn_top準拠:矩形+矢印+opacity hover) ---- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  width:auto;min-width:270px;height:52px;
+  background:var(--coral);
+  color:#fff;font-weight:700;font-size:15px;
+  border-radius:var(--radius);
+  transition:opacity .3s ease-in-out;
+  padding:0 28px;
+}
+.btn:hover{opacity:.75;}
+.btn::after{content:'→';transition:transform .3s;}
+.btn:hover::after{transform:translateX(6px);}
+.btn-teal{background:var(--teal);}
+.btn-outline{background:#fff;color:var(--teal);border:1px solid var(--teal);}
+
+.eyebrow{
+  display:inline-block;color:var(--teal);font-weight:700;font-size:12px;
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;
+  font-family:'Poppins',sans-serif;
+}
+.eyebrow::before{content:'— ';}
+
+.sec-head{text-align:center;margin-bottom:44px;}
+.sec-head h2{font-size:26px;font-weight:800;line-height:1.5;margin-bottom:10px;color:var(--ink);}
+.sec-head p{font-size:14px;color:var(--muted);}
+
+/* ---- ヘッダー(実サイト準拠:ロゴ左+CTA右上、下にナビ行) ---- */
+#site-header{border-bottom:1px solid var(--border);background:#fff;}
+.header-top{display:flex;align-items:center;justify-content:space-between;padding:16px 0;}
+.header-logo{font-family:'Poppins';font-weight:800;font-size:24px;color:var(--teal);letter-spacing:.02em;}
+.header-cta a{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--coral);color:#fff;font-size:13px;font-weight:700;
+  padding:10px 20px;border-radius:var(--radius);transition:opacity .3s;
+}
+.header-cta a:hover{opacity:.75;}
+.header-nav{border-top:1px solid var(--border);}
+.header-nav ul{display:flex;gap:28px;justify-content:center;padding:12px 0;flex-wrap:wrap;}
+.header-nav a{font-size:13px;font-weight:700;color:var(--ink);}
+.header-nav a:hover{color:var(--teal);}
+.header-hamburger{display:none;}
+@media(max-width:860px){
+  .header-nav ul{gap:14px;font-size:12px;}
+  .header-cta a{font-size:12px;padding:8px 14px;}
+}
+
+/* ---- ヒーロー:実サイトのMVスライダー風(写真+テキストパネル) ---- */
+#hero{position:relative;background:var(--bg-gray);}
+.hero-photo{position:relative;height:460px;overflow:hidden;background:linear-gradient(135deg,#DDF4F1,#F6F7F7);}
+.hero-photo img{width:100%;height:100%;object-fit:cover;}
+.hero-panel{
+  position:absolute;left:6%;top:50%;transform:translateY(-50%);
+  background:rgba(255,255,255,.94);
+  padding:36px 40px;max-width:460px;
+  border-left:4px solid var(--coral);
+}
+.hero-eyebrow{color:var(--coral);font-weight:800;font-size:12px;letter-spacing:.1em;margin-bottom:10px;font-family:'Poppins';}
+.hero-title{font-size:clamp(24px,3.2vw,32px);font-weight:800;line-height:1.5;color:var(--ink);margin-bottom:16px;}
+.hero-title .mark{color:var(--teal);}
+.hero-sub{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.9;}
+.hero-btns{display:flex;flex-direction:column;gap:10px;}
+.hero-btns .btn{width:100%;}
+@media(max-width:860px){
+  .hero-photo{height:auto;}
+  .hero-panel{position:static;transform:none;max-width:100%;margin:0;padding:28px 24px;}
+}
+
+/* ---- キャンペーン概要バー(実サイトのバナー的な使い方) ---- */
+.info-bar{background:var(--teal);color:#fff;text-align:center;padding:12px 16px;font-size:13px;font-weight:700;}
+.info-bar strong{color:#fff;}
+
+/* ---- 実績数字(枠+数字、shadow無し) ---- */
+#stats{padding:64px 0;background:#fff;}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);}
+.stat-cell{text-align:center;padding:28px 12px;border-right:1px solid var(--border);}
+.stat-cell:last-child{border-right:none;}
+.stat-num{font-family:'Poppins';font-size:32px;font-weight:800;color:var(--teal);}
+.stat-label{font-size:12px;color:var(--muted);margin-top:6px;}
+@media(max-width:700px){
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .stat-cell{border-bottom:1px solid var(--border);}
+}
+
+/* ---- 保護者の声(実サイトのカード:枠線+小さい角丸) ---- */
+#testimonials{padding:64px 0;background:var(--bg-gray2);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.testi-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:26px;}
+.testi-stars{color:var(--acc-orange);font-size:14px;margin-bottom:10px;}
+.testi-text{font-size:13px;margin-bottom:14px;color:var(--ink);}
+.testi-quote{font-size:12px;font-weight:700;color:var(--teal-dark);border-left:3px solid var(--teal);padding-left:10px;margin-bottom:14px;}
+.testi-author{display:flex;align-items:center;gap:10px;padding-top:14px;border-top:1px solid var(--border);}
+.testi-avatar{width:38px;height:38px;border-radius:50%;background:var(--bg-gray);flex-shrink:0;}
+.testi-name{font-weight:700;font-size:12px;}
+.testi-meta{font-size:11px;color:var(--muted);}
+@media(max-width:860px){.testi-grid{grid-template-columns:1fr;gap:14px;}}
+
+/* ---- TESTEAの特徴(実サイトの3カラム、色タグ付き) ---- */
+#philosophy{padding:64px 0;background:#fff;}
+.phil-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);}
+.phil-cell{padding:32px 28px;border-right:1px solid var(--border);}
+.phil-cell:last-child{border-right:none;}
+.phil-tag{display:inline-block;font-size:11px;font-weight:800;color:#fff;padding:3px 10px;border-radius:var(--radius);margin-bottom:14px;}
+.phil-tag.t1{background:var(--teal);}
+.phil-tag.t2{background:var(--acc-cyan);}
+.phil-tag.t3{background:var(--acc-orange);}
+.phil-title{font-size:16px;font-weight:800;margin-bottom:10px;}
+.phil-desc{font-size:13px;color:var(--muted);}
+@media(max-width:860px){
+  .phil-grid{grid-template-columns:1fr;}
+  .phil-cell{border-right:none;border-bottom:1px solid var(--border);}
+  .phil-cell:last-child{border-bottom:none;}
+}
+
+/* ---- 3ステップ ---- */
+#flow{padding:64px 0;background:var(--bg-gray2);}
+.flow-grid{display:flex;justify-content:space-between;gap:20px;}
+.flow-step{flex:1;text-align:center;}
+.flow-num{
+  width:44px;height:44px;border-radius:50%;background:var(--teal);color:#fff;
+  font-family:'Poppins';font-weight:800;font-size:18px;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 14px;
+}
+.flow-title{font-size:14px;font-weight:800;margin-bottom:6px;}
+.flow-desc{font-size:12px;color:var(--muted);}
+@media(max-width:760px){.flow-grid{flex-direction:column;gap:24px;}}
+
+/* ---- 併用OK ---- */
+#compat{padding:64px 0;background:#fff;}
+.compat-list{display:flex;flex-direction:column;gap:12px;max-width:640px;margin:0 auto;}
+.compat-item{display:flex;gap:12px;align-items:flex-start;font-size:14px;font-weight:700;}
+.compat-mark{color:var(--teal);font-weight:800;}
+
+/* ---- キャンペーン詳細(実サイトのバナー的コーラル使い) ---- */
+#offer{padding:64px 0;background:var(--ink);}
+.offer-inner{max-width:760px;margin:0 auto;}
+.offer-inner .sec-head h2{color:#fff;}
+.offer-inner .sec-head p{color:rgba(255,255,255,.6);}
+.offer-list{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.15);margin-bottom:28px;}
+.offer-row{display:flex;gap:18px;background:var(--ink);padding:22px 24px;align-items:flex-start;}
+.offer-num{font-family:'Poppins';font-weight:800;color:var(--coral);font-size:20px;min-width:32px;}
+.offer-row-title{color:#fff;font-weight:700;font-size:15px;margin-bottom:4px;}
+.offer-row-detail{color:rgba(255,255,255,.6);font-size:12px;}
+.offer-note{background:rgba(253,99,120,.15);border:1px solid var(--coral);padding:16px 20px;font-size:13px;color:#fff;margin-bottom:28px;border-radius:var(--radius);}
+.offer-inner .btn{width:100%;}
+
+/* ---- フォーム ---- */
+#form-section{padding:64px 0;background:#fff;}
+.form-note{
+  display:inline-block;background:var(--bg-gray);border-left:3px solid var(--coral);
+  padding:12px 18px;font-size:13px;font-weight:700;margin-bottom:16px;
+}
+#satori__creative_container{max-width:680px;margin:0 auto;text-align:center;}
+
+/* ---- 校舎一覧 ---- */
+#schools{padding:64px 0;background:var(--bg-gray2);}
+.schools-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);}
+.school-col{padding:0;}
+.school-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 24px;border-bottom:1px solid var(--border);background:#fff;
+}
+.school-name{font-weight:700;font-size:14px;}
+.school-station{font-size:11px;color:var(--muted);}
+.school-arrow{color:var(--teal);}
+.school-online-row{background:var(--teal);color:#fff;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;}
+@media(max-width:760px){.schools-grid{grid-template-columns:1fr;}}
+
+/* ---- FAQ ---- */
+#faq{padding:64px 0;background:#fff;}
+.faq-body{max-width:760px;margin:0 auto;}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-item:first-child{border-top:1px solid var(--border);}
+.faq-q{display:flex;gap:14px;align-items:center;padding:18px 6px;cursor:pointer;}
+.faq-mark{color:var(--coral);font-family:'Poppins';font-weight:800;font-size:16px;}
+.faq-qtext{flex:1;font-weight:700;font-size:14px;}
+.faq-toggle{font-size:16px;color:var(--teal);}
+.faq-item.open .faq-toggle{transform:rotate(45deg);}
+.faq-a{display:none;padding:0 6px 18px 30px;font-size:13px;color:var(--muted);}
+.faq-item.open .faq-a{display:block;}
+
+/* ---- フッター ---- */
+#footer{background:var(--ink);color:#fff;padding:40px 0 24px;}
+.footer-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.15);margin-bottom:16px;}
+.footer-logo{font-family:'Poppins';font-weight:800;font-size:20px;color:var(--teal);}
+.footer-nav{display:flex;gap:18px;flex-wrap:wrap;}
+.footer-nav a{font-size:12px;color:rgba(255,255,255,.65);}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.35);text-align:center;}
+
+#fixed-cta{
+  position:fixed;bottom:0;left:0;right:0;z-index:900;
+  background:#fff;border-top:1px solid var(--border);
+  padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;
+  transform:translateY(100%);transition:transform .3s;
+}
+#fixed-cta.show{transform:translateY(0);}
+.fixed-cta-text{font-size:13px;font-weight:700;color:var(--ink);}
+#fixed-cta .btn{min-width:auto;height:42px;font-size:13px;padding:0 20px;}
+@media(max-width:480px){#fixed-cta{flex-direction:column;gap:8px;}}
+  </style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P3BS96K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<header id="site-header">
+  <div class="container header-top">
+    <a href="https://testea.net/" class="header-logo" target="_blank" rel="noopener">TESTEA</a>
+    <div class="header-cta"><a href="#form-section">受験相談/体験授業はこちら</a></div>
+  </div>
+  <nav class="header-nav">
+    <ul class="container">
+      <li><a href="#offer">秋キャンペーン</a></li>
+      <li><a href="#testimonials">保護者の声</a></li>
+      <li><a href="#stats">実績</a></li>
+      <li><a href="#schools">校舎・アクセス</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="info-bar">中学受験準備応援キャンペーン実施中 ── 2026年10月1日〜2ヶ月間限定<strong>／週1コース4コマ無料</strong></div>
+
+<section id="hero">
+  <div class="hero-photo">
+    <img src="images/fv-new-photo.jpg" alt="">
+    <div class="hero-panel">
+      <div class="hero-eyebrow">Autumn Campaign 2026</div>
+      <h1 class="hero-title">小3・4・5年生のいま、<br>中学受験準備を<span class="mark">はじめる。</span></h1>
+      <p class="hero-sub">大手進学塾の入室テストは、小4開始が主流です。まずは週1コースを4コマ、無料でお試しいただけます。</p>
+      <div class="hero-btns">
+        <a href="#form-section" class="btn">無料相談/体験授業はこちら</a>
+        <a href="#offer" class="btn btn-outline">キャンペーン詳細を見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">Achievement</span>
+      <h2>20年の歴史が証明する実績</h2>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-cell"><div class="stat-num">20<span style="font-size:16px;">年</span></div><div class="stat-label">個別指導の実績年数</div></div>
+      <div class="stat-cell"><div class="stat-num">3,000<span style="font-size:16px;">+</span></div><div class="stat-label">累計指導生徒数</div></div>
+      <div class="stat-cell"><div class="stat-num">400<span style="font-size:16px;">+</span></div><div class="stat-label">現在の受講生徒数</div></div>
+      <div class="stat-cell"><div class="stat-num">8<span style="font-size:16px;">校舎</span></div><div class="stat-label">東京・神奈川の校舎数</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">Voice</span>
+      <h2>中学受験を見据えた保護者の声</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">「算数のどこが穴なのか」を初めてはっきり教えてもらえました。大手塾では聞けなかったことが面談ですぐわかりました。</p>
+        <p class="testi-quote">先生がずっと息子だけを見てくれているのが安心でした。</p>
+        <div class="testi-author"><div class="testi-avatar"></div><div><div class="testi-name">S.Mさん(お母様)</div><div class="testi-meta">小5・日能研との併用</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">「まだ早いかも」と思っていましたが、小3のうちから相談してよかったです。自分で「やること」を持てるようになりました。</p>
+        <p class="testi-quote">うちの子のペースに合わせてくれる塾、ここ以外に知りません。</p>
+        <div class="testi-author"><div class="testi-avatar"></div><div><div class="testi-name">K.Tさん(お母様)</div><div class="testi-meta">小4・サピックスとの併用</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">「入塾を決めなくていい」相談会で、逆に信頼できると感じて入会しました。国語が苦手だった娘が自分から問題を解くようになりました。</p>
+        <p class="testi-quote">押しつけがなく、子どもが自然と前向きになれる空気がありました。</p>
+        <div class="testi-author"><div class="testi-avatar"></div><div><div class="testi-name">Y.Nさん(お母様)</div><div class="testi-meta">小3・四谷大塚との併用</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="philosophy">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">TESTEAの3つの特徴</span>
+      <h2>「授業でわかった」だけじゃない。<br>自分で解ける子にするのが目標。</h2>
+    </div>
+    <div class="phil-grid">
+      <div class="phil-cell"><span class="phil-tag t1">特徴01</span><div class="phil-title">完全1対1のマンツーマン指導</div><div class="phil-desc">講師1名がお子さんを専任担当。理解するまで先に進みません。</div></div>
+      <div class="phil-cell"><span class="phil-tag t2">特徴02</span><div class="phil-title">20年の実績に裏打ちされた専門スタッフ</div><div class="phil-desc">難関校合格の実績を持つ専門スタッフが、志望校のクセや傾向を熟知して指導します。</div></div>
+      <div class="phil-cell"><span class="phil-tag t3">特徴03</span><div class="phil-title">学習習慣まで変わっていく</div><div class="phil-desc">解き方を教えるだけで終わらず、自分で考える力・自学自習の習慣を同時に育てます。</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="flow">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">Flow</span>
+      <h2>3ステップでスタート</h2>
+    </div>
+    <div class="flow-grid">
+      <div class="flow-step"><div class="flow-num">1</div><div class="flow-title">フォームで申し込み</div><div class="flow-desc">希望校舎・面談形式(対面・オンライン)をお選びください。</div></div>
+      <div class="flow-step"><div class="flow-num">2</div><div class="flow-title">無料個別相談</div><div class="flow-desc">お子さんの現状・課題・目標を丁寧にお聞きします。</div></div>
+      <div class="flow-step"><div class="flow-num">3</div><div class="flow-title">4コマ無料でスタート</div><div class="flow-desc">入会金22,000円のみで、週1コースを最大4コマ無料でお試しいただけます(振替なし)。</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="compat">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">併用OK</span>
+      <h2>今の塾を辞めなくても大丈夫です</h2>
+    </div>
+    <div class="compat-list">
+      <div class="compat-item"><span class="compat-mark">✓</span>日能研・四谷大塚・SAPIX・早稲アカなどとの併用OK</div>
+      <div class="compat-item"><span class="compat-mark">✓</span>集団塾のカリキュラムに合わせた補強指導</div>
+      <div class="compat-item"><span class="compat-mark">✓</span>苦手科目だけのスポット受講も可能</div>
+      <div class="compat-item"><span class="compat-mark">✓</span>大手進学塾の入室テスト対策としても活用可能</div>
+    </div>
+  </div>
+</section>
+
+<section id="offer">
+  <div class="container offer-inner">
+    <div class="sec-head">
+      <span class="eyebrow">Campaign</span>
+      <h2>週1コース4コマが無料になります</h2>
+      <p>2026年10月1日〜2ヶ月間限定</p>
+    </div>
+    <div class="offer-list">
+      <div class="offer-row"><div class="offer-num">01</div><div><div class="offer-row-title">週1コースが4コマ無料</div><div class="offer-row-detail">2026年10月1日から2ヶ月間、週1コースの授業料が最大4コマ分無料。欠席された場合の振替対応はございません。</div></div></div>
+      <div class="offer-row"><div class="offer-num">02</div><div><div class="offer-row-title">対象:小学3・4・5年生</div><div class="offer-row-detail">中学受験の準備を検討し始める学年を対象としています。恐れ入りますが小学6年生は対象外です。</div></div></div>
+      <div class="offer-row"><div class="offer-num">03</div><div><div class="offer-row-title">個別相談(無料)</div><div class="offer-row-detail">お子さんの今の状況と志望校を丁寧にお聞きし、何から始めるべきかを一緒に整理します。</div></div></div>
+      <div class="offer-row"><div class="offer-num">04</div><div><div class="offer-row-title">入会金は22,000円(通常通り)</div><div class="offer-row-detail">入会金を無料にするものではなく、週1コース4コマ分の授業料を無料にする特典です。</div></div></div>
+    </div>
+    <div class="offer-note">本キャンペーンは2026年10月1日から2ヶ月間限定です。無料コマの振替対応はございませんので、あらかじめご了承のうえお申し込みください。</div>
+    <a href="#form-section" class="btn">無料相談を申し込む</a>
+  </div>
+</section>
+
+<section id="form-section">
+  <div class="container" style="text-align:center;">
+    <div class="sec-head">
+      <span class="eyebrow">お申し込み</span>
+      <h2>お子さんのこと、ここから相談してみませんか。</h2>
+    </div>
+    <div class="form-note">対象は小学3・4・5年生です(小学6年生は対象外)。2026年10月1日から2ヶ月間限定でご案内しております。</div>
+    <div id="satori__creative_container">
+      <!-- TODO: SATORIクリエイティブキーは要確認 -->
+      <script id="-_-satori_creative-_-" src="//delivery.satr.jp/js/creative_set.js?d=20251119" data-key="478063580e3ded94"></script>
+    </div>
+  </div>
+</section>
+
+<section id="schools">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">校舎・アクセス</span>
+      <h2>通える校舎がきっと見つかります</h2>
+    </div>
+    <div class="schools-grid">
+      <div class="school-col">
+        <div class="school-row"><div><div class="school-name">市ヶ谷校</div><div class="school-station">市ヶ谷駅 徒歩3〜4分</div></div><span class="school-arrow">→</span></div>
+        <div class="school-row"><div><div class="school-name">初台校</div><div class="school-station">初台駅 北口 徒歩3分</div></div><span class="school-arrow">→</span></div>
+        <div class="school-row"><div><div class="school-name">田町校</div><div class="school-station">田町駅 芝浦口 徒歩10分</div></div><span class="school-arrow">→</span></div>
+        <div class="school-row"><div><div class="school-name">久我山校</div><div class="school-station">久我山駅 南口 徒歩1分</div></div><span class="school-arrow">→</span></div>
+      </div>
+      <div class="school-col">
+        <div class="school-row"><div><div class="school-name">西永福校</div><div class="school-station">西永福駅 北口 徒歩2分</div></div><span class="school-arrow">→</span></div>
+        <div class="school-row"><div><div class="school-name">駒込校</div><div class="school-station">駒込駅 2番出口 徒歩1分</div></div><span class="school-arrow">→</span></div>
+        <div class="school-row"><div><div class="school-name">自由が丘校</div><div class="school-station">自由が丘駅 南口 徒歩1分</div></div><span class="school-arrow">→</span></div>
+        <div class="school-row"><div><div class="school-name">日吉校</div><div class="school-station">横浜市港北区</div></div><span class="school-arrow">→</span></div>
+      </div>
+    </div>
+    <div class="school-online-row"><div><strong>オンライン校</strong>　全国どこからでも受講OK。対面と同じマンツーマン指導をZoomで。</div><span>→</span></div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div class="sec-head">
+      <span class="eyebrow">FAQ</span>
+      <h2>よくあるご質問</h2>
+    </div>
+    <div class="faq-body">
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-mark">Q.</span><span class="faq-qtext">今の集団塾を辞めずに通えますか?</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a">はい、大丈夫です。日能研・四谷大塚・SAPIX・早稲アカなどに通いながら併用するお子さんがたくさんいます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-mark">Q.</span><span class="faq-qtext">キャンペーンを利用するのに入会は必要ですか?</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a">入会後に週1コース4コマ分の授業料を無料にする特典です。まずは無料の個別相談だけでもご利用いただけます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-mark">Q.</span><span class="faq-qtext">小学6年生は対象になりますか?</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a">申し訳ございませんが、本キャンペーンは小学3・4・5年生のみが対象で、小学6年生は対象外です。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-mark">Q.</span><span class="faq-qtext">無料コマを欠席した場合、振替はできますか?</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a">本キャンペーンの無料コマは振替対応がございません。あらかじめご了承のうえお申し込みください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-mark">Q.</span><span class="faq-qtext">費用はどのくらいかかりますか?</span><span class="faq-toggle">＋</span></div>
+        <div class="faq-a">入会金は22,000円です。本キャンペーンでは週1コース4コマ分の授業料が無料になります。詳しい料金は無料相談時にお伝えします。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">TESTEA</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:8px;">2006年開校 / 8校舎+オンライン校 / 東京都・神奈川県</div>
+      </div>
+      <nav class="footer-nav">
+        <a href="#hero">トップ</a>
+        <a href="#offer">キャンペーン</a>
+        <a href="#form-section">お申し込み</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+    <p class="footer-copy">© 2026 TESTEA Inc. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<div id="fixed-cta">
+  <div class="fixed-cta-text">中学受験準備応援キャンペーン実施中</div>
+  <a href="#form-section" class="btn">無料相談を申し込む</a>
+</div>
+
+<script>
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.closest('.faq-item');
+    const wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen) item.classList.add('open');
+  });
+});
+const heroEl=document.querySelector('#hero');
+const cta=document.getElementById('fixed-cta');
+if(heroEl&&cta){
+  const obs=new IntersectionObserver(entries=>{cta.classList.toggle('show',!entries[0].isIntersecting);},{threshold:.2});
+  obs.observe(heroEl);
+}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const target=document.querySelector(a.getAttribute('href'));
+    if(!target) return;
+    e.preventDefault();
+    window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-8,behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
