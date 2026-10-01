@@ -186,10 +186,11 @@ body { padding-top: 0; }
 /* S02: オファーを「主役の数字ブロック」として再設計 */
 .hero-offer-block { display: flex; align-items: stretch; background: #fff; border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 22px; box-shadow: var(--shadow-card-lg); animation: fv-in .6s .24s ease both; max-width: 480px; }
 .hero-offer-num { padding: 14px 22px; display: flex; flex-direction: column; justify-content: center; }
-.hero-offer-num .figures { display: flex; align-items: baseline; gap: 4px; line-height: 1; }
-.hero-offer-num .num-face { font-size: clamp(56px, 7vw, 80px); color: var(--navy-dark); }
-.hero-offer-num .unit { font-size: 22px; font-weight: 800; color: var(--navy-dark); }
-.hero-offer-num .sub-label { font-size: 13px; font-weight: 700; color: var(--teal-dark); margin-top: 2px; }
+/* B案: 一番伝えたい「無料」の文字そのものを最大化して主役にする */
+.hero-offer-num .offer-eyebrow { font-size: 15px; font-weight: 800; color: var(--navy-dark); letter-spacing: .02em; }
+.hero-offer-num .offer-free-word { font-size: clamp(52px, 6.6vw, 72px); font-weight: 900; color: var(--orange); line-height: 1; letter-spacing: -0.01em; }
+.hero-offer-num .offer-free-word .free-mark { font-size: 0.56em; margin-left: 1px; }
+.hero-offer-num .offer-comma-badge { display: inline-block; width: fit-content; margin-top: 6px; background: var(--teal-pale); color: var(--teal-dark); font-weight: 800; font-size: 13px; padding: 3px 13px; border-radius: var(--radius-pill); }
 /* R2-3: 橙はCTAボタン専用色とし、ここは濃ティールにして「押す場所」の混同を解消 */
 .hero-offer-accent { background: var(--teal-deep); color: #fff; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; flex: 1; min-width: 150px; }
 .hero-offer-accent .label { font-size: 12px; font-weight: 800; letter-spacing: .04em; margin-bottom: 6px; opacity: .85; }
@@ -220,7 +221,7 @@ body { padding-top: 0; }
   .hero-main-heading .pre-line { font-size: 20px; line-height: 1.25; margin-bottom: 4px; }
   /* .hero-kw のサイズはベースのclamp(vw基準)に任せ、狭い画面でも1行に収まるようにする */
   .hero-offer-block { flex-direction: column; max-width: 100%; }
-  .hero-offer-num .num-face { font-size: 56px; }
+  .hero-offer-num .offer-free-word { font-size: 52px; }
   .btn-lg, .btn { width: 100%; max-width: 100%; }
 }
 
@@ -495,13 +496,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         まずは<strong>週1コース</strong>から、中学受験の"最初の一歩"を一緒に踏み出しませんか。
       </p>
 
-      <!-- S02: オファーを主役の数字ブロックとして再設計 -->
+      <!-- S02改(B案): 「4」ではなく「無料」自体を主役の文字として最大化 -->
       <div class="hero-offer-block">
         <div class="hero-offer-num">
-          <div class="figures">
-            <span class="num-face">4</span><span class="unit">コマ</span>
-          </div>
-          <div class="sub-label">週1コースが無料</div>
+          <div class="offer-eyebrow">週1コースが</div>
+          <div class="offer-free-word">無料<span class="free-mark">!</span></div>
+          <div class="offer-comma-badge">最大4コマ</div>
         </div>
         <div class="hero-offer-accent">
           <div class="label">ご利用条件</div>
