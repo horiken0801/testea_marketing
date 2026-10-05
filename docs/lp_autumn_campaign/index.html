@@ -200,8 +200,7 @@ body { padding-top: 0; }
 
 .hero-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 22px; animation: fv-in .6s .30s ease both; }
 .hero-cta-note { font-size: 12px; color: var(--text-muted); }
-.hero-trust { display: flex; flex-wrap: wrap; gap: 8px; animation: fv-in .6s .36s ease both; }
-.trust-pill { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,.9); border: 1px solid rgba(15,154,158,.22); color: var(--teal-dark); font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: var(--radius-pill); white-space: nowrap; }
+.hero-trust-line { font-size: 12.5px; font-weight: 700; color: var(--teal-dark); letter-spacing: .01em; animation: fv-in .6s .36s ease both; }
 
 #hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 48px; background: #fff; clip-path: polygon(0 100%, 100% 30%, 100% 100%); z-index: 1; pointer-events: none; }
 
@@ -259,11 +258,11 @@ body { padding-top: 0; }
 .stats-cream .lead { font-size: 13.5px; color: var(--text-body); line-height: 1.85; margin-bottom: 26px; }
 .mini-steps { display:flex; flex-direction:column; gap:16px; margin-bottom:24px; }
 .mini-step { display:flex; align-items:flex-start; gap:14px; }
-.mini-num { width:30px; height:30px; min-width:30px; background: var(--teal); color:#fff; font-weight:900; font-size:13px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-top:2px; flex-shrink:0; }
+.mini-num { font-family:'Inter',sans-serif; color: var(--teal); font-weight:900; font-size:20px; line-height:1.4; min-width:30px; flex-shrink:0; }
 .mini-text { font-size:13.5px; line-height:1.7; color:var(--text-body); }
 .mini-text strong { color:var(--text-main); }
-.check-box { background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 28px; }
-.check-box li { display:flex; align-items:flex-start; gap:8px; font-size:12.5px; color:var(--text-body); line-height:1.65; margin-bottom:7px; }
+.check-box { margin-bottom: 28px; }
+.check-box li { display:flex; align-items:flex-start; gap:8px; font-size:12.5px; color:var(--text-body); line-height:1.65; margin-bottom:9px; }
 .check-box li:last-child { margin-bottom:0; }
 .check-box li::before { content:''; display:inline-block; width:15px; height:15px; flex-shrink:0; margin-top:2px; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B7175' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); background-size:contain; background-repeat:no-repeat; }
 @media (max-width:1024px) { .stats-dark, .stats-cream { padding: 48px 32px; } }
@@ -289,30 +288,13 @@ body { padding-top: 0; }
 .phil-item { position: relative; padding: 32px 28px; border-right: 1px solid var(--border-color); background: #fff; min-width: 0; }
 .phil-item:last-child { border-right: none; }
 .phil-img { width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; border-radius: var(--radius-md); margin-bottom: 20px; display: block; background: var(--teal-pale); }
-.phil-tag { display: inline-block; background: var(--teal-pale); color: var(--teal-dark); font-size: 11px; font-weight: 800; letter-spacing: .06em; padding: 4px 12px; border-radius: var(--radius-pill); margin-bottom: 12px; }
+.phil-tag { display: block; color: var(--teal); font-family: 'Inter', sans-serif; font-weight: 900; font-size: 13px; letter-spacing: .08em; margin-bottom: 10px; }
 .phil-title { font-size: 17px; font-weight: 900; color: var(--text-main); line-height: 1.45; margin-bottom: 10px; min-height: 50px; }
 .phil-desc { font-size: 13.5px; color: var(--text-body); line-height: 1.85; margin-bottom: 16px; }
 .phil-point { display: flex; align-items: flex-start; gap: 8px; background: var(--teal-pale2); border-left: 3px solid var(--teal); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 10px 14px; font-size: 12.5px; font-weight: 700; color: var(--text-main); line-height: 1.55; }
 .pp-icon { width: 15px; height: 15px; flex-shrink: 0; margin-top: 2px; stroke: var(--teal-dark); }
 @media (max-width:900px) { .phil-grid { grid-template-columns: 1fr; } .phil-item { border-right: none; border-bottom: 1px solid var(--border-color); } .phil-item:last-child { border-bottom: none; } #philosophy { padding: 56px 0; } }
 @media (max-width:600px) { #philosophy { padding: 48px 0; } .phil-lead h2 { font-size: 21px; } .phil-title { font-size: 16px; min-height: unset; } .phil-img { height: 160px; } .phil-lead { margin-bottom: 40px; } }
-
-/* ============ FLOW(B12: ステップ3種を同一サイズ・同一濃度に統一) ============ */
-#flow { background: var(--bg-light); padding: 72px 0; }
-.flow-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 44px; }
-.flow-step { text-align:center; padding: 0 20px; }
-.flow-circle { width: 64px; height: 64px; border-radius: 50%; background: var(--teal); color: #fff; font-family: 'Inter'; font-size: 22px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
-.flow-circle.is-final { box-shadow: 0 0 0 3px var(--orange); }
-.flow-title { font-size:15px; font-weight:900; color:var(--text-main); margin-bottom:8px; }
-.flow-desc { font-size:13px; color:var(--text-muted); line-height:1.8; }
-@media (max-width:768px) {
-  #flow { padding: 52px 0; }
-  .flow-steps { grid-template-columns: 1fr; gap: 22px; margin-top: 32px; }
-  .flow-step { display: flex; flex-direction: row; align-items: flex-start; text-align: left; gap: 16px; padding: 0; }
-  .flow-circle { margin: 0; width: 52px; height: 52px; min-width: 52px; font-size: 18px; flex-shrink: 0; }
-  .flow-step > div:last-child { flex: 1; min-width: 0; }
-  .flow-title { font-size: 14.5px; margin-bottom: 6px; }
-}
 
 /* ============ COMPAT ============ */
 #compat { background: var(--bg-cream); padding: 88px 0; } /* A06:前後セクションとの間に呼吸をつくる余白 */
@@ -321,7 +303,7 @@ body { padding-top: 0; }
 .compat-text p { font-size:14px; color:var(--text-body); line-height:1.88; margin-bottom:24px; }
 .compat-list { display:flex; flex-direction:column; gap:12px; }
 .compat-list li { display:flex; align-items:flex-start; gap:12px; font-size:14px; font-weight:700; color:var(--text-main); line-height:1.5; }
-.compat-list .ck { width:24px; height:24px; min-width:24px; background: var(--teal); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; margin-top:1px; flex-shrink:0; }
+.compat-list .ck { width:18px; height:18px; min-width:18px; margin-top:3px; flex-shrink:0; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230F9A9E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); background-size:contain; background-repeat:no-repeat; }
 .compat-img { border-radius: var(--radius-xl); overflow: hidden; background: var(--teal-pale); aspect-ratio: 4 / 3; }
 .compat-img img { width:100%; height:100%; object-fit:cover; display:block; }
 @media (max-width:768px) {
@@ -338,19 +320,16 @@ body { padding-top: 0; }
 .offer-inner h2 { font-size:28px; font-weight:900; color:#fff; margin-bottom:36px; line-height:1.5; letter-spacing:-0.01em; }
 .offer-list { display:flex; flex-direction:column; gap:12px; margin-bottom:28px; text-align:left; }
 /* S04: 半透明ガラス調カードを廃止し、不透明の白カードに(文字は濃色) */
-#offer .offer-item { display:flex; align-items:flex-start; gap:16px; background: #fff; border-radius: var(--radius-md); padding: 18px 20px; }
-.offer-icon { width:40px; height:40px; min-width:40px; background: var(--teal-pale); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
-.offer-icon svg { stroke: var(--teal-dark); }
+#offer .offer-item { background: #fff; border-radius: var(--radius-md); border-left: 3px solid var(--teal); padding: 16px 20px 16px 22px; }
 .offer-item-title { font-size:15px; font-weight:800; color:var(--text-main); margin-bottom:4px; }
 .offer-item-detail { font-size:12.5px; color:var(--text-body); line-height:1.7; }
-.offer-price-tag { display:inline-block; background: var(--teal-pale); color: var(--teal-dark); font-weight:800; font-size:11.5px; padding:2px 10px; border-radius:var(--radius-pill); margin-top:6px; }
 .offer-warn { background: var(--yellow-light); border: 1px solid #E3C377; border-radius: var(--radius-md); padding: 16px 20px; display:flex; align-items:flex-start; gap:12px; margin-bottom: 32px; text-align: left; }
 .offer-warn-ico { flex-shrink:0; margin-top:2px; }
 .offer-warn-text { font-size:13.5px; color: var(--yellow-ink); font-weight:700; line-height:1.7; }
 @media (max-width:768px) {
   #offer { padding: 56px 0; }
   .offer-inner h2 { font-size: 22px; margin-bottom: 26px; }
-  #offer .offer-item { padding: 15px 16px; gap: 12px; }
+  #offer .offer-item { padding: 14px 16px 14px 18px; }
   .offer-item-title { font-size: 14px; }
   .offer-item-detail { font-size: 12px; }
 }
@@ -397,7 +376,7 @@ body { padding-top: 0; }
 .faq-item:first-child { border-top:1px solid var(--border-color); }
 .faq-q { display:flex; align-items:center; gap:14px; padding:18px 6px; cursor:pointer; user-select:none; }
 .faq-q:hover { background: var(--teal-pale2); }
-.faq-qlabel { width:28px; height:28px; min-width:28px; background: var(--teal); color:#fff; font-size:13px; font-weight:900; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.faq-qlabel { color: var(--teal-dark); font-family: 'Inter', sans-serif; font-size:16px; font-weight:900; min-width:18px; flex-shrink:0; }
 .faq-qtext { flex:1; font-size:15px; font-weight:700; color:var(--text-main); line-height:1.5; }
 .faq-icon { width:26px; height:26px; min-width:26px; border:1.5px solid var(--border-color); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700; color:var(--teal-dark); transition:transform .2s, background .2s, border-color .2s; line-height:1; }
 .faq-item.open .faq-icon { background:var(--teal); border-color:var(--teal); color:#fff; transform:rotate(45deg); }
@@ -520,12 +499,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="hero-cta-note">相談は無料。強制入会は一切ございません。※小学6年生は対象外です。</span>
       </div>
 
-      <div class="hero-trust">
-        <div class="trust-pill">対象:小学3・4・5年生</div>
-        <div class="trust-pill">8校舎＋オンライン</div>
-        <div class="trust-pill">20年の指導実績</div>
-        <div class="trust-pill">集団塾との併用OK</div>
-      </div>
+      <p class="hero-trust-line">対象:小学3・4・5年生　|　8校舎＋オンライン　|　20年の指導実績　|　集団塾との併用OK</p>
 
     </div>
   </div>
@@ -663,39 +637,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<section id="flow">
-  <div class="container">
-    <div class="sec-head fi">
-      <h2>3ステップで中学受験準備がスタートする</h2>
-      <p>お申し込みから受講開始まで最短1週間。まずはお気軽にご連絡ください。</p>
-    </div>
-
-    <div class="flow-steps fi">
-      <div class="flow-step">
-        <div class="flow-circle">1</div>
-        <div>
-          <div class="flow-title">フォームで申し込み</div>
-          <div class="flow-desc">希望校舎・面談形式(対面・オンライン)をお選びください。</div>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-circle">2</div>
-        <div>
-          <div class="flow-title">無料個別相談</div>
-          <div class="flow-desc">お子さんの現状・課題・目標を丁寧にお聞きし、今やるべきことを整理します。</div>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-circle is-final">3</div>
-        <div>
-          <div class="flow-title">週1コースを8コマ無料でスタート</div>
-          <div class="flow-desc">入会金22,000円のみで、最大8コマ無料でお試しいただけます(振替なし)。</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="compat">
   <div class="container">
     <div class="compat-inner">
@@ -703,10 +644,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h2>今の塾を辞めなくても大丈夫です。</h2>
         <p>「少し分かるけど、苦しいところがある」――そんなお子さんこそ、TESTEAが得意です。日能研・四谷大塚・SAPIX・早稲アカなど、どの大手塾との併用にも対応しています。</p>
         <ul class="compat-list">
-          <li><span class="ck">✓</span>大手集団塾(日能研・四谷大塚・SAPIXなど)との併用OK</li>
-          <li><span class="ck">✓</span>集団塾のカリキュラムに合わせた補強指導</li>
-          <li><span class="ck">✓</span>苦手科目だけのスポット受講も可能</li>
-          <li><span class="ck">✓</span>大手進学塾の入室テスト対策としても活用可能</li>
+          <li><span class="ck"></span>大手集団塾(日能研・四谷大塚・SAPIXなど)との併用OK</li>
+          <li><span class="ck"></span>集団塾のカリキュラムに合わせた補強指導</li>
+          <li><span class="ck"></span>苦手科目だけのスポット受講も可能</li>
+          <li><span class="ck"></span>大手進学塾の入室テスト対策としても活用可能</li>
         </ul>
       </div>
       <div class="compat-img fi fi-d1">
@@ -724,34 +665,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <!-- R2-4: スクロール連動フェードインが未発火の状態でも4枚とも同じ不透明白カードで確実に読めるよう、fiクラス(初期opacity:0)を外して常時表示にする -->
       <div class="offer-list">
         <div class="offer-item">
-          <div class="offer-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-          <div>
-            <div class="offer-item-title">週1コースが8コマ無料</div>
-            <div class="offer-item-detail">2026年10月3日から2026年11月末まで、週1コースの授業料が最大8コマ分無料になります。欠席された場合の振替対応はございません。※継続受講が適用条件です。</div>
-            <span class="offer-price-tag">8コマ分 → 無料</span>
-          </div>
+          <div class="offer-item-title">週1コースが8コマ無料</div>
+          <div class="offer-item-detail">2026年10月3日から2026年11月末まで、週1コースの授業料が最大8コマ分無料になります。欠席された場合の振替対応はございません。※継続受講が適用条件です。</div>
         </div>
         <div class="offer-item">
-          <div class="offer-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
-          <div>
-            <div class="offer-item-title">対象:小学3・4・5年生</div>
-            <div class="offer-item-detail">中学受験の準備を検討し始める学年を対象としたキャンペーンです。恐れ入りますが、小学6年生は対象外となります。</div>
-          </div>
+          <div class="offer-item-title">対象:小学3・4・5年生</div>
+          <div class="offer-item-detail">中学受験の準備を検討し始める学年を対象としたキャンペーンです。恐れ入りますが、小学6年生は対象外となります。</div>
         </div>
         <div class="offer-item">
-          <div class="offer-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-          <div>
-            <div class="offer-item-title">個別相談(無料)</div>
-            <div class="offer-item-detail">お子さんの今の状況と志望校を丁寧にお聞きし、中学受験準備として何から始めるべきかを一緒に整理します。</div>
-            <span class="offer-price-tag">相談料 → 無料</span>
-          </div>
+          <div class="offer-item-title">個別相談(無料)</div>
+          <div class="offer-item-detail">お子さんの今の状況と志望校を丁寧にお聞きし、中学受験準備として何から始めるべきかを一緒に整理します。</div>
         </div>
         <div class="offer-item">
-          <div class="offer-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
-          <div>
-            <div class="offer-item-title">入会金は22,000円(通常通り)</div>
-            <div class="offer-item-detail">本キャンペーンは入会金を無料にするものではなく、入会後の週1コース8コマ分の授業料を無料にする特典です。あらかじめご了承ください。</div>
-          </div>
+          <div class="offer-item-title">入会金は22,000円(通常通り)</div>
+          <div class="offer-item-detail">本キャンペーンは入会金を無料にするものではなく、入会後の週1コース8コマ分の授業料を無料にする特典です。あらかじめご了承ください。</div>
         </div>
       </div>
 
