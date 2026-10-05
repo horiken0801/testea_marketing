@@ -1,0 +1,90 @@
+[
+  {
+    "topic": "繁田式の紹介(HP誘導)",
+    "insight": "金12:30 HP誘導は過去実績最高クラス(7/24: imp62, 7/31: imp44)。先週未実施だったため勝ちパターンをまず立て直す。",
+    "post_text": "偏差値だけでは、子どもが今どこにいるか分かりません。\n\n同じ点数でも、\n止まっている場所は一人ひとり違います。\n\n繁田式では、そこをどう見て、どう声をかけているか。\n\n▼まとめています\nhttps://testea.net/handashiki/",
+    "suggested_datetime": "2026-08-14T12:30:00+09:00",
+    "reasoning": "金12:30の勝ちパターン(HP誘導)をまず立て直すための1本。変数は動かさず、実績のある/handashiki/に誘導。判定基準はimpとURLクリック。",
+    "sources": [],
+    "category": "HP誘導",
+    "expected_engagement": "imp 35〜55",
+    "destination_url": "https://testea.net/handashiki/"
+  },
+  {
+    "topic": "休止",
+    "insight": "運用プロンプト2-6「土は原則休止」に従い、通常投稿は作成していない。",
+    "post_text": "",
+    "suggested_datetime": "2026-08-15T00:00:00+09:00",
+    "reasoning": "土曜の実績は過去15.0impで曜日単独最弱。テスト目的変数にしない方針のためスキップ。",
+    "sources": [],
+    "category": "休止",
+    "expected_engagement": "",
+    "destination_url": ""
+  },
+  {
+    "topic": "附属校か進学校か(議論提起)",
+    "insight": "日21:00議論型は過去実績上位(7/26: imp45)。Threadsで強かった論点ロジックを意見が割れる問いとしてX向けに再構成。",
+    "post_text": "附属校、向いているのはどんな子だと思いますか。\n\n競争より、\n自分のペースで打ち込める環境が合う子。\n\n逆に、\n競争があった方が伸びる子。\n\nどちらだと思うか、コメントで聞いてみたいです。",
+    "suggested_datetime": "2026-08-16T21:00:00+09:00",
+    "reasoning": "保護者間で意見が割れやすい二択の問いを提示。テスト変数は末尾の問いかけの形(コメント募集型)。",
+    "sources": [],
+    "category": "議論・テーマ提起",
+    "expected_engagement": "imp 30〜45",
+    "destination_url": ""
+  },
+  {
+    "topic": "朝の計算用紙(共感)",
+    "insight": "月7:00は紙ノート・朝の場面など共感系の枠。実測データが薄い時間帯のため素の共感投稿で反応を見る。",
+    "post_text": "朝、机に広げっぱなしの計算用紙。\n\n昨日の続きなのか、\n今日また同じところで止まっているのか。\n\n見ただけで、大体分かる朝があります。\n\nそのまま黙って、横に座るだけの日もあります。\n\n同じような朝、ありますか。",
+    "suggested_datetime": "2026-08-17T07:00:00+09:00",
+    "reasoning": "月朝枠のデータが薄いため、まず素の共感投稿で反応を取得する回。次回以降、時間帯を動かすかの判断材料にする。",
+    "sources": [],
+    "category": "共感(朝の場面)",
+    "expected_engagement": "imp 20〜35",
+    "destination_url": ""
+  },
+  {
+    "topic": "取材実績の紹介(HP誘導)",
+    "insight": "火12:30 HP誘導も過去実績最高クラス(7/21: imp48, 8/4: imp42)。実績のあるページで勝ちパターンを維持。",
+    "post_text": "塾の実績は、パンフレットより先に、\nどんな場面で紹介されてきたかを見た方が分かることがあります。\n\nテスティーがこれまで取材いただいた記事を、\nまとめて置いています。\n\n▼こちら\nhttps://testea.net/press/",
+    "suggested_datetime": "2026-08-18T12:30:00+09:00",
+    "reasoning": "火12:30の勝ちパターンを維持。変数は固定し、実績のある/press/に誘導。前回同カテゴリ比較対象は8/4(/about/, imp42)。",
+    "sources": [],
+    "category": "HP誘導",
+    "expected_engagement": "imp 35〜55",
+    "destination_url": "https://testea.net/press/"
+  },
+  {
+    "topic": "できたところから聞く(声かけ型)",
+    "insight": "水21:00声かけ型は平均31.0impで「ときどき反応を取る」枠。声かけの順番を提示する形式。",
+    "post_text": "『できなかったところ』より先に、\n『できたところ』から聞く。\n\nこれだけで、子どもの表情はかなり変わります。\n\n順番を変えるだけなので、\n今日の丸つけから試せます。",
+    "suggested_datetime": "2026-08-19T21:00:00+09:00",
+    "reasoning": "順番の提示という声かけ型の型を踏襲。今日から試せる具体的な行動を最後に置き、実行に移しやすくしている。",
+    "sources": [],
+    "category": "声かけ型",
+    "expected_engagement": "imp 25〜35",
+    "destination_url": ""
+  },
+  {
+    "topic": "計算用紙を残す(算数相談)",
+    "insight": "木21:00は共感単独だと弱い(imp16〜30)ため、相談・DM化カテゴリ(算数)を配置。末尾は問いかけ1文(DM誘導ではない)。",
+    "post_text": "算数の計算用紙、\nどのくらい残していますか。\n\n途中式を消してしまう子は、\nどこで間違えたか、あとから追えなくなります。\n\n消さずに残すだけで、\n見えてくることがあります。\n\n計算用紙、今どんな使い方をしていますか。",
+    "suggested_datetime": "2026-08-20T21:00:00+09:00",
+    "reasoning": "木21:00の弱さを、カテゴリを共感単独から相談・DM化に変える形でテスト。末尾は「DMください」ではなく問いかけ1文にとどめている。",
+    "sources": [],
+    "category": "相談・DM化(算数)",
+    "expected_engagement": "imp 15〜25",
+    "destination_url": ""
+  },
+  {
+    "topic": "書籍一覧の紹介(HP誘導・新規ページテスト)",
+    "insight": "「Week4以降の新規投入ページ」である/books/を初めて誘導先に使うA/Bテスト。時間・曜日・カテゴリは8/14と同一に固定。",
+    "post_text": "20年間、保護者の方に向けて書いてきたものがあります。\n\nその場しのぎの情報ではなく、\n繰り返し読み返せるものを、という思いで。\n\nこれまでの書籍を一覧にしました。\n\n▼こちら\nhttps://testea.net/books/",
+    "suggested_datetime": "2026-08-21T12:30:00+09:00",
+    "reasoning": "A/Bテスト。変数は誘導先URLのみ(/handashiki/→/books/)。比較対象は8/14投稿(想定imp35〜55)。判定基準はimpとURLクリック数。",
+    "sources": [],
+    "category": "HP誘導",
+    "expected_engagement": "imp 30〜50",
+    "destination_url": "https://testea.net/books/"
+  }
+]

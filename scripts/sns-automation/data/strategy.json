@@ -1,0 +1,27 @@
+{
+  "updated_at": null,
+  "tone": "親しみやすく簡潔な日本語。専門用語には一言だけ補足を添える。",
+  "topics": [
+    {
+      "name": "業界トレンド解説",
+      "weight": 1.0
+    },
+    {
+      "name": "実践Tips",
+      "weight": 1.0
+    },
+    {
+      "name": "事例紹介",
+      "weight": 1.0
+    }
+  ],
+  "posting_times": {
+    "x": ["09:00", "20:00"],
+    "threads": ["12:30"]
+  },
+  "hashtags": {
+    "x": [],
+    "threads": []
+  },
+  "hypotheses": []
+}

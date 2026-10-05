@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P3BS96K');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="個別指導塾TESTEA 2026年秋期「中学受験準備応援キャンペーン」実施中。対象は小学3・4・5年生(小6は対象外)。入会金22,000円で、週1コースを最大8コマ無料でお試しいただけます。2026年10月3日から2026年11月末までの期間限定。">
+  <title>TESTEA 中学受験準備応援キャンペーン2026秋 | 週1コース8コマ無料</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Inter:wght@400;600;700;800;900&family=Yusei+Magic&display=swap" rel="stylesheet">
+  <style>
+/* ================================================================
+   デザイン修正指示書(2026.09.30)反映版。対応した項目番号をコメントで
+   明示しています。S=公開前必須 / A=今回の改修で / B=余力で
+================================================================ */
+:root {
+  --teal:           #0F9A9E;
+  --teal-dark:      #0B7175;   /* 白背景上のティール文字はこの色に統一(S04) */
+  --teal-deep:       #063F42;  /* 濃色ベタ背景用(S04:白文字コントラスト確保) */
+  --teal-mid:       #12ADB1;
+  --teal-light:     #4DC3C6;
+  --teal-pale:      #E3F6F6;
+  --teal-pale2:     #F1FBFB;
+  --orange:         #B5501F;   /* CTA専用フラットカラー。白文字コントラスト4.5:1以上(S04) */
+  --orange-hover:   #9A421A;
+  --marker:         #EFC363;   /* 強調は背景色つきマーカーのみに用途限定(S04/S01) */
+  --marker-soft:    rgba(239,195,99,.55);
+  --yellow-light:   #FBF3E1;
+  --yellow-ink:     #6B4A10;
+  --white:          #FFFFFF;
+  --bg-light:       #F5FAFB;
+  --bg-cream:       #FFF8EE;
+  --text-main:      #1A3A3C;
+  --text-body:      #374151;
+  --text-muted:     #5B6B73;   /* S04:従来よりコントラストを上げた濃いグレー */
+  --border-color:   #D9E5E4;
+  --shadow-card:    0 2px 16px rgba(15,154,158,0.08);
+  --shadow-card-lg: 0 6px 28px rgba(15,154,158,0.14);
+  --navy-dark:      #16302E;
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-xl:   24px;
+  --radius-pill: 999px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+  font-weight: 400;
+  color: var(--text-main);
+  line-height: 1.85;
+  background: #fff;
+  padding-bottom: 64px; /* A08:固定バー1段化(56px)+余白に合わせ調整 */
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* S02: 数字と日本語単位のフォント・ベースライン不一致を解消するため、
+   数字部分だけ Inter を明示指定し、単位は本文フォントで別要素に分離する */
+.num-face { font-family: 'Inter', sans-serif; font-weight: 900; }
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; }
+ul, ol { list-style: none; }
+button { font-family: inherit; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+@media (max-width: 1024px) { .container { padding: 0 28px; } }
+@media (max-width: 768px)  { .container { padding: 0 20px; } }
+@media (max-width: 480px)  { .container { padding: 0 16px; } }
+
+/* B12: モーションは「FV入場」と「CTAホバー」のみに限定。減速設定にも対応 */
+.fi { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fi.show { opacity: 1; transform: translateY(0); }
+.fi-d1 { transition-delay: 0.08s; }
+.fi-d2 { transition-delay: 0.16s; }
+.fi-d3 { transition-delay: 0.24s; }
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .fi { opacity: 1; transform: none; }
+}
+
+/* A08: CTAを2階層に整理。主=オレンジ塗り(フラット) / 副=白地枠線 */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--orange);
+  color: #fff; font-weight: 800; font-size: 16px; padding: 15px 32px;
+  border-radius: var(--radius-pill); cursor: pointer;
+  border: none; max-width: 420px; width: fit-content;
+  transition: background-color 0.15s, transform 0.15s;
+  white-space: nowrap; text-decoration: none; letter-spacing: 0.02em;
+  box-shadow: 0 3px 10px rgba(181,80,31,.28);
+}
+.btn:hover { background: var(--orange-hover); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn-lg { font-size: 17px; padding: 17px 40px; width: 100%; max-width: 420px; }
+.btn .ico { font-size: 17px; font-style: normal; }
+.btn-outline {
+  background: #fff; color: var(--teal-dark); border: 1.5px solid var(--teal-dark);
+  box-shadow: none;
+}
+.btn-outline:hover { background: var(--teal-pale); }
+
+.sec-head { text-align: center; margin-bottom: 48px; }
+.sec-head h2 { font-size: 30px; font-weight: 900; color: var(--text-main); line-height: 1.5; margin-bottom: 12px; letter-spacing: -0.01em; }
+.sec-head p { font-size: 14px; color: var(--text-muted); line-height: 1.8; }
+@media (max-width: 768px) { .sec-head h2 { font-size: 23px; letter-spacing: 0; } .sec-head { margin-bottom: 36px; } .sec-head p { font-size: 13px; } }
+@media (max-width: 480px) { .sec-head h2 { font-size: 21px; } .sec-head { margin-bottom: 30px; } }
+
+/* ============ HEADER(B11: ナビを最大3項目+CTAに縮小) ============ */
+#site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1100; background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(15,154,158,0.10); transition: background 0.3s, box-shadow 0.3s; }
+#site-header.scrolled { background: rgba(255,255,255,0.98); box-shadow: 0 2px 14px rgba(15,154,158,0.10); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 20px; }
+/* A10: ロゴ画像はテキストロゴ(擬似SVG)化し、画像欠落時のレイアウト崩れを排除 */
+/* 実ロゴ画像。white地の場合のみ使用(透過PNG・背景がティール系のため濃色面では使わない) */
+.header-logo { display: flex; align-items: center; flex-shrink: 0; }
+.header-logo img { height: 30px; width: auto; display: block; }
+@media (max-width:480px) { .header-logo img { height: 26px; } }
+.header-nav { display: flex; align-items: center; gap: 24px; list-style: none; }
+.header-nav a { font-size: 13px; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: 0.02em; transition: color 0.15s; white-space: nowrap; }
+.header-nav a:hover { color: var(--teal-dark); }
+.header-cta-wrap { flex-shrink: 0; }
+.header-cta-wrap .btn-outline { font-size: 13px; padding: 10px 20px; min-height: 44px; }
+.header-hamburger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; cursor: pointer; background: none; border: none; padding: 4px; flex-shrink: 0; }
+.header-hamburger span { display: block; width: 100%; height: 2.5px; background: var(--teal-dark); border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+.header-hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.header-hamburger.open span:nth-child(2) { opacity: 0; }
+.header-hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+.header-mobile-menu { display: none; position: absolute; top: 64px; left: 0; right: 0; background: #fff; border-top: 1px solid var(--border-color); box-shadow: 0 8px 20px rgba(15,154,158,0.12); padding: 16px 20px 20px; flex-direction: column; gap: 0; }
+.header-mobile-menu.open { display: flex; }
+.header-mobile-menu a { display: block; font-size: 14px; font-weight: 700; color: var(--text-main); padding: 13px 4px; border-bottom: 1px solid var(--border-color); text-decoration: none; }
+.header-mobile-menu a:last-child { border-bottom: none; }
+.header-mobile-menu .mobile-cta { margin-top: 14px; display: block; text-align: center; background: var(--orange); color: #fff; font-size: 15px; font-weight: 800; padding: 15px 20px; border-radius: var(--radius-pill); border-bottom: none; }
+@media (max-width:860px) { .header-nav { display: none; } .header-cta-wrap { display: none; } .header-hamburger { display: flex; } }
+@media (max-width:480px) { .header-inner { height: 56px; } .header-mobile-menu { top: 56px; } }
+body { padding-top: 0; }
+
+@keyframes fv-in { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+/* ============ HERO(S01/S02/S03/S10) ============ */
+#hero { position: relative; width: 100%; min-height: max(620px, 92svh); height: auto; overflow: visible; display: flex; align-items: stretch; }
+/* S10: 画像未読込・失敗時もレイアウトが壊れないよう、ブランド色のフォールバック背景を常設 */
+.hero-bg-photo { position: absolute; inset: 0; z-index: 0; background: linear-gradient(135deg, var(--teal-pale) 0%, var(--bg-cream) 100%); }
+.hero-bg-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 65% center; display: block; }
+/* R2-2: 写真が入った場合でも左カラムの文字が確実に読めるよう白ベールを濃く再調整 */
+.hero-bg-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(245,250,251,0.97) 0%, rgba(245,250,251,0.92) 34%, rgba(245,250,251,0.62) 56%, rgba(245,250,251,0.18) 78%, transparent 100%); }
+.hero-content { position: relative; z-index: 2; width: 100%; max-width: 1280px; margin: 0 auto; padding: 96px 64px 72px; display: flex; align-items: center; gap: 0; }
+.hero-text-col { width: 58%; max-width: 660px; padding-top: 4px; }
+
+.hero-ribbon-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--teal); color: #fff; font-size: 12px; font-weight: 700; padding: 7px 18px; border-radius: var(--radius-pill); margin-bottom: 22px; letter-spacing: .03em; width: fit-content; flex-wrap: wrap; animation: fv-in .6s .05s ease both; }
+.hero-ribbon-badge .rsep { width: 1px; height: 12px; background: rgba(255,255,255,.4); flex-shrink: 0; }
+
+/* S01: h1最大サイズ104px→72px。意図した位置で改行し、下線はinline背景グラデで文字を追従させる */
+.hero-main-heading { margin: 0 0 22px; animation: fv-in .6s .12s ease both; }
+/* R2-6: 2行の間が約60px空いてしまっていたのを8〜12px前後に圧縮 */
+.hero-main-heading h1 { font-weight: 900; letter-spacing: -0.01em; line-height: 1.3; margin: 0; color: var(--navy-dark); text-wrap: balance; }
+.hero-main-heading .pre-line { display: block; font-size: clamp(22px, 2.6vw, 28px); font-weight: 700; color: var(--navy-dark); letter-spacing: .02em; line-height: 1.3; margin-bottom: 10px; }
+/* 「今がはじめどき。」を油性マジック風フォント(Yusei Magic)で強調。太い手書き感+大きいサイズ+マーカーで視線を集める */
+.hero-kw {
+  display: inline-block;
+  font-family: 'Yusei Magic', 'Zen Kaku Gothic New', sans-serif;
+  /* 下限をvw基準にして狭い画面でも1行に収まるようにする(固定42px床が原因で
+     スマホ幅では強制的に2行折り返しになっていた) */
+  font-size: clamp(30px, 9.5vw, 78px);
+  color: var(--orange);
+  background-image: linear-gradient(transparent 66%, var(--marker) 66%);
+  background-repeat: no-repeat;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0 .08em;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  transform: rotate(-1.5deg);
+  text-shadow: 2px 2px 0 rgba(181,80,31,.12);
+}
+
+.hero-sub-copy { font-size: clamp(14px, 1.3vw, 15px); font-weight: 500; color: var(--text-body); line-height: 1.9; margin-bottom: 24px; animation: fv-in .6s .18s ease both; }
+.hero-sub-copy strong { color: var(--navy-dark); font-weight: 700; }
+
+/* S02: オファーを「主役の数字ブロック」として再設計 */
+.hero-offer-block { display: flex; align-items: stretch; background: #fff; border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 22px; box-shadow: var(--shadow-card-lg); animation: fv-in .6s .24s ease both; max-width: 480px; }
+.hero-offer-num { padding: 14px 22px; display: flex; flex-direction: column; justify-content: center; }
+/* B案: 一番伝えたい「無料」の文字そのものを最大化して主役にする */
+.hero-offer-num .offer-eyebrow { font-size: 15px; font-weight: 800; color: var(--navy-dark); letter-spacing: .02em; }
+.hero-offer-num .offer-free-word { font-size: clamp(52px, 6.6vw, 72px); font-weight: 900; color: var(--orange); line-height: 1; letter-spacing: -0.01em; }
+.hero-offer-num .offer-free-word .free-mark { font-size: 0.56em; margin-left: 1px; }
+.hero-offer-num .offer-comma-badge { display: inline-block; width: fit-content; margin-top: 6px; background: var(--teal-pale); color: var(--teal-dark); font-weight: 800; font-size: 13px; padding: 3px 13px; border-radius: var(--radius-pill); }
+/* R2-3: 橙はCTAボタン専用色とし、ここは濃ティールにして「押す場所」の混同を解消 */
+.hero-offer-accent { background: var(--teal-deep); color: #fff; padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; flex: 1; min-width: 150px; }
+.hero-offer-accent .label { font-size: 12px; font-weight: 800; letter-spacing: .04em; margin-bottom: 6px; opacity: .85; }
+.hero-offer-accent .detail-list { display: flex; flex-direction: column; gap: 3px; }
+.hero-offer-accent .detail-list li { font-size: 14px; line-height: 1.5; font-weight: 700; padding-left: 14px; position: relative; }
+.hero-offer-accent .detail-list li::before { content: '・'; position: absolute; left: 0; }
+
+.hero-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 22px; animation: fv-in .6s .30s ease both; }
+.hero-cta-note { font-size: 12px; color: var(--text-muted); }
+.hero-trust { display: flex; flex-wrap: wrap; gap: 8px; animation: fv-in .6s .36s ease both; }
+.trust-pill { display: flex; align-items: center; gap: 5px; background: rgba(255,255,255,.9); border: 1px solid rgba(15,154,158,.22); color: var(--teal-dark); font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: var(--radius-pill); white-space: nowrap; }
+
+#hero::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 48px; background: #fff; clip-path: polygon(0 100%, 100% 30%, 100% 100%); z-index: 1; pointer-events: none; }
+
+@media (max-width:1100px) { .hero-content { padding: 88px 40px 64px; } }
+@media (max-width:860px) { .hero-text-col { width: 74%; } }
+@media (max-width:768px) {
+  #hero { height: auto; min-height: 100svh; }
+  .hero-content { padding: 104px 24px 64px; flex-direction: column; align-items: flex-start; justify-content: center; }
+  .hero-text-col { width: 100%; max-width: 100%; }
+  .hero-bg-photo img { object-position: 75% center; }
+  .hero-bg-photo::after { background: rgba(245,250,251,0.88); }
+  #hero::after { height: 32px; }
+}
+@media (max-width:480px) {
+  .hero-content { padding: 96px 16px 56px; }
+  /* S01: スマホは40〜44px、行間1.25。「小3・4・5年生の、」は見出しの一部として同じ塊に見える大きさに */
+  .hero-main-heading .pre-line { font-size: 20px; line-height: 1.25; margin-bottom: 4px; }
+  /* .hero-kw のサイズはベースのclamp(vw基準)に任せ、狭い画面でも1行に収まるようにする */
+  .hero-offer-block { flex-direction: column; max-width: 100%; }
+  .hero-offer-num .offer-free-word { font-size: 52px; }
+  .btn-lg, .btn { width: 100%; max-width: 100%; }
+}
+
+/* ============ TESTIMONIALS(S03) ============ */
+#testimonials { background: var(--bg-cream); padding: 72px 0; }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+.testi-card { background: #fff; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-card); padding: 26px; display: flex; flex-direction: column; min-height: 280px; }
+.testi-chips { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.chip { font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: var(--radius-pill); background: var(--teal-pale); color: var(--teal-dark); }
+.chip-alt { background: var(--yellow-light); color: var(--yellow-ink); }
+.testi-quote-main { font-size: 19px; font-weight: 700; color: var(--navy-dark); line-height: 1.6; margin-bottom: 14px; flex: 1; }
+.testi-quote-main::before { content: '"'; color: var(--teal); }
+.testi-text-sub { font-size: 13px; color: var(--text-body); line-height: 1.8; margin-bottom: 16px; }
+.testi-author { display: flex; align-items: center; gap: 10px; padding-top: 14px; border-top: 1px solid var(--border-color); }
+.testi-avatar-init { width: 38px; height: 38px; min-width: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-size: 14px; }
+.testi-name { font-weight: 700; font-size: 12.5px; color: var(--text-main); }
+@media (max-width:900px) { .testi-grid { grid-template-columns: 1fr; gap: 14px; } }
+@media (max-width:580px) { #testimonials { padding: 52px 0; } .testi-card { padding: 20px; min-height: unset; } .testi-quote-main { font-size: 17px; } }
+
+/* ============ STATS(A09) ============ */
+#stats { display: grid; grid-template-columns: 1fr 1fr; }
+.stats-dark { background: var(--teal-deep); padding: 64px 48px; display: flex; flex-direction: column; }
+.stats-dark .kicker { color: #fff; opacity: .8; font-size: 12px; font-weight: 800; letter-spacing: .08em; margin-bottom: 14px; }
+.stats-dark h2 { font-size: 24px; font-weight: 900; color: #fff; line-height: 1.45; margin-bottom: 32px; letter-spacing: -0.01em; }
+/* A09: 4つを2x2でなく横一列に。数字は白+64px、単位は同一ベースラインで24px */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+.stat-num { display: flex; align-items: baseline; gap: 2px; color: #fff; }
+.stat-num .num-face { font-size: 40px; }
+.stat-num .unit { font-size: 18px; font-weight: 800; }
+.stat-label { font-size: 11.5px; color: rgba(255,255,255,.85); line-height: 1.5; margin-top: 4px; }
+.stats-photo { flex: 1; min-height: 140px; border-radius: var(--radius-md); overflow: hidden; background: rgba(255,255,255,.08); position: relative; }
+.stats-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.stats-cream { background: var(--bg-cream); padding: 64px 48px; display: flex; flex-direction: column; justify-content: center; }
+.stats-cream h3 { font-size: 22px; font-weight: 900; color: var(--text-main); line-height: 1.5; margin-bottom: 12px; letter-spacing: -0.01em; }
+.stats-cream .lead { font-size: 13.5px; color: var(--text-body); line-height: 1.85; margin-bottom: 26px; }
+.mini-steps { display:flex; flex-direction:column; gap:16px; margin-bottom:24px; }
+.mini-step { display:flex; align-items:flex-start; gap:14px; }
+.mini-num { width:30px; height:30px; min-width:30px; background: var(--teal); color:#fff; font-weight:900; font-size:13px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin-top:2px; flex-shrink:0; }
+.mini-text { font-size:13.5px; line-height:1.7; color:var(--text-body); }
+.mini-text strong { color:var(--text-main); }
+.check-box { background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px 20px; margin-bottom: 28px; }
+.check-box li { display:flex; align-items:flex-start; gap:8px; font-size:12.5px; color:var(--text-body); line-height:1.65; margin-bottom:7px; }
+.check-box li:last-child { margin-bottom:0; }
+.check-box li::before { content:''; display:inline-block; width:15px; height:15px; flex-shrink:0; margin-top:2px; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B7175' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); background-size:contain; background-repeat:no-repeat; }
+@media (max-width:1024px) { .stats-dark, .stats-cream { padding: 48px 32px; } }
+@media (max-width:768px) {
+  #stats { grid-template-columns: 1fr; }
+  .stats-dark { padding: 44px 20px; }
+  .stats-cream { padding: 40px 20px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 18px 14px; margin-bottom: 24px; }
+  .stats-dark h2 { font-size: 20px; margin-bottom: 24px; }
+  .stat-num .num-face { font-size: 34px; }
+  .stats-photo { min-height: 160px; }
+  .stats-cream h3 { font-size: 19px; }
+}
+
+/* ============ PHILOSOPHY(A09) ============ */
+#philosophy { background: #fff; padding: 76px 0; }
+.phil-lead { text-align: center; margin-bottom: 56px; }
+.phil-lead h2 { font-size: 27px; font-weight: 900; color: var(--text-main); line-height: 1.5; margin-bottom: 14px; letter-spacing: -0.01em; }
+.phil-lead h2 em { font-style: normal; background-image: linear-gradient(transparent 62%, var(--marker) 62%); background-repeat: no-repeat; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.phil-lead p { font-size: 14px; color: var(--text-muted); line-height: 1.85; max-width: 600px; margin: 0 auto; }
+/* R2-1: 3枚目が右端で切れる問題(画像の固有幅が列を押し広げる)を repeat(3, minmax(0,1fr)) で解消 */
+.phil-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; min-width: 0; }
+.phil-item { position: relative; padding: 32px 28px; border-right: 1px solid var(--border-color); background: #fff; min-width: 0; }
+.phil-item:last-child { border-right: none; }
+.phil-img { width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; border-radius: var(--radius-md); margin-bottom: 20px; display: block; background: var(--teal-pale); }
+.phil-tag { display: inline-block; background: var(--teal-pale); color: var(--teal-dark); font-size: 11px; font-weight: 800; letter-spacing: .06em; padding: 4px 12px; border-radius: var(--radius-pill); margin-bottom: 12px; }
+.phil-title { font-size: 17px; font-weight: 900; color: var(--text-main); line-height: 1.45; margin-bottom: 10px; min-height: 50px; }
+.phil-desc { font-size: 13.5px; color: var(--text-body); line-height: 1.85; margin-bottom: 16px; }
+.phil-point { display: flex; align-items: flex-start; gap: 8px; background: var(--teal-pale2); border-left: 3px solid var(--teal); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 10px 14px; font-size: 12.5px; font-weight: 700; color: var(--text-main); line-height: 1.55; }
+.pp-icon { width: 15px; height: 15px; flex-shrink: 0; margin-top: 2px; stroke: var(--teal-dark); }
+@media (max-width:900px) { .phil-grid { grid-template-columns: 1fr; } .phil-item { border-right: none; border-bottom: 1px solid var(--border-color); } .phil-item:last-child { border-bottom: none; } #philosophy { padding: 56px 0; } }
+@media (max-width:600px) { #philosophy { padding: 48px 0; } .phil-lead h2 { font-size: 21px; } .phil-title { font-size: 16px; min-height: unset; } .phil-img { height: 160px; } .phil-lead { margin-bottom: 40px; } }
+
+/* ============ FLOW(B12: ステップ3種を同一サイズ・同一濃度に統一) ============ */
+#flow { background: var(--bg-light); padding: 72px 0; }
+.flow-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 44px; }
+.flow-step { text-align:center; padding: 0 20px; }
+.flow-circle { width: 64px; height: 64px; border-radius: 50%; background: var(--teal); color: #fff; font-family: 'Inter'; font-size: 22px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+.flow-circle.is-final { box-shadow: 0 0 0 3px var(--orange); }
+.flow-title { font-size:15px; font-weight:900; color:var(--text-main); margin-bottom:8px; }
+.flow-desc { font-size:13px; color:var(--text-muted); line-height:1.8; }
+@media (max-width:768px) {
+  #flow { padding: 52px 0; }
+  .flow-steps { grid-template-columns: 1fr; gap: 22px; margin-top: 32px; }
+  .flow-step { display: flex; flex-direction: row; align-items: flex-start; text-align: left; gap: 16px; padding: 0; }
+  .flow-circle { margin: 0; width: 52px; height: 52px; min-width: 52px; font-size: 18px; flex-shrink: 0; }
+  .flow-step > div:last-child { flex: 1; min-width: 0; }
+  .flow-title { font-size: 14.5px; margin-bottom: 6px; }
+}
+
+/* ============ COMPAT ============ */
+#compat { background: var(--bg-cream); padding: 88px 0; } /* A06:前後セクションとの間に呼吸をつくる余白 */
+.compat-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.compat-text h2 { font-size:27px; font-weight:900; color:var(--text-main); margin-bottom:14px; line-height:1.5; letter-spacing:-0.01em; }
+.compat-text p { font-size:14px; color:var(--text-body); line-height:1.88; margin-bottom:24px; }
+.compat-list { display:flex; flex-direction:column; gap:12px; }
+.compat-list li { display:flex; align-items:flex-start; gap:12px; font-size:14px; font-weight:700; color:var(--text-main); line-height:1.5; }
+.compat-list .ck { width:24px; height:24px; min-width:24px; background: var(--teal); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; margin-top:1px; flex-shrink:0; }
+.compat-img { border-radius: var(--radius-xl); overflow: hidden; background: var(--teal-pale); aspect-ratio: 4 / 3; }
+.compat-img img { width:100%; height:100%; object-fit:cover; display:block; }
+@media (max-width:768px) {
+  .compat-inner { grid-template-columns: 1fr; gap: 24px; }
+  .compat-img { order: -1; }
+  #compat { padding: 56px 0; }
+  .compat-text h2 { font-size: 21px; }
+  .compat-text p { font-size: 13.5px; margin-bottom: 18px; }
+}
+
+/* ============ OFFER(S02/S04) ============ */
+#offer { background: var(--teal-deep); padding: 80px 0; }
+.offer-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+.offer-inner h2 { font-size:28px; font-weight:900; color:#fff; margin-bottom:36px; line-height:1.5; letter-spacing:-0.01em; }
+.offer-list { display:flex; flex-direction:column; gap:12px; margin-bottom:28px; text-align:left; }
+/* S04: 半透明ガラス調カードを廃止し、不透明の白カードに(文字は濃色) */
+#offer .offer-item { display:flex; align-items:flex-start; gap:16px; background: #fff; border-radius: var(--radius-md); padding: 18px 20px; }
+.offer-icon { width:40px; height:40px; min-width:40px; background: var(--teal-pale); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+.offer-icon svg { stroke: var(--teal-dark); }
+.offer-item-title { font-size:15px; font-weight:800; color:var(--text-main); margin-bottom:4px; }
+.offer-item-detail { font-size:12.5px; color:var(--text-body); line-height:1.7; }
+.offer-price-tag { display:inline-block; background: var(--teal-pale); color: var(--teal-dark); font-weight:800; font-size:11.5px; padding:2px 10px; border-radius:var(--radius-pill); margin-top:6px; }
+.offer-warn { background: var(--yellow-light); border: 1px solid #E3C377; border-radius: var(--radius-md); padding: 16px 20px; display:flex; align-items:flex-start; gap:12px; margin-bottom: 32px; text-align: left; }
+.offer-warn-ico { flex-shrink:0; margin-top:2px; }
+.offer-warn-text { font-size:13.5px; color: var(--yellow-ink); font-weight:700; line-height:1.7; }
+@media (max-width:768px) {
+  #offer { padding: 56px 0; }
+  .offer-inner h2 { font-size: 22px; margin-bottom: 26px; }
+  #offer .offer-item { padding: 15px 16px; gap: 12px; }
+  .offer-item-title { font-size: 14px; }
+  .offer-item-detail { font-size: 12px; }
+}
+
+/* ============ FORM(S05) ============ */
+#form-section { background: #fff; padding: 80px 0; position: relative; }
+.form-header { text-align:center; margin-bottom:28px; }
+.form-header h2 { font-size:27px; font-weight:900; color:var(--text-main); margin-bottom:10px; line-height:1.5; letter-spacing:-0.01em; }
+.form-header p { font-size:14px; color:var(--text-muted); }
+.form-urgency-note {
+  display: flex; align-items: flex-start; gap: 10px;
+  max-width: 720px; margin: 0 auto 24px;
+  padding: 14px 18px; border-radius: var(--radius-md);
+  background: var(--yellow-light); border: 1px solid #E3C377;
+  color: var(--yellow-ink); font-size: 13.5px; font-weight: 700; line-height: 1.8;
+  text-align: left;
+}
+.form-meta { text-align: center; font-size: 12.5px; color: var(--teal-dark); font-weight: 700; margin-bottom: 20px; }
+/* S05: SATORIフォームを白カード(最大幅720px・角丸16・影弱)に収める */
+.form-card-wrap { max-width: 720px; margin: 0 auto; background: #fff; border: 1px solid var(--border-color); border-radius: 16px; padding: 32px 28px; box-shadow: var(--shadow-card); }
+#satori__creative_container { text-align: center; }
+@media (max-width:768px) { #form-section { padding: 56px 0; } .form-header h2 { font-size: 21px; } .form-card-wrap { padding: 22px 16px; } }
+
+/* ============ SCHOOLS(B11: コンパクトなチップ+エリア見出し) ============ */
+#schools { background: var(--bg-cream); padding: 76px 0; }
+.schools-area-block { margin-bottom: 28px; }
+.schools-area-block h3 { font-size: 12px; font-weight: 800; color: var(--teal-dark); letter-spacing: .08em; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.schools-area-block h3::before { content: ''; display: inline-block; width: 3px; height: 13px; background: var(--teal); border-radius: 2px; }
+.school-chip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.school-chip { display: block; background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 10px 14px; transition: border-color .15s; }
+.school-chip:hover { border-color: var(--teal); }
+.school-chip .name { font-size: 13.5px; font-weight: 800; color: var(--text-main); }
+.school-chip .station { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.school-online-row { margin-top: 18px; background: var(--teal-deep); color: #fff; border-radius: var(--radius-md); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.school-online-row .name { font-weight: 800; font-size: 14px; }
+.school-online-row .desc { font-size: 12px; opacity: .85; margin-top: 2px; }
+@media (max-width: 700px) { .school-chip-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { #schools { padding: 52px 0; } .school-chip-grid { grid-template-columns: 1fr 1fr; gap: 8px; } }
+
+/* ============ FAQ ============ */
+#faq { background: #fff; padding: 76px 0; }
+.faq-body { max-width:760px; margin:0 auto; }
+.faq-item { border-bottom:1px solid var(--border-color); }
+.faq-item:first-child { border-top:1px solid var(--border-color); }
+.faq-q { display:flex; align-items:center; gap:14px; padding:18px 6px; cursor:pointer; user-select:none; }
+.faq-q:hover { background: var(--teal-pale2); }
+.faq-qlabel { width:28px; height:28px; min-width:28px; background: var(--teal); color:#fff; font-size:13px; font-weight:900; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.faq-qtext { flex:1; font-size:15px; font-weight:700; color:var(--text-main); line-height:1.5; }
+.faq-icon { width:26px; height:26px; min-width:26px; border:1.5px solid var(--border-color); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; font-weight:700; color:var(--teal-dark); transition:transform .2s, background .2s, border-color .2s; line-height:1; }
+.faq-item.open .faq-icon { background:var(--teal); border-color:var(--teal); color:#fff; transform:rotate(45deg); }
+.faq-a { display:none; padding:0 6px 18px 48px; }
+.faq-item.open .faq-a { display:block; }
+.faq-alabel { color:var(--orange); font-size:15px; font-weight:900; margin-right:8px; }
+.faq-atext { font-size:13.5px; color:var(--text-body); line-height:1.88; }
+@media (max-width:768px) { #faq { padding: 52px 0; } .faq-qtext { font-size: 14px; } .faq-a { padding: 0 4px 16px 32px; } .faq-atext { font-size: 13px; } }
+
+/* ============ FOOTER(S04:コントラスト改善) ============ */
+#footer { background: var(--teal-deep); padding: 44px 0 28px; }
+.footer-grid { display:grid; grid-template-columns: 1fr auto; gap: 32px; align-items:start; padding-bottom:24px; border-bottom:1px solid rgba(255,255,255,.16); margin-bottom:18px; }
+/* ロゴが透過ティール文字のため、濃色背景の上でも視認できるよう白パッチを敷く */
+/* ロゴデータ自体を白版に変更したため、背景パッチは不要 */
+.footer-logo { display: inline-flex; align-items: center; }
+.footer-logo img { height: 26px; width: auto; display: block; }
+.footer-info { font-size:12.5px; color:rgba(255,255,255,.78); line-height:1.9; max-width:380px; margin-top: 10px; }
+.footer-nav { display:flex; flex-direction:column; gap:9px; align-items:flex-end; }
+.footer-nav a { font-size:12.5px; color:rgba(255,255,255,.78); }
+.footer-nav a:hover { color:#fff; }
+.footer-copy { font-size:11.5px; color:rgba(255,255,255,.65); text-align:center; }
+@media (max-width:768px) { .footer-grid { grid-template-columns: 1fr; gap: 20px; } .footer-nav { align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 12px; } #footer { padding: 36px 0 22px; } }
+
+/* ============ FIXED CTA(A08: 1段化・高さ56px) ============ */
+#fixed-cta { position:fixed; bottom:0; left:0; right:0; z-index:998; background: #fff; border-top: 1px solid var(--border-color); box-shadow: 0 -4px 16px rgba(0,0,0,.06); padding:8px 20px; display:flex; align-items:center; justify-content:space-between; gap:14px; transform:translateY(100%); transition:transform .3s ease; }
+#fixed-cta.show { transform:translateY(0); }
+.fixed-cta-text { color:var(--text-main); font-size:13px; font-weight:700; }
+#fixed-cta .btn { font-size:14px; padding:12px 24px; min-height: 44px; flex-shrink:0; }
+@media (max-width:480px) {
+  #fixed-cta { padding: 0; height: 56px; }
+  .fixed-cta-text { display: none; }
+  #fixed-cta .btn { width: 100%; max-width: 100%; height: 56px; border-radius: 0; }
+  body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
+}
+  </style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P3BS96K"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header id="site-header" role="banner">
+  <div class="container">
+    <div class="header-inner">
+      <a href="https://testea.net/" class="header-logo" aria-label="TESTEA 個別指導塾テスティー トップへ" target="_blank" rel="noopener">
+        <img src="data:image/png;base64,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" alt="TESTEA 個別指導塾テスティー" width="804" height="117" loading="eager">
+      </a>
+      <nav aria-label="メインナビゲーション">
+        <ul class="header-nav">
+          <li><a href="#philosophy">特徴</a></li>
+          <li><a href="#schools">校舎</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <div class="header-cta-wrap">
+        <a href="#form-section" class="btn btn-outline">無料相談を申し込む</a>
+      </div>
+      <button class="header-hamburger" id="hamburger-btn" aria-label="メニューを開く" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="header-mobile-menu" id="mobile-menu" aria-label="モバイルメニュー">
+      <a href="#philosophy">特徴</a>
+      <a href="#schools">校舎・アクセス</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#form-section" class="mobile-cta">無料相談を申し込む →</a>
+    </nav>
+  </div>
+</header>
+
+<section id="hero">
+  <div class="hero-bg-photo" aria-hidden="true">
+    <img src="images/fv-new-photo.jpg" alt="講師がマンツーマンで生徒の解答を確認している様子" loading="eager" fetchpriority="high" width="1600" height="1200">
+  </div>
+  <!-- ヒーローに実写画像を配置するため、フォールバックの線画ピクトグラムは削除 -->
+
+  <div class="hero-content">
+    <div class="hero-text-col">
+
+      <div class="hero-ribbon-badge">
+        <span>Autumn 2026</span>
+        <span class="rsep"></span>
+        <span>キャンペーン実施中・11月末まで</span>
+      </div>
+
+      <div class="hero-main-heading">
+        <h1>
+          <span class="pre-line">小3・4・5年生の、</span><br>
+          <span class="hero-kw" id="kw-anim">今がはじめどき。</span>
+        </h1>
+      </div>
+
+      <p class="hero-sub-copy">
+        大手進学塾の入室テストは、小4開始が主流です。<br>
+        まずは<strong>週1コース</strong>から、中学受験の"最初の一歩"を一緒に踏み出しませんか。
+      </p>
+
+      <!-- S02改(B案): 「4」ではなく「無料」自体を主役の文字として最大化 -->
+      <div class="hero-offer-block">
+        <div class="hero-offer-num">
+          <div class="offer-eyebrow">週1コースが</div>
+          <div class="offer-free-word">無料<span class="free-mark">!</span></div>
+          <div class="offer-comma-badge">最大8コマ</div>
+        </div>
+        <div class="hero-offer-accent">
+          <div class="label">ご利用条件</div>
+          <ul class="detail-list">
+            <li>入会金22,000円のみ</li>
+            <li>2026年11月末まで</li>
+            <li>振替対応はございません</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="hero-cta" id="hero-cta-block">
+        <a href="#form-section" class="btn btn-lg">
+          無料相談を申し込む <span class="ico">›</span>
+        </a>
+        <span class="hero-cta-note">相談は無料。強制入会は一切ございません。※小学6年生は対象外です。</span>
+      </div>
+
+      <div class="hero-trust">
+        <div class="trust-pill">対象:小学3・4・5年生</div>
+        <div class="trust-pill">8校舎＋オンライン</div>
+        <div class="trust-pill">20年の指導実績</div>
+        <div class="trust-pill">集団塾との併用OK</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div class="container">
+    <div class="sec-head fi">
+      <h2>中学受験を見据えた保護者の声</h2>
+      <p>「早く始めてよかった」という声が続々届いています</p>
+    </div>
+
+    <div class="testi-grid">
+      <article class="testi-card fi fi-d1">
+        <div class="testi-chips"><span class="chip">小5</span><span class="chip chip-alt">日能研併用</span></div>
+        <p class="testi-quote-main">先生がずっと息子だけを見てくれているのが、すごく安心でした。</p>
+        <p class="testi-text-sub">「算数のどこが穴なのか」を初めてはっきり教えてもらえました。大手塾では聞けなかったことが、面談ですぐわかった感じです。</p>
+        <div class="testi-author">
+          <div class="testi-avatar-init" style="background:#0F9A9E;">S</div>
+          <div class="testi-name">S.Mさん(お母様)</div>
+        </div>
+      </article>
+
+      <article class="testi-card fi fi-d2">
+        <div class="testi-chips"><span class="chip">小4</span><span class="chip chip-alt">サピックス併用</span></div>
+        <p class="testi-quote-main">うちの子のペースに合わせてくれる塾、ここ以外に知りません。</p>
+        <p class="testi-text-sub">「まだ早いかも」と思っていましたが、小3のうちから相談してよかったです。子どもが自分で「やること」を持てるようになりました。</p>
+        <div class="testi-author">
+          <div class="testi-avatar-init" style="background:#B5501F;">K</div>
+          <div class="testi-name">K.Tさん(お母様)</div>
+        </div>
+      </article>
+
+      <article class="testi-card fi fi-d3">
+        <div class="testi-chips"><span class="chip">小3</span><span class="chip chip-alt">四谷大塚併用</span></div>
+        <p class="testi-quote-main">押しつけがなくて、子どもが自然と前向きになれる空気がありました。</p>
+        <p class="testi-text-sub">「入塾を決めなくていい」という相談会で、逆に信頼できると感じて入会しました。国語が苦手だった娘が、自分から問題を解くようになりました。</p>
+        <div class="testi-author">
+          <div class="testi-avatar-init" style="background:#4B6BCC;">Y</div>
+          <div class="testi-name">Y.Nさん(お母様)</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="stats-dark fi">
+    <span class="kicker">ACHIEVEMENT</span>
+    <h2>20年の歴史が証明する実績</h2>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num"><span class="num-face">20</span><span class="unit">年</span></div>
+        <div class="stat-label">個別指導の実績年数</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span class="num-face">6,000</span><span class="unit">名+</span></div>
+        <div class="stat-label">累計指導生徒数</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span class="num-face">500</span><span class="unit">名+</span></div>
+        <div class="stat-label">現在受講している生徒数</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num"><span class="num-face">8</span><span class="unit">校舎</span></div>
+        <div class="stat-label">東京・神奈川の校舎数</div>
+      </div>
+    </div>
+    <div class="stats-photo">
+      <img src="images/achievement-musashi.jpg" alt="久我山校の外観。マツモトキヨシ店舗上の個別指導塾TESTEA看板にココ!の案内付き" loading="lazy" width="800" height="400">
+    </div>
+  </div>
+
+  <div class="stats-cream fi">
+    <h3>「中学受験、始めるなら<br>いつから？」一緒に整理します。</h3>
+    <p class="lead">
+      個別面談で、お子さんの今の状況と中学受験に向けて何から始めるべきかを一緒に整理します。「これって相談していいのかな」と思っていることでも、どうぞ遠慮なく話してください。
+    </p>
+    <div class="mini-steps">
+      <div class="mini-step">
+        <div class="mini-num">1</div>
+        <div class="mini-text"><strong>お子さんの今の状況をうかがいます</strong><br>学習の悩み・志望校・今の塾の様子をお聞きします。</div>
+      </div>
+      <div class="mini-step">
+        <div class="mini-num">2</div>
+        <div class="mini-text"><strong>「今やるべきこと」を整理</strong><br>科目ごとの弱点と中学受験準備として必要なことを明確にします。</div>
+      </div>
+      <div class="mini-step">
+        <div class="mini-num">3</div>
+        <div class="mini-text"><strong>週1コースを8コマ無料でスタート</strong><br>入会金のみで、まずは8コマお試しいただけます。</div>
+      </div>
+    </div>
+    <ul class="check-box">
+      <li>子どもと一緒に来ても、お母さん一人で来てもOK</li>
+      <li>今の塾はそのままで大丈夫(併用相談も大歓迎)</li>
+      <li>オンラインでの面談もOK</li>
+      <li>相談したからといって入会を決める必要はありません</li>
+    </ul>
+    <a href="#form-section" class="btn btn-outline">無料相談を申し込む</a>
+  </div>
+</section>
+
+<section id="philosophy">
+  <div class="container">
+    <div class="phil-lead fi">
+      <h2>「授業でわかった」だけじゃない。<br><em>自分で解ける子</em>にするのが目標。</h2>
+      <p>子どもが「あ、わかった！」と言うだけでは不十分。「自分でできた！」という体験を積み重ねることで、お子さん自身の自信と学習習慣が育っていきます。</p>
+    </div>
+
+    <div class="phil-grid fi">
+      <div class="phil-item">
+        <img class="phil-img" src="images/teacher-closeup.jpg" alt="講師がマンツーマンで生徒の解答を確認している様子" loading="lazy" width="400" height="180">
+        <span class="phil-tag">特徴01</span>
+        <h3 class="phil-title">完全1対1の<br>マンツーマン指導</h3>
+        <p class="phil-desc">講師1名がお子さんを担当。苦手箇所を徹底フォローし、理解するまで先に進みません。「わかったふり」をなくします。</p>
+        <div class="phil-point"><svg class="pp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> お子さんのペースに合わせた指導で苦手を確実に克服</div>
+      </div>
+
+      <div class="phil-item">
+        <img class="phil-img" src="images/classroom-whiteboard.jpg" alt="スタッフが保護者・生徒と面談している様子" loading="lazy" width="400" height="180">
+        <span class="phil-tag">特徴02</span>
+        <h3 class="phil-title">20年の実績に裏打ちされた<br>専門スタッフ</h3>
+        <p class="phil-desc">開校20年・難関校合格の実績を持つ専門スタッフが担当。志望校のクセや傾向を熟知しているので、「この学校ならこれが大事」というピンポイントの指導ができます。</p>
+        <div class="phil-point"><svg class="pp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 志望校に特化した指導で「何を重点的に勉強すべきか」が明確に</div>
+      </div>
+
+      <div class="phil-item">
+        <img class="phil-img" src="images/feature03-coaching.jpg" alt="自習室の様子" loading="lazy" width="400" height="180">
+        <span class="phil-tag">特徴03</span>
+        <h3 class="phil-title">学習習慣まで<br>変わっていく</h3>
+        <p class="phil-desc">「解き方を教えるだけ」で終わらず、自分で考える力・自学自習の習慣を同時に育てます。集団塾の授業理解度も向上します。</p>
+        <div class="phil-point"><svg class="pp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 家庭学習の質まで変わる。授業以外の時間の使い方も指導</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="flow">
+  <div class="container">
+    <div class="sec-head fi">
+      <h2>3ステップで中学受験準備がスタートする</h2>
+      <p>お申し込みから受講開始まで最短1週間。まずはお気軽にご連絡ください。</p>
+    </div>
+
+    <div class="flow-steps fi">
+      <div class="flow-step">
+        <div class="flow-circle">1</div>
+        <div>
+          <div class="flow-title">フォームで申し込み</div>
+          <div class="flow-desc">希望校舎・面談形式(対面・オンライン)をお選びください。</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-circle">2</div>
+        <div>
+          <div class="flow-title">無料個別相談</div>
+          <div class="flow-desc">お子さんの現状・課題・目標を丁寧にお聞きし、今やるべきことを整理します。</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-circle is-final">3</div>
+        <div>
+          <div class="flow-title">週1コースを8コマ無料でスタート</div>
+          <div class="flow-desc">入会金22,000円のみで、最大8コマ無料でお試しいただけます(振替なし)。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compat">
+  <div class="container">
+    <div class="compat-inner">
+      <div class="compat-text fi">
+        <h2>今の塾を辞めなくても大丈夫です。</h2>
+        <p>「少し分かるけど、苦しいところがある」――そんなお子さんこそ、TESTEAが得意です。日能研・四谷大塚・SAPIX・早稲アカなど、どの大手塾との併用にも対応しています。</p>
+        <ul class="compat-list">
+          <li><span class="ck">✓</span>大手集団塾(日能研・四谷大塚・SAPIXなど)との併用OK</li>
+          <li><span class="ck">✓</span>集団塾のカリキュラムに合わせた補強指導</li>
+          <li><span class="ck">✓</span>苦手科目だけのスポット受講も可能</li>
+          <li><span class="ck">✓</span>大手進学塾の入室テスト対策としても活用可能</li>
+        </ul>
+      </div>
+      <div class="compat-img fi fi-d1">
+        <img src="images/classroom-scene.jpg" alt="講師がホワイトボードを使って生徒に説明している様子" loading="lazy" width="480" height="360">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="offer">
+  <div class="container">
+    <div class="offer-inner">
+      <h2>週1コース8コマが無料になります</h2>
+
+      <!-- R2-4: スクロール連動フェードインが未発火の状態でも4枚とも同じ不透明白カードで確実に読めるよう、fiクラス(初期opacity:0)を外して常時表示にする -->
+      <div class="offer-list">
+        <div class="offer-item">
+          <div class="offer-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+          <div>
+            <div class="offer-item-title">週1コースが8コマ無料</div>
+            <div class="offer-item-detail">2026年10月3日から2026年11月末まで、週1コースの授業料が最大8コマ分無料になります。欠席された場合の振替対応はございません。※継続受講が適用条件です。</div>
+            <span class="offer-price-tag">8コマ分 → 無料</span>
+          </div>
+        </div>
+        <div class="offer-item">
+          <div class="offer-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+          <div>
+            <div class="offer-item-title">対象:小学3・4・5年生</div>
+            <div class="offer-item-detail">中学受験の準備を検討し始める学年を対象としたキャンペーンです。恐れ入りますが、小学6年生は対象外となります。</div>
+          </div>
+        </div>
+        <div class="offer-item">
+          <div class="offer-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div>
+            <div class="offer-item-title">個別相談(無料)</div>
+            <div class="offer-item-detail">お子さんの今の状況と志望校を丁寧にお聞きし、中学受験準備として何から始めるべきかを一緒に整理します。</div>
+            <span class="offer-price-tag">相談料 → 無料</span>
+          </div>
+        </div>
+        <div class="offer-item">
+          <div class="offer-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+          <div>
+            <div class="offer-item-title">入会金は22,000円(通常通り)</div>
+            <div class="offer-item-detail">本キャンペーンは入会金を無料にするものではなく、入会後の週1コース8コマ分の授業料を無料にする特典です。あらかじめご了承ください。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-warn">
+        <span class="offer-warn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+        <div class="offer-warn-text">
+          本キャンペーンは2026年10月3日から2026年11月末までの期間限定です。無料コマの振替対応はございませんので、あらかじめご了承のうえお申し込みください。<br>
+          ※キャンペーン特典は継続受講が適用条件です。
+        </div>
+      </div>
+
+      <a href="#form-section" class="btn btn-lg">
+        無料相談を申し込む <span class="ico">›</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="form-section">
+  <div class="container">
+    <div class="form-header fi">
+      <h2>お子さんのこと、ここから相談してみませんか。</h2>
+      <p>フォームを送ると、1〜2営業日以内にご連絡します。まずは聞くだけでもOKです。</p>
+    </div>
+    <div class="form-urgency-note fi">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span>対象は小学3・4・5年生です(小学6年生は対象外)。2026年11月末までの期間限定でご案内しております。</span>
+    </div>
+    <div class="form-meta fi">入力項目 6つ ・ 所要時間目安 1分</div>
+    <div class="form-card-wrap fi">
+      <div id="satori__creative_container">
+        <script id="-_-satori_creative-_-" src="//delivery.satr.jp/js/creative_set.js?d=20251119" data-key="7f114d959cb709e1"></script>
+      </div>
+    </div>
+    <style>
+      span.satori__system_notes { display: none; }
+      .satori__custom_form .satori__input_group input,
+      .satori__custom_form .satori__input_group select,
+      .satori__custom_form .satori__input_group textarea {
+        min-height: 48px;
+      }
+      .satori__custom_form .satori__input_group input:focus,
+      .satori__custom_form .satori__input_group select:focus,
+      .satori__custom_form .satori__input_group textarea:focus {
+        outline: 2px solid #0F9A9E;
+        outline-offset: 1px;
+      }
+      /* R2-5: 送信ボタンは橙・幅いっぱいに(公開環境でSATORI側の実クラス名を要確認) */
+      .satori__custom_form button[type="submit"],
+      .satori__custom_form input[type="submit"],
+      .satori__submit_button {
+        background: #B5501F !important;
+        color: #fff !important;
+        width: 100% !important;
+        min-height: 52px !important;
+        border-radius: 999px !important;
+        font-weight: 800 !important;
+        border: none !important;
+      }
+      @media screen and (max-width: 600px) {
+        .satori__custom_form .satori__input_group select {
+          padding: 0.75rem; width: 100%; max-width: 100%; background-color: #fff;
+          border: 1px solid #e2e8f0; color: #333; border-radius: 4px; font-size: 0.9rem; box-sizing: border-box;
+        }
+        #satori__form_body > div.satori__custom_form > div:nth-child(5),
+        #satori__form_body > div.satori__custom_form > div:nth-child(6) { float: none; width: 100%; }
+        #satori__form_body > div.satori__custom_form > div:nth-child(7) { clear: none; }
+        .satori__custom_form .satori__notes { max-width: 100%; box-sizing: border-box; display: inline-block; }
+        .satori__custom_form .satori__input_group textarea { width: 100%; max-width: 100%; box-sizing: border-box; }
+        .satori__custom_form .satori__input_group input[type='text'],
+        .satori__custom_form .satori__input_group input[type='tel'],
+        .satori__custom_form .satori__input_group input[type='email'] { box-sizing: border-box; }
+      }
+    </style>
+  </div>
+</section>
+
+<section id="schools">
+  <div class="container">
+    <div class="sec-head fi">
+      <h2>通える校舎がきっと見つかります</h2>
+      <p>東京都内7校舎＋神奈川1校舎。お近くにない方はオンライン校をご利用いただけます。</p>
+    </div>
+
+    <div class="fi">
+      <div class="schools-area-block">
+        <h3>東京</h3>
+        <div class="school-chip-grid">
+          <a href="https://testea.net/school/ichigaya/" target="_blank" rel="noopener" class="school-chip"><div class="name">市ヶ谷校</div><div class="station">市ヶ谷駅 徒歩3〜4分</div></a>
+          <a href="https://testea.net/school/hatsudai/" target="_blank" rel="noopener" class="school-chip"><div class="name">初台校</div><div class="station">初台駅 徒歩3分</div></a>
+          <a href="https://testea.net/school/shibaurakonan/" target="_blank" rel="noopener" class="school-chip"><div class="name">田町校</div><div class="station">田町駅 徒歩10分</div></a>
+          <a href="https://testea.net/school/kugayama/" target="_blank" rel="noopener" class="school-chip"><div class="name">久我山校</div><div class="station">久我山駅 徒歩1分</div></a>
+          <a href="https://testea.net/school/nishieifuku" target="_blank" rel="noopener" class="school-chip"><div class="name">西永福校</div><div class="station">西永福駅 徒歩2分</div></a>
+          <a href="https://testea.net/school/komagome/" target="_blank" rel="noopener" class="school-chip"><div class="name">駒込校</div><div class="station">駒込駅 徒歩1分</div></a>
+          <a href="https://testea.net/school/jiyugaoka/" target="_blank" rel="noopener" class="school-chip"><div class="name">自由が丘校</div><div class="station">自由が丘駅 徒歩1分</div></a>
+        </div>
+      </div>
+
+      <div class="schools-area-block">
+        <h3>神奈川</h3>
+        <div class="school-chip-grid">
+          <a href="https://testea.net/school/hiyoshi/" target="_blank" rel="noopener" class="school-chip"><div class="name">日吉校</div><div class="station">日吉駅 徒歩1分</div></a>
+        </div>
+      </div>
+
+      <a href="https://testea.net/school/webko/" target="_blank" rel="noopener" class="school-online-row">
+        <div><div class="name">オンライン校</div><div class="desc">全国どこからでも受講OK。対面と同じマンツーマン指導をZoomで。</div></div>
+        <span>›</span>
+      </a>
+    </div>
+    <!-- 注:センター南校(2026年11月1日開校予定)はオープン後に追加してください -->
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div class="sec-head fi">
+      <h2>よくあるご質問</h2>
+      <p>ご不明な点はお気軽にお問い合わせください</p>
+    </div>
+
+    <div class="faq-body fi">
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-qlabel">Q</span><span class="faq-qtext">今の集団塾を辞めずに通えますか？</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><span class="faq-alabel">A.</span><span class="faq-atext">はい、大丈夫です。日能研・四谷大塚・SAPIX・早稲アカなどに通いながらTESTEAを併用するお子さんがたくさんいます。それぞれの塾の授業内容に沿った補強指導を行うので、ぜひそのままご相談ください。</span></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-qlabel">Q</span><span class="faq-qtext">キャンペーンを利用するのに入会は必要ですか？</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><span class="faq-alabel">A.</span><span class="faq-atext">本キャンペーンは、入会後に週1コースの8コマ分授業料を無料にする特典です。まずは無料の個別相談でお子さんの状況をお伺いしますので、相談だけで入会を決めていただく必要はありません。なお、キャンペーン特典は継続受講が適用条件となります。</span></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-qlabel">Q</span><span class="faq-qtext">小学6年生は対象になりますか？</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><span class="faq-alabel">A.</span><span class="faq-atext">申し訳ございませんが、本キャンペーンは中学受験の準備を検討し始める学年を対象としているため、小学3・4・5年生のみが対象で、小学6年生は対象外となります。6年生の方も通常コースでのご相談は可能です。</span></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-qlabel">Q</span><span class="faq-qtext">無料コマを欠席した場合、振替はできますか？</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><span class="faq-alabel">A.</span><span class="faq-atext">本キャンペーンの無料コマについては振替対応がございません。欠席された場合はその回の権利を消化する形になります。あらかじめご了承のうえお申し込みください。</span></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-qlabel">Q</span><span class="faq-qtext">1科目だけの受講は可能ですか？</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><span class="faq-alabel">A.</span><span class="faq-atext">はい、1教科からの受講が可能です。算数・国語などいずれか1科目だけの受講でも歓迎です。</span></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-qlabel">Q</span><span class="faq-qtext">オンラインでの受講・相談は可能ですか？</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><span class="faq-alabel">A.</span><span class="faq-atext">はい、オンライン校でのご受講・無料相談が可能です。対面と同等のマンツーマン指導をご提供します。</span></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-qlabel">Q</span><span class="faq-qtext">キャンペーンはいつまで有効ですか？</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><span class="faq-alabel">A.</span><span class="faq-atext">2026年10月3日から2026年11月末までのキャンペーンです。</span></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-qlabel">Q</span><span class="faq-qtext">費用はどのくらいかかりますか？</span><span class="faq-icon">+</span></div>
+        <div class="faq-a"><span class="faq-alabel">A.</span><span class="faq-atext">入会金は22,000円です。本キャンペーンでは、入会後の週1コース授業料が最大8コマ分無料になります。詳しい料金は無料相談時にお伝えします。</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyQAAAB1CAYAAAC/MCXLAAAuOElEQVR4nO2dTY6kyNamn7q68+CuIJB60j0K7gqSWkF6ST1PagXltYFOrxUUNfukHiS5gvJcwSVXUMS8W5dYwUdIPY8eGPYZ4PyDO+4e7yO5wMF+DoYB55gdM/vh7e0NIS5MAITl1gc+9IR9BTIgB9Lyl59JLiGEEEIIcWF+kEEiLkQARMAOeFyY1guQlL98YVpCCCGEEGJDZJCIcxMCB/p7QZbwDYgxPSdCCCGEEOLGkEEizkXIeQ2RJt+BPca9SwghhBBC3Ah/21oAcXd4mB6Lf3E5Y4Qyr78wRpAQQgghhLgR1EMi1iQAjiwfI7KUZ8x4lWxbMYQQQgghxBDqIRFrEWF6KLY2RgCeMGNKdtuKIYQQQgghhpBBItZgD3zZWogGD8CfGENJCCGEEEJcKTJIxFIOwO9bC9HDF2SUCCGEEEJcLRpDIpYQcX09I138hBnfIoQQQgghrggZJGIuIWYmrVvhFSNztq0YQgghhBCiigwSMQcPs0L6w7ZiTOYZY5QU24ohhBBCCCEsGkMi5nDk9owRMLNvHbYWQgghhBBCONRDIqYSsf64kReMK1XWOB6Uv7WnEv4RMy2wEEIIIYTYGBkkYgoe67lqvWJWdE/KNPsIMIZQtFLez2WaQgghhBBiY+SyJaawZx2D4DfAx7hP5SPCZ2XePvDHCvk/oamAhRBCCCGuAvWQiLF4LO8decYYAtlCWUKWj2N5wRg4QgghhBBiQ9RDIsayY7kxErLOtLspxph4XpDGI0YeIYQQQgixITJIxFj2C+KeY7rdokzzZUEa0RqCCCHuigPzZuPbjTwG5x3DFmHkjybG80fEO3D+mQqtHAem92KHmN78KruOsMHEtMfgteQ/lpB5920sUZl+OCOOP3BsbXzqZRHMTMfD1SVvRPiI8WVk0x0Ks+vIe4dzRb80IeOvM2Le/T5MjSeXLTEGH/j3zLivmJdJvpIsTQLgr5lxX5n/8RBC3Cf2o/jDyPAexoX0A2aM2x7zoU8wPbE/lectAead9YL52KczZDz0nIvKfF9KGdrIW86FmMVuv9OtqEwtmzlYOWDajIhH4CPwFVMGfhn3EfiZ+vX6mG/aaxn22DgXDeQVUP92+LjZIG3+MLyAsL0+j7pLdFPeLvbA7408u0gxdfQ3xhuVNk71PjSP2f9tVOtJW7iuuhbi6qKPKZ8Ap0f05VlNMwE+lftjGkZtumPKaOhZOACfy/2fGvlmuPv9B/X6Z+WoEpXxc9bxMrGyjbnOlNM6MAZbPqPj/X1C4uL9slsQd8/5jBEwD+dvuAd/Cg+Ymb7264kjhHhnFJh33AfgF4xykZXHHzFKkY9TSOJy6zFfuRjzvnvsCfedcQpvOvJ4MjK9c1KU20+Ye3DE3YMYI3Nehkkq8bKWdOZ8TywB5t4WlWOvZT5Wif5eySso5Xkowz1gptYPMMpiNZ0mUbk9ltsxLcyf6a8XYbkf43om4ooc1WM2/zFkI481OWKeq0NLfs+Ysn4s94tKmgnOGHnFTGaTYr736Yh8lxBSL+M/G+e/4YzPX8pflaaRs8fIP8bwvCRj6tsYgxxwBknAMqXz1sk4tVCbBNxHGRW4D+JYwpl5jf3oLeWAaxWcyi+Ye5uuJs19ETPsarfjPqZRzhh+D5wDD1N/vTPnk7O90ngN+Iz7qB8mnNtTdxcqyjz+wtQrrzx2wCmlO+a7sf44M56lmq9f/oLyv4drSe5qhW4eTxfKswYR5hp83H3Y4Vqj7bE9Tv6I0wazAvgVUwYfy2O/VdJ7wvVuUTm+w7w/9i2yZWV6VoELcfVwjzNGgvK/VVIjzDPblmZQkeXYcn4pAU5pfmo5/0T9nWWVy5BTJdTHGYlNPPqfgxhTFmHLuT1O+d+X+UeYe2r1gZ8x5Z+WMtuel0MlvF+RE5xLE7heoLEEuOv8hrm+D+V+XKZr69WvmB4uK2fekaYt/6ocIeZarLFbxdbvqsIf4sqwuj2U+zkbfx/+jlPGbnHl7TXp6yINuK8yCphmZYcz84lnxpvDgfkLNn6g+8P73tnR380dsf5CmVsy1lViTY5crv55XPa5vEZ8xrWA94U5VPabrYRNZewD7S6vNlyfi1QXabmNmdYYkHBavyPq11pV2qzhE5d5Hsv/Pq53Oee8veBjaN6DL9TfS0+0u/ZWW66rrdIxbo2sB5yylmLK5pH6dSflMa9Dvg8NGdtalg84xd3DtO4/0H1/o3J7bDk31b0m5LTe7jHX9YRRnLPyeNxybIiI7ufpK6fjDLxyG5QyvNJ+nf9q2X+h7j6Xl+ntMbI/UH/fRpy+f6s6QUB/40SKW5rAw+mKdlbRoJQtwPWIgTFyY5zhG9D+7fEbeTVpXk8XIaf3oHqd32nXC4NyG+PG7jbpqm8x5pqyEfLxd+5L0V7CF7oVkZj7KqNPuJfrEB7zrr3rBXIujtyXYnwtPGHqyq7j/L2Ved974Bz4XNYYjpBBUuW3lmOfR5y7FgJM/Xmh3ygIMO/xtOVcjlFGbBjK9LIyfIB5D9h3QYabdj1iXoPVgXFl2efuMWUsxBR8nBKYYpTFA658rcIb4xTKx0r4EOeyZ2lz2cpwyt4HXEu55bkMk3TIGZXbuOP8UjLqblpeue+1nLfyhLQPYk578vHpfgdWle2g5Xyby1aCqxefcG5bFmukWJmSFvmiMk17n/rqalX2gvrkBEWZth1HdsBc07eKjAecwd+GX9nPK/sZwz2lWWW/Lf0Q9/5I6P+et/WS9ZFgyv4XRjb0/Z37UrTF+gQz4x1XlGEMBeYh/zgQTkzH21qAO2Z34fysm0Vx4XyvlUPLsc8jzrUxdaB3SL/CPYWU/g9+TLdCkZS/onIsx7X42nStckZ57iNGmTlw/pm3xrLGPYg4vc+PLeE+cvq9sQpds8U449Rly+LjjIuqMZzTfU93uFb4vHL8B+bXq75elaZSPzVMSt3Qs+S099oFGAPtGeeuVrSku+fUZYsyvQhXto84QyShXmY2b6+SR0h97FHKKbaMf2zIZnvi/rMljuUj/eMvqvU4KLffG2GKDrm6SHETKBTlsQPmGT5yWi6WmOk9YmDuR1DGtc9F0hdBg9rFEN7MeOmKMowlQwaJuC3CDfLcobEk5yIdGS6jv9EmwL17c4ZdotpagqcQUm+c/ICpJweMQvFK3Z0jx/m/f6Z71i5L2jh3oNuIiXAKzK9M7wFo5tVFRv89GOp1aiOgvZG3zWXLushEHWn5mDJKWuSwceKJ8s2lzWWriVX4fdrrYkT7LFsJ3eVc0H8/21y2fmB4Frqcen1NcGMhc5wRUFRk8DvkbMrXNByq+LgZ8NrSasMbGW4MEebZsj02QXm8KLcp9XFw1W3G+Gcrxc3MFWHqwx4ZJGIhwcx4+YoyjCXl+lwqhOjCYxsDeocMkjWpuk1Mcb87cNq6aokrafW5Ju2ZprDkHcejyv4zRuGMqSsnCc7IiKgPtC5a0qwqi1N6LsLK/p5xSvfSe9BGwvSen7Qjf+sS0+wB8Wn/ZlWPpdTvm4d7bxw7ZGgrbyvbHFe3gFOXrSYJzmWtzSDZt8QtaHffa3OXbMOOP/mAM4hoSY+GTNYQopRphzEkj9SN86zcRjgXvcOATGHPuUMpWzIinSbpxPBtROU2wU0AAe46A9wsgbuJaYe4MVDNPHNM2fmYelDQcv0ySMS5yLcWQIgrJ3xn+d4raWW/S7n1MR/g6liDgvlKxoFljS9VpdTHKGuvGEWswPnjx+X53zGyBzhlxbrBHFnPRdejrgg94maa6iOt7HfdAw9zPfYeZAzfgz63miZ9LeM59Xt2KLdhubWuSVU3oJj2noio3H7lcq6XS3rfLBGnDZwZ/dfgD6SZ4MZBJJzey2o5/loea47VKco0/sJNDQzGiLSy+ZhnY09/j44lpd8w/kz389s0JoOBvKaww5T5I+aZtfUrK7deee4RN2vclLR/of2eHcrtHjfFcUKjHGWQiHORby2AEFfObqN8H5j+sblX0pnnxsYJcDNhPWCU/j3X1UOVlNsjTvGMMUpKVv4PcG4Xe1wLfcw0v/Ih9rhyijFK2wG3psgY0o5jQSXtA909L2llO8Xoy3F++nnjXJvLFriegIK63Cn9MxtC//O7w8wg9pVTlzCf00aJnP5vdp/LVlBu546HOpQ/WyZ2HMxnhqfyb3PZqhqGKXWXoy4yzMDrL7RPsXvAjUWx+2Noumb5tLtseXSP8fJG5jWGAlM3rPFFQ5YUU2c+Ye7zcULaYbnNe8LEuGf8QKMcZZCIc+Ejo0SIPnYb5h0igwT6WzHHuv6EPeeCSjovuNmaqnEKTpWlvjSrfC/DBvQrLjaPlO7rOuIMkqRx7oAbp+JX8s568pw6wDzAuYHFOOXFDi6OeuKGA2nba7YGYU73PUhxyugPuNXQ4XS2oCPGOLNGTt7It6C958Snrmz7jXQPtLc0B7gxPceW89Vw0F4n2sYbtblxhR3xq3nkjJ8Y6cipzEVH2Gwgra7zzbp9wJVjNJBmQt3dLG1J6wvTepgT6uV6oN1la8fp4olt7HHPsY0fM62nLMMZX9B+nZ8w9z7oSad6rqBuyEUdcQpcQ8OOxgQrMkjEufCRQSJEFwHbznC4o32xtfdGm3vPv0acGzrWxiPt02pao2IJMf0GVF8eEcMrgufAHxh3C5vPYaxwI/Bwq5W/4JSsA8YY+ET/TGJj78ED0+9BjOsh+lKRNcb1FO3p/94lOAVvV/7/pXL+kbqR0NUzE1XS62NXbrOWc20Dqpv/oV6mTTcne8yr/P8Hzv1p7HPSVe5FZT+g/TpS3OxlAe31t1qOY9zO8sr+gXrPXEJ91rmp7HDv3D1uwc6/KmGee+KHuDEeKa6nIWV6b25e2be9IVnl3M+09/RV8RqywbjB+gnmvtie+sSekEEihshmxvNWlEGIeyPaOP/qeID3RoFrtU57wrWda2vt7hs74OFaDrvCZT3xp9KcmjNiWBHLGbeeyBGnRL+wntwebhVtcOs3QH3hOGtIJC1p9N0DqK//0UY2ED8qt58wivgB16DQ7DWp4uEWn7OTBbxQNxis4Zvgek1eKnlWZYsqYbsIcGW547QFPWGcMWnLyudUybTHvMqxgnH8RvdMXOAU/++Ycgtw76qsDBOUadj8C+o9TrZMd9QNP/t8tMnqUzdgHjldgyvukLkPn7rxCqbu/IlZquClPJbRfl8y6gsYJpU0wC3cPQWbhh03dqRu1CUM41X2o3LbJ0eIc8+zz0KIDBIxgWJmvAC5hAjRRbi1ALgF3N4bGfPLvy1eX1ohrmV4bp5TCKgrCv5K6e6pK0uPONeMbEG6AeY7YZVJ2zJbJcIZLF+ou3ZZwoF87PiEoXB9pLjZmKwy+My4628aQvZ6C1xr9yNGQSxwg/mjShyb91CecWX/qSL3VEKcK1GCc39KKvKEGIX/hfEcOHWNqvbufcK5A37Azd7k4dyEgsr575wuHpiWYaLymFWAbd5Zi1zHcvsdU4Z/YoyIHdN1mbD8RcC/KzKkmPL6WspnjZRvdK9oXlT2X3DPh72m33FGfIF7/n1OXRPBTezwWp5LcWNj9l0X1IJN9xVnACeNMF7j/wfM+/AnWiaU+BvmBSDeVzmMfYnCfLercGa8JaSYB12sh/W5fi9cov74TF/19hxEWwvwDvAunN8n3Aw+n5k2BW4bEeYb8DtOGf4Rp4T8hVFkvInpehjF6C/qxkjSErbAfE+sO8sv1Fc5H8KfKJuNE1J32/mCM0Rey60tgxw3ziWspGNlzMrtd8z71MYvyvStS9Qe9761bmp++T8qt0mP3HvcPf8Dd5/+XZHFxynMzd+hkl9QycsrtzluJqYD7lqzigwe/Rxof/e8YN6/P+EUZTDlEFB/Z1bdXbNSzm/l/6LMI8XV2bDcWhenZv5JJf095p5YIzJskbVNfnC9ITlG8bZG12/UeyDyMt0/yv8fMQZQUcriV9LMKvvHhgzWEHzC3PePuN6Uao9RNY7tMTqUacfl/7AlfED3O8SGTzH37BunjQkJznA9lMdecG5nNf6Oq3BRR6ZrELDMX/qV87bkJZxv1pNnrmtV5IJ6l/gQ+cx8PrDNitBRmWdw4XznslRhGOOzuYQ953v2htwsLk3GZYyv3YK4bfc7YN779Qmt2n4ucuoKwZQW5Dns6VcEj5j6bZWufGSa1bEDX3FrCIS4no3P1FcbH0OCax22jR5JT3ibZ4q5BtvaveuJc6TuJvPaEW4oXpVvuNW7I9xUzo+cugbFuHti94+4wcsv1McPfMWVwc8YA+gD5r75FZkS2glx98saPglufJF9R3yi343Ppp/iFPpD5fweo2xXe0ZSzHuoej1ddf5z43+Ea92vcizTeCzl+NY4n5VyBdTr6Y6661uI03tS3DgiD1M2CXXDISv3D9THfXicrr7evMYct8o7uPuQcUpB+z2q5kkps627ceV4hqkXO7r1nbyyH+HcHm0vkE3Tb+SZc2rQVNMKqA9iP1I3lnLc9fxJnaRDVnh7e7vEL3h7eyve5lGU8S8la9svnSl7srHcW1//4Qpkv/ZfNLNs397e3rK3tzdvY/nnEm0s95a/48wySzvSC2am9/b2vu9D18+yJI2okk7+tv437FCm3VUnmr+kIk/cESZsSTMvf2FLeO/N1OXibfp7yC/jpeX+nGsfKtPmPdiNTL8aLyvLLuq5xqAs06wSz15T+FbXA/YVeWy8ojzeJoc955VpDV1z0nE/grLc4rLMu35JS/5tecalPDaMvd68vL7i7fTdYjlUfs0wbWVbNPLwy/zt/fQqecZv7n2YtpSD92buU1Y55pdxk7d+WWz5vlXSbysbe1/9lnOHShk0z9nraiuTXUdeU3/22pvl0vxFlevM3tqfnea9b5Zz/HZav/Z9+f7w9vbWaayszI5x05o1+YntxyKkTG/JfuZ2WumHiKm3/ozlFWN5FyvKco/EzCvff7B92c55gfzB+3IDq+Jx2so2lr53YcK8xcu+se30w9dIWG7TBWl45S9fJEk3Pu7dmq2UpodzK7Fp+gxfg8e899CYtJfmOTePgPnlOiWuV26LjvM+0+WfE6cLj+FyHptfWG7TmbJMwadfpub5ofBr4VfyukR+TbxyW6yY3lppXXRQe3HheFtTbC3AiqTMU5gfGJ4/XujZeE+EC+IeB87NMUjCOYLcOekKaRSct57nrK/QFJxe+5g8ipn5jUl7aZ5z88hmxpsatxg4n8/If06cLooV80tnSzGdfOL5ofBrkV8wrzaKa07vb2smJu6WI+P9b5t8QgaJEJbdzHhN/+km6cx0rc+yEEIIsRkySMRYjgvifuH9uuiI+8Vjeg/DbmZe6cD5gvmTBIQTwnoTwwshhBCDyCARY0kWxv8dt+CRELdOhJva8TAyTsD82QaPK4VpYzchbIK55nxiPCGEEKITGSRiLCnLp2n9hPGvjRamI8RWeJhnobomQTEybjQzz7FTO6cz039k/AQcRSXOnxgjyJuZrxBCCAHIIBHTOKyQxiNGmcuRYSJuixA3v7rlmfG9h+HMfI8jw2XMX+8iHBluj1ugDszaCBn3M6OgEEKIDZBBIqaQst5idlXDJEYKjbhuIoyrUtXlyq4AXIyI7zN/dfb0TGGrRCPDFZhrrk5y8YhbGE0IIYSYjAwSMZWI+TNutWFXuP0LZ5zsVkxfiKXscCvcVtkz3l1rtyD/45nCVrGrto+h4HSSigdklAghhJiJDBIxlZx1XLfasMbJn5gF99Iyr+BM+QkxhE+7S9YL03ojwpn5D0332ySdmQ9MH9zexBol3gIZhBBCvENkkJyPgPudHjMGvl4gnw/AZ0zvSYFRgnYXyFeclz23Y2QmtM+MVUxIw8OMtZhDOjF8wXy3yt3MeFXsYqhCCCHEaC65Uvt74wHjc/4H26xMnbFs7ZAh9hilcq5f/FQeMLN0fcK4jB0xymJ6ofzFetiW9Hij/DPGPRsh9QHsVZ4wvSf5yHTmcpwZp0vuPsKVwn7C9GzmM2QQQgjxDpFBcn5+2TDvn1m+fkgXBUYpSbmcUWKpGicvGMU2YRvDT8zjAdP7tRVjno1o4HzMuF6FMWHaGDvdb5N0Zn521fbjiLCHgfM71FMihBBiJHLZum++cF7XmAJjlDz3Bzsrj5hFF3OMgulvKIu4HdoGqTfxB85/ZJzBvxsRpo3jzHgZ553+N2G4B2Y3M38hhBDvEBkk94935vQLjBJziTElfdhek39jWma9LYURd8EYt6dP9C8OGDB/dfZ0ZrwlcXc95/wy3U8z0xZCCCFakUEi1qDAuLf8uq0Y/8UvmB6T/bZiiBtn7PTWH+mubznwG/N6EY8z4iyJ+0y7m5WHcdHKmDc2RQghhOhFBolYkxj4J+stnriEB4wrV8btzOgkrotsQlhb33KM8u6Vxwvc1NX/AH7CTHQx9IxMne63SToizHeMsfQTRraAukHi4wanf2ZaT08xIawQQoh3jga1i7XJMC5cEUa5meuushZPmGmDf0WDbMU0Mqb3CDxilPfPGKPiWP6K8mf/WwKM8RKW26A8nk7Mt0lR5u+V/7PyWIoxMPKOeB7GbWvH/KmK4bwz/AkhhLgzfnh7e7tUXiFmGtyp/Mj2U7um3K6rwpbl52HcWPZsb5iAUdAirq/19sC8Gad+WFmOOVzsBXIGhsrPx4xJWoPvmOfQ/q6JsPztWGfGvFdM2RUrpCWEEOIdoB4ScU4KjLJ9wBgCey4/RXCVjxhlMETKkhgmx7hXrTF19wfcQp9gxmtkZR4p/b0WaxHgemN8zreOUIyeLyGEEBOQQSIuRVL+AoxxssO4t1yaJ4ziFzJtjIB4nxwwdWVtxf2pkma1d6y69kjaiNP8X8WjPlaq+j/gcj2U3xleo0QIcR3EXGattLFrogWY99w53levTPvu+2XYc787n1EjKSCDRFyeDOfGFWAMk5DLusTZlcJDZJSIfgpMHc24jFL/iDPUm8/ElgtJjuGZ215/xMO8l3Jcr9WtE1C/JzHDik81TkF97J1HfTa5hG3LKcAt5pn1nM8w97SYmY9H/brjEWntcWO4jlzntya4UD4R49dsOtd71i78mo0M759RlipPOEPsXSODRGxJRv3lEOIMlHO7dj1gPhIBapkQ/eSYOnlkm169W+AeWvl21I2+X1lPiczoLpsd8xTDuCfNatrVa0oZVnyaceLKftCSXj6Q3lRCxilnBU5h3HFahh6nz+zcMZUB08vx98b/bEa+Yl2KrQUQ3cgguW++cltWd4qT18cZKEtm++njscwvOFP64nqZupBnhqknR253gotzca2TRUwlbPxvKpRL+I1uV7Y98+tUV5rXQlT+PMYZrAlm4c2XMl7aE/aIW6TzCTde0bKnbow8D6QH5hn/ayAMtE/Q843uHsKhfMVlyLYWQHQjg+T8PLPNhzrjthcGzHHjTjzcoPi1W6ifMC2A+5XTFcNstV5Nxrz7XWCUqj1G8bmGmeO25BVTDvG2YqxGuLUAd0KAM0Sqz8iB/udujzMwHjFK/9fyeIExQPoap+x02108UZ8V8BXnUmVp/p/CkrjiMmRbCyC6kUFyXrT2xToUmHKMMUrDgXVbqX/BtGAdV0xT9DN2kOM1EmPqSsz5eu+unaqieA8EXIc73ivdSpNHuyvrnnpvzj970jgHQfkLy19XOf5Cv0GSlPGrz9QnnIHjzZSvi7YGhRzTmzWHV7p7QmJOn5U92yvIxZXlMzbcHF4mpj8l7FIukZePqZ8Z5vuVXCDPScggOR/fkTFyDlLMRyvAlO9ahkmC1k64FH9whS/DieS48U4H3o8b11fc6u33RNT4/xXXWg9m7MFU5qy7ldHdUxN2pOkN/D8nY67xFWfA91HgFuVMcAbDE+baY/pdnyLqxtCQYZG1HMsx9TtgnOuW5Z8YubveA22GpN8hwyWJuIx3QDwxnDcjjx39Y0+PE9PLgJ84v0t3xmXqQYKbNOUjrmEtukDeo5BBIm6VDNcil7C8dfOBYZcCsQ7F1gKsSIpb1+PAeWeJ2YpXzDMWc3+GiCWq7D9zep1p47+Pm3mtzfXnloioX7/fOJ+W24Rp9/8bRuE5Mu2ZP+LGaz1hjMO4cW6MsdDlvjXGc8Ebkf6S8HAd78GC6xuHFM+MlwF/9pxPZ6R55D48Jw6cGssPmEaXlCtpIJRBIm6dFNdb8qkv4Ah+4b6VLnE+cpxbyY7zTsZwKaxCmWwrxtmJqBuRCcMKpl+Jc+sGaER/D1/13KEnnB00bn9F5ZxX5pPRP+OYJcdNapI0znkDcYeYGv+Z9oaqZu9QXNkPqZfbb5g6s/QbJbqJes69cB+GxRwiuo1z23t5FcggEfdAgZuR5cvCtA5cURemuDkK6pMx7HCK1bUrri+4sVQp19GCewmixv8E9ZSO5TfGTYEb0D/Oxad7rZ8v9M9gNcadbo77nOVpZPwCZ7AdcAbJC26BVRkk58GnvwEouYwYV0dEv0504Ire8zJIxD2RlNslRskn7tNHXpwfD/MBOGLqT4EzTsAN/A3K37nX2hniGbdgXEp7nfdxbpH3SMhp70DREm5H3Zfcb5w/NP5nM+UJ6FbuvZlpDtHMz6fuAvu9Ixy4RSSH8Bv/i5bzfQa713PuMCL/qeRMG9yeldsEN76smtY1EbDt+NY964+ZOPSce2Xa9cZstxRAxnqNIRH9utDVjXOWQSLujaTcLjFKIq7Pr1ZcPyGmFfh3jLKf4GY1gfbBiyFGGfMxH0Gv3K7Vm/KCM46ycj+nX4kMcG5nT7gxJPfIYWS4Pf1uTU2XiLlTWj8M5HMODi3/q9cTVva9RtiY4cVlA04VvLzxvy/+EGuX145pSmGBeX4j2ntA0mXirE7MtpNwxKw7xXZAf89TzPj6FWJct7fiA66Hegkx/dfxQneP42bIIBH3SIL5cM5d2CxCBomYzq6y/4Srf9YVyv7ySrh0IM2w5ViAUwxz2ltgh9JtphfQ7Vr2UB4/TkjzFgh5P7OjrUWBqc+2B+WB6Qrcc8uxDOPG5VWOxYzrRfxhRJi34SD/RcD0evERY7i3UUxMS0wj7jk3tXfk1vEYXrz3FfM+L84uzURkkIh7JaZ/GsY+HjHKSrqaNOI9sOs4/ohpwbOteHatiRRjTGR0uzCkI4+NJcT1xtjfmN6YkPszSOIJYdPGf4+6stzsEUkZ/+6JK+mHnA6G7ou3BQeW9UAnHcezxv9iZHpTjI0xZHT3cHmcGkmvmB6VY7ndU3+mfi/jpeuIJyrs6X/OYq5Q8T4TIaYO9r3PX8tw2UBaO/pnLDsHzzJIxD0TAf+eGXeHPiBiPAHj3aysW479kP7B5QZRJ8ybInvHfQ303jNtDM+h8T+kPtA5bInTt2p4lSPO2DswflarS+LhxrckuHESQeV8W3lal0Fwq60nq0u3LkdOjW8ft1ZVlWfc7GHgJkVpvgs+o8lS1san//l44X30jniYchjqqRxrjMA2Y2ieZJCIeybndIGzsYSrSiLunWhB3HQlGcbmNed5eMR8pLIVZdkKn+tR9Jv4WwvQwhE3g9E/MIZFyvU02KzpsuVzeg88unvbC5zSu6d/pfqi5VzAfTxTW3CkvxFoz/33jkSY+jfUGNY0nK8SGSTi3jkwTwF7wnyIihVlEfdLuCDucSUZxuY1d+rRkCv/oI0kpv4Bf2Vc79ae7nFpVYV3SY+X35Nukx9Z3yjwOW0drU6n+j+B/70g/bGLSPrUy+IDpkzjlrBrumxFjO/ZgrqR8t+pG7p24HBS/g+B/6ycD8u8vnJZ5XnP9J6DgGFXoGxC/ktJ6O/htGsoTSXFPL/BhDjegCxgDIJiRFoZ457pCFPXxvZ2H7iBd7cMkvMRoNaPayDHvAzmTLEacD2tgPfEjvvy7fWZP4XvtxXlGEO6IG7EfbhAJDgl+6X8P0YJ9UamH0wVaEYeaxLiZlWb4843hbGG36El7O8YGf9joQzFwvhVrCL+d+B/UZf5UJ4LKseqEwKE5fYTbka+S5AxvQElAP7qOe9zufd5xHCjSrQg/f2MOEe610H5yjruel6Zzp7pz2mxQv5nRwbJ+XjAvGAibqQyTKDgtgythHkzboXIIDkHT5hy3W8rRivpjDi7C+e3hAIzYHfOZA/30mt4xJVBxHW5Z26xNs3Qon922ueE8xpMIe0za1WVeDv26v9ivkH/rxH2/7QcswTl1sP1ZGTUW9LjRpy8/AXUvyHV3imv3P8flfPfaR8rk1G/llvB6zn3wmWNkTETKuy47Fglr+dcujDtGPNsbL1u1dmRQXJeHrj8TAWX4meuf3CiJZ0Zz19RBlHniWWrJ5+LOa1Z4YL8jgviLslzrjK043ae+z52uAaHcEb8r9TLIWL5KtzBxDzyhflZhnqQvcp+2Dj3K8ONU/FA+mDetc33wStuodGY+qDd/1b+ltJ07Slwxopf5u/T/y0IqV/fM92NFEfaW9KznvSvgajnXHZBGcbO7vYF8zztzyRLFY/+92m+IO2QbdZFiTfIM5NBIubyBTdryrWTzYznryiDuA0+YepLPDK8R3dX/RDVGYguSbog7o77MEgKlr27curlGC5Iy+I3/icDeeQr5AmmvluF+hvDClYzbjoQphiRTk69J+Qbde+CPW5a3bnPWxtZzzmPca58R0yPSYKRd0f3NSeczvA2dnzBVnj09wKnF5AhYvpU07/gFnktVpWmzr7n3CuX6wWvPj9LKdhg4g8ZJGIJAbdhkMA8NxX/DHKI68ebEDZckM9xQdwlZMz/eIWrSiKqhI3/2YXyjTFK0xGniIx9V0YM1wl/ZFqHUpaI9mcjLX8eboym15Ne1ZiwY4WaxD3xM9onPPhGXck8YMogx5Rf3pMmuDF0H0u5ooHwW7Onf+zP8cz5x8zvJfiAc53PVpGmjke/QZKeIc8mLziDPeOGXbtkkAjRzbkHeIrbZ7cgbrqSDHPznuNi9MB9rto+lZB6C2K4Qpq7yn6bX76/Qh5tZMxX1pa6qVVJyu2e9V1tPE7vUcxwy7k3Iu2QaY1dOcveG5ckpL+X6Dvn6+X1MXVi6VgbO2YxYv33VkK/sZasnF+V75g6fKwcK86Y39mRQSLeCxm3NYhQ3Aa7BXGPK8kwN+8l0/8e1xLkRqkubLkGPvUGkLQjTBtZZf+VbdwA1yLiPO9puxhplZThehwyfazb0DTEY6c+3pqA4fJJzpT3nvaZ1prYWc6G6owdz/sr642PSOh3H3xh+Xsyp95L91zme+S2n/NWZJCI90KxtQDi7ggYvzp7k0tP99skXRB3x3XOkHbL7Bv/jwPhvzfCjlkc8Bx8ZVgxihjf25xxuYaj4kL5NJn7zrgkEcML7lnleO18D4yrL9WVxyPGjTH5HTfYvZgom8Vj2BiBdcZg5Bh5fd7BjJ8ySIQQYh7RgrjpSjLMpWD+9L+PvM81ltKR4bKJ6XrU69Ir7QaJNzHdS5AwXC4h4w2SPafG2Y7T2SrHLCZY7an4zjy3upy68ddGQF1xHwpfzJDjEoSYa4kYNw5hv1K+Pq6RY2w9qRojYOphhqmLQwbfJ8x1hoy/Fz5ugPxuRB5d0z7PIecOe0PakEEihBDzCBfEPa4kwxKOzG+NDnlfBklYbtOJ4cewp67gHDvCVZXEfEL6t06K6VGstkjPUSrnkDN8L1Pqz9FQ+GskYtosVn+wXqNKxrReIzutct6SToB5foYMqifcvc1G5JkyzViKRoYVFWSQiPeCv7UA4q7wmT+byVbT/TZJF8SNuI9V28dyrjVzAk4HDR9wvSZZJVyVvCO9XRm2KH/7kXKEjTTGcom1hAqMTBF1pfkJ0wq9Wzk/j9PyHgpfJZyYXzox/DnwJ4T9zroum1OMkeZ00E1y3AKbQ2PkHjCrz49xd5wywU3Edbzfbw4ZJGIJwdYCTMDfWgBxV+wWxD2uJMNSMuZP/3svq7ZvicepW4cdkxFSXxm8SdZxfE9/r1fRcfwaFyltklB3y7EryMO8wedd7Bm3/kgXU+Worvp+7fQt+nhufmPcuIwCZ8z3PUNg6tCa/Mz1vN9vjr9tLYC4afytBZhAMCPOkC+weL+EC+KmK8mwBumCuLuVZHivRNR72V5xLc9ZT7y+xdb64r30nO961z33pLcFGebZ+0Z9FqhsIF5+HnHeFd84v4tcG8/AP5k+SDwGfqLf6NjNkuiU1zKvZKX03iWX7CEpLhxvTYqtBbhSbmUBHp/bmNlkCmu37MylbeGw98Dc1aK7BixvxZFl0/8mawly5fw4I85QS3mMUZRjTC9ViPvWFLQ/W88Yxaygnazj+Av9ylfGac/KmEX7fu3J0xLjvhVrvLcyTq+loPtd9MI098KMyzVGFVz/WKxX3KKVl843ZtlsVUfce6qpr/zKOo1D35Gb1ir88PY2NGX2qkRMGzj1M9fxwfMwFfdWFPBL8hPXpWC1ETGt3lnGdhEvxWNa/WrOMLIlAeNmNrkVnhnXCnhgnlvHH1zflLk50922rqkOLsXD9aAWmGtqOzaVADe+IKO7TnmYRpO+PELmD6gvBtK2MgQj41TTT0fI4+N603POu5Ce33I8PVN+98SB0/eZXd0+5ryNsk0l9Bz5etQn8fjKtIHnbYryN4yM6Wyp1udIe2PZP7mBd/WlDRKov6T7KLiuAvS4rTETU4iY30o69cHegiPzWrQvaRB7jK9fOdfVGuNzW+57fWSM/wiGM9JPZ8Q5Nx7T320F1/V+FkLMJ8D12OWYb2Z2obxjnEF+7nz3mPfdYWK8A65RIK9srw2P0wavjOtvNAa2MUjEdXJgXovvK+ZlUqwoy5r4wL9nxr2JVgUhhBBCiFtGg9qF5TAz3gPXPbg1mhnvFRkjQgghhBBnRwaJqPJtZrzDmkKsiMd8f/3jalIIIYQQQohOZJCIKseZ8R65TqPkwPzB1ul6YgghhBBCiC40hkRU8YD/nBn3FTMwLl9JlqUEmFVY53Dt42KEEEIIIe4G9ZCIKgXz3bYeuB43J49lshyRMSKEEEIIcRFkkIgm8YK4T1zHujEJ09dVqBKvI4YQQgghhBhCBolokmIWJprLJ7Y1ShLmr6INZtXVbBVJhBBCCCHEIDJIRBuHhfG3MkoS5i/waDksF0MIIYQQQoxFg9pFFxnGBWsJ3zDrgBQL0xnCw/TsLJX3O/NW3xZCCCGEEDNRD4noYr9CGh8xhk24Qlpd7DAzey01RmCdaxZCCCGEEBOQQSK6SIGvK6TzCPwLM3OVv0J6lgAj45/MX2ukyh9o7IgQQgghxMWRy5bow8P0Pqyh8Fu+YoyT48z4O0xPxodVpDE8Y3pxihXTFEIIIYQQI5BBIoYIMT0ca/OKMUpSjNGT9uQflL8d6xpHln+i3hEhhBBCiE2QQSLGcAA+by3EmfiZ61g7RQghhBDiXSKDRIwlYfmUutfGV8wsYEIIIYQQYiNkkIgppKw7dmNLZIwIIYQQQlwBmmVLTGGHGQB+68gYEUIIIYS4EmSQiCkUmEHm37YVYxEyRoQQQgghrggZJGIqBaanZI01Si7Nb8gYEUIIIYS4KjSGRCwhAmLOMxXvmrxiZD1uK4YQQgghhGgig0QsJcDMwPW0rRidfMcYI/m2YgghhBBCiDbksiWWkmGMkt8wPRHXwivwK2bMS76pJEIIIYQQohP1kIg18TGLKG69XskfpRzFtmIIIYQQQoghZJCIc+BjDIIdlxtf8opxHYtRj4gQQgghxM0gg0ScEw8zfiPifGNMvmMMkSPqERFCCCGEuDlkkIhL4WPGc+wwY04eZ6bzglkxPkVGiBBCCCHEzSODRGyFhzFMgnIfjMFSJS23BWbwfIYMECGEEEKIu+L/A37L25pb5zkCAAAAAElFTkSuQmCC" alt="TESTEA 個別指導塾テスティー" width="804" height="117"></div>
+        <div class="footer-info">2006年開校 ／ 8校舎＋オンライン校<br>東京都・神奈川県</div>
+      </div>
+      <nav class="footer-nav" aria-label="フッターナビゲーション">
+        <a href="#hero">トップ</a>
+        <a href="#philosophy">TESTEAとは</a>
+        <a href="#offer">キャンペーン</a>
+        <a href="#form-section">お申し込み</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+    <p class="footer-copy">© 2026 TESTEA Inc. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<div id="fixed-cta" role="complementary" aria-label="固定CTAバー">
+  <div class="fixed-cta-text">中学受験準備応援キャンペーン実施中</div>
+  <a href="#form-section" class="btn">無料相談を申し込む</a>
+</div>
+
+<script>
+(function() {
+  const header = document.getElementById('site-header');
+  const THRESHOLD = 60;
+  function updateHeader() { header.classList.toggle('scrolled', window.scrollY > THRESHOLD); }
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  updateHeader();
+})();
+
+const fiObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); fiObs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fi').forEach(el => fiObs.observe(el));
+
+/* R2-7: FVのCTAボタン自体を監視し、そのボタンが画面外に出てから固定バーを表示(初期表示での二重CTA重なりを回避) */
+const ctaObs = new IntersectionObserver(entries => {
+  document.getElementById('fixed-cta').classList.toggle('show', !entries[0].isIntersecting);
+}, { threshold: 0 });
+const heroCtaEl = document.querySelector('#hero-cta-block');
+if (heroCtaEl) ctaObs.observe(heroCtaEl);
+
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+const hamburger = document.getElementById('hamburger-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
+    });
+  });
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    const headerH = window.innerWidth <= 480 ? 56 : 64;
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - headerH - 8, behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
