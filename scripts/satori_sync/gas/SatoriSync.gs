@@ -40,6 +40,7 @@ var SATORI_CONF = {
     doNotSend: '送付禁止フラグ',
     activity: ['問合日', '初期対応へのレス', '面談実施', '体験実施'],
     route: 'なにで知ったか',
+    lastUpdated: '最終更新日時',
   },
   // 情報獲得経路が分からない人に送る値
   routeDefault: 'その他',
@@ -169,6 +170,7 @@ function satoriBuildDesired_(todayYmd) {
     campus: col(c.campus), inquiry: col(c.inquiry), email: col(c.email), status: col(c.status),
     enrollment: col(c.enrollment), rejoin: col(c.rejoin), withdrawn: col(c.withdrawn),
     spam: col(c.spam), doNotSend: col(c.doNotSend), activity: c.activity.map(col), route: col(c.route),
+    lastUpdated: col(c.lastUpdated),
   };
   var rows = values.slice(1).filter(function (r) { return r.some(function (v) { return String(v).trim(); }); });
   return satoriBuildDesired(rows, idx, todayYmd, SATORI_CONF);

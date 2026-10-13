@@ -140,25 +140,36 @@ function satoriPrevMonthEnd(todayYmd) {
  *   write : SATORIへ書き込む状態か（在籍は最近の入会・再入会だけ書き込む）
  */
 function satoriDeriveRow(row, idx, inquiry, cutoff, conf) {
-  if (satoriHasDate(row[idx.withdrawn])) return { status: SATORI_STATUS.FORMER, write: true, reason: '退会日あり' };
+  var withdrawnYmd = satoriParseFullDate(row[idx.withdrawn]) ||
+    (satoriActivityDates(row[idx.withdrawn], inquiry)[0] || null);
+
+  if (satoriHasDate(row[idx.withdrawn])) {
+    return { status: SATORI_STATUS.FORMER, write: true, reason: '退会日あり', anchor: withdrawnYmd };
+  }
   var rejoined = satoriIsChecked(row[idx.rejoin]) || satoriHasDate(row[idx.rejoin]);
-  if (rejoined) return { status: SATORI_STATUS.ENROLLED, write: true, reason: '再入会' };
+  if (rejoined) return { status: SATORI_STATUS.ENROLLED, write: true, reason: '再入会', anchor: inquiry };
   var enrolled = satoriActivityDates(row[idx.enrollment], inquiry);
   var enrolledYmd = enrolled.length ? Math.max.apply(null, enrolled) : null;
   if (satoriHasDate(row[idx.enrollment])) {
     var recent = enrolledYmd !== null && enrolledYmd >= conf.enrolledWriteSince;
-    return { status: SATORI_STATUS.ENROLLED, write: recent, reason: recent ? '入会（最近）' : '入会（以前）' };
+    return { status: SATORI_STATUS.ENROLLED, write: recent, reason: recent ? '入会（最近）' : '入会（以前）', anchor: inquiry };
   }
   if (satoriNormalize(row[idx.status]) === SATORI_STATUS.FORMER) {
-    return { status: SATORI_STATUS.FORMER, write: true, reason: '在籍ステータス: 元在' };
+    var lastUpdatedYmd = idx.lastUpdated !== undefined ? satoriParseFullDate(row[idx.lastUpdated]) : null;
+    return {
+      status: SATORI_STATUS.FORMER,
+      write: true,
+      reason: '在籍ステータス: 元在',
+      anchor: withdrawnYmd || lastUpdatedYmd || inquiry,
+    };
   }
-  if (inquiry === null) return { status: null, write: false, reason: '' };
+  if (inquiry === null) return { status: null, write: false, reason: '', anchor: null };
 
   var dates = [inquiry];
   idx.activity.forEach(function (c) { dates = dates.concat(satoriActivityDates(row[c], inquiry)); });
   var last = Math.max.apply(null, dates);
-  if (last > cutoff) return { status: SATORI_STATUS.ACTIVE, write: true, reason: '対応中（最終 ' + last + '）' };
-  return { status: SATORI_STATUS.PENDING, write: true, reason: cutoff + 'までに対応停止（最終 ' + last + '）' };
+  if (last > cutoff) return { status: SATORI_STATUS.ACTIVE, write: true, reason: '対応中（最終 ' + last + '）', anchor: inquiry };
+  return { status: SATORI_STATUS.PENDING, write: true, reason: cutoff + 'までに対応停止（最終 ' + last + '）', anchor: inquiry };
 }
 
 // 同じメールアドレスに複数行あるときの優先順位（小さいほど優先）
@@ -200,8 +211,9 @@ function satoriBuildDesired(rows, idx, todayYmd, conf) {
   Object.keys(byEmail).forEach(function (email) {
     var e = byEmail[email];
     var status = e.best && e.best.write ? e.best.status : null;
+    var tagAnchor = e.best ? e.best.anchor : null;
     var tag = (status === SATORI_STATUS.PENDING || status === SATORI_STATUS.FORMER) &&
-      e.inquiry !== null && e.inquiry >= conf.tagInquirySince;
+      tagAnchor !== null && tagAnchor >= conf.tagInquirySince;
     desired[email] = {
       status: status,
       permissionReject: e.permissionReject,

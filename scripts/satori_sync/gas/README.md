@@ -53,3 +53,18 @@ APIキーは既存のスクリプトプロパティ `SATORI_API_KEY` / `SATORI_S
 - `tagInquirySince`: タグを付ける問合日の下限（既定 2026-06-01）
 - `enrolledWriteSince`: 在籍を書き込む入会日の下限（既定 2026-09-01。それより前の入会は現役か分からないため触れない）
 - `yearInferenceAnchor`: 年なし（MM/DD）の問合日の年推定の基準日
+
+## 既知の修正履歴
+
+### 2026-10-13: 元在がタグ対象から漏れる不具合を修正
+
+**症状**: 在籍ステータスが「元在」の顧客（約400件）が、タグ「新規_未決元在」の対象に一件も入らなかった。
+
+**原因**: タグ付けの条件判定が、すべての状況で「問合日」（`idx.inquiry`）を基準にしていた。元在の顧客は問合せ自体が古いため、問合日基準では`tagInquirySince`（2026-06-01）を超えられず、常にタグ対象外になっていた。
+
+**修正内容**:
+1. `satoriDeriveRow`（`SatoriLogic.gs`）の返り値に `anchor`（タグ判定に使う基準日）を追加。退会日あり→退会日、在籍ステータス=元在→退会日 ‖ 最終更新日時 ‖ 問合日、それ以外→問合日、の優先順位で決定する。
+2. `satoriBuildDesired`（`SatoriLogic.gs`）のタグ判定を `e.inquiry` から `e.best.anchor` に変更。
+3. `SATORI_CONF.columns` に `lastUpdated: '最終更新日時'` を追加し、`satoriBuildDesired_`（`SatoriSync.gs`）の `idx` 構築にも `lastUpdated: col(c.lastUpdated)` を追加（この行が無いと `idx.lastUpdated` が `undefined` になり、修正1・2を入れても効果が出ない点に注意）。
+
+**検証結果**: 修正後、ドライラン（`SATORI_DRY_RUN=true`）で約360件の元在がタグ対象として判定された。本番反映は、送信直前のフィルタ（`satoriSync`内、`SATORI登録済み`シートに無いメールアドレスは送らない安全装置）により、SATORIに既存登録済みの約160件のみが実際に送信され、残り約200件（SATORI未登録の元在）は意図的に未送信のまま。これは仕様として現状維持することに決定（SATORIへの新規顧客作成は行わない）。
