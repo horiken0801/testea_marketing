@@ -1,0 +1,41 @@
+name: Threads trend drafts (中学受験)
+
+on:
+  schedule:
+    - cron: "0 22 * * 1,4" # 毎週火・金 07:00 JST に下書きを生成
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: threads-drafts
+  cancel-in-progress: false
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: scripts/sns-automation
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -e .
+
+      - run: python scripts/draft_threads_posts.py
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL }}
+
+      - name: Commit drafts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add drafts/threads
+          git diff --cached --quiet || git commit -m "chore: add Threads trend drafts"
+          git push

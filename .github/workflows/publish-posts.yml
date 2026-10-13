@@ -1,0 +1,47 @@
+name: Publish due posts
+
+# NOTE: フル自動運用フェーズは一旦保留中。定期実行は止めています。
+# 再開する場合は下の schedule のコメントを外してください。
+on:
+  # schedule:
+  #   - cron: "0 * * * *" # 毎時0分にキューを確認して投稿
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: content-queue
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: scripts/sns-automation
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -e .
+
+      - run: python scripts/publish_posts.py
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+
+      - name: Commit queue status
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content_queue/queue.json
+          git diff --cached --quiet || git commit -m "chore: update post status"
+          git push

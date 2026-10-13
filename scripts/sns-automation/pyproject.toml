@@ -1,0 +1,21 @@
+[project]
+name = "socialbot"
+version = "0.1.0"
+description = "X (Twitter) / Threads automated operation toolkit"
+requires-python = ">=3.11"
+dependencies = [
+    "tweepy>=4.14,<5",
+    "requests>=2.31,<3",
+    "anthropic>=0.40,<1",
+    "python-dotenv>=1.0,<2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["socialbot", "socialbot.platforms"]
