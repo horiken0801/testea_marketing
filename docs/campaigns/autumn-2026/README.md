@@ -20,5 +20,6 @@
 - `lp/` — LPのHTML案（`index.html` が最終版、`index-playful.html` / `index-testea-brand.html` はデザインバリエーション案）
 - `lp_draft.md` — LP文言のドラフト
 - `school_announcement_draft.md` — 校舎向け通知文のドラフト
+- `meta-google-ads-ops.md` — Meta広告・Google広告の運用詳細（対象学年を絞った背景、PMaxキャンペーンのルール、バナー制作仕様など。Cyvate社との打ち合わせに基づく）
 
 ※ 本番LPは上記の `testea.net/autumn-campaign-2026` に公開済み。このフォルダの内容は制作時のドラフト・素材アーカイブ。
