@@ -1,0 +1,79 @@
+[
+  {
+    "topic": "秋期キャンペーン(小3〜5年生向け・画像あり・継続)",
+    "insight": "前回(10/8)の秋期キャンペーン投稿(画像付き・URL直書き)がエンゲージメント率11.3%で週内最高を記録した。Threadsとは逆にXでは好反応だったため、同じ形式(画像付き・URLを本文に直書き)で継続する。",
+    "post_text": "中学受験の対策、早めに始めるご家庭と、6年生から本格化するご家庭があります。\n\n早めに始めると、学習習慣を整える時間に余裕が持てます。\n\n小3〜5年生向けの秋のキャンペーン(週1コースの授業料が入会金のみ、11月末まで)を実施中です。\n\n詳しくはこちら\nhttps://testea.net/autumn-campaign-2026/",
+    "suggested_datetime": "2026-10-15T21:00:00+09:00",
+    "reasoning": "木21:00の相談枠だが、好調だった形式を維持してキャンペーンを継続投入。画像を添付してください。",
+    "sources": [],
+    "category": "キャンペーン",
+    "expected_engagement": "imp 40〜60、エンゲージメント率8〜12%",
+    "destination_url": "https://testea.net/autumn-campaign-2026/"
+  },
+  {
+    "topic": "HP誘導(/press/・問いかけあり・再登板)",
+    "insight": "/press/は過去複数回エンゲージメント率13〜14%台を記録した最も再現性の高いURL。数週間の間隔を空けたため、新規性を回復している可能性があり再投入する。",
+    "post_text": "塾選びのとき、指導方針だけでなく、これまでどんな形で評価されてきたかも気になるところだと思います。\n\nテスティーがメディアで紹介いただいた記事をまとめています。\n\n▼こちら\nhttps://testea.net/press/\n\nこうした実績、参考にされますか？",
+    "suggested_datetime": "2026-10-16T12:30:00+09:00",
+    "reasoning": "金12:30のHP誘導枠。実績のある/press/を間隔を空けて再投入する。",
+    "sources": [],
+    "category": "HP誘導",
+    "expected_engagement": "imp 25〜40",
+    "destination_url": "https://testea.net/press/"
+  },
+  {
+    "topic": "休止",
+    "insight": "運用プロンプト2-6「土は原則休止」に従い、通常投稿は作成していない。",
+    "post_text": "",
+    "suggested_datetime": "2026-10-17T00:00:00+09:00",
+    "reasoning": "土曜は原則休止のためスキップ。",
+    "sources": [],
+    "category": "休止",
+    "expected_engagement": "",
+    "destination_url": ""
+  },
+  {
+    "topic": "議論・過去問の点数を人と比べる家庭と自分の子の推移だけを見る家庭",
+    "insight": "前回(10/11)の議論(合同説明会)は反応ゼロだった。Threads側で好評だった『比べ方』という切り口をXにも展開する。",
+    "post_text": "過去問の点数を、他の子や平均点と比べる家庭と、自分の子の過去の結果とだけ比べる家庭があります。\n\n比べる家庭は、全体の中での立ち位置が分かります。\n\n自分の子だけで比べる家庭は、純粋な成長を実感しやすくなります。\n\n過去問の点数、何と比べていますか？",
+    "suggested_datetime": "2026-10-18T21:00:00+09:00",
+    "reasoning": "日21:00の議論枠。反応の弱かった前回から、好調な過去問テーマと組み合わせた切り口に変更。",
+    "sources": [],
+    "category": "議論・テーマ提起",
+    "expected_engagement": "imp 30〜45",
+    "destination_url": ""
+  },
+  {
+    "topic": "相談・DM化(理科・X初投入)",
+    "insight": "社会はThreadsで好調だったがXでは反応ゼロだった。同じ症状特化型の理科はThreadsで2週連続安定しているため、Xでも試す価値がある。",
+    "post_text": "理科の暗記単元は得意なのに、計算や考察問題になると急に手が止まる子がいます。\n\n覚えることと、使うことは別の力なので、知識を実際の問題に当てはめる練習が必要です。\n\n理科のことで気になることはありますか？",
+    "suggested_datetime": "2026-10-19T07:00:00+09:00",
+    "reasoning": "月7:00の生活導線枠。社会に代えて理科をXに新規投入する。",
+    "sources": [],
+    "category": "相談・DM化(理科)",
+    "expected_engagement": "imp 20〜30",
+    "destination_url": ""
+  },
+  {
+    "topic": "HP誘導(/premium/・初投入)",
+    "insight": "未投入の/premium/(プレミアムコース)を投入し、URLの幅を広げる。",
+    "post_text": "中学受験の対策に加えて、高校・大学受験まで見据えたいというご相談もいただきます。\n\nテスティーのプレミアムコースについて、まとめているページがあります。\n\n▼こちら\nhttps://testea.net/premium/\n\n先々のことまで意識されていますか？",
+    "suggested_datetime": "2026-10-20T12:30:00+09:00",
+    "reasoning": "火12:30のHP誘導枠。未投入URLでデータの幅を広げる。",
+    "sources": [],
+    "category": "HP誘導",
+    "expected_engagement": "imp 20〜30",
+    "destination_url": "https://testea.net/premium/"
+  },
+  {
+    "topic": "声かけ型(過去問の点数を見せられたときの聞き方)",
+    "insight": "週の締め。声かけ型は直近2回反応が弱かったため、好調な過去問テーマと接続した角度に変更する。",
+    "post_text": "過去問の点数を見せられたとき、点数そのものより、\n『前よりどこが良くなった?』\nと聞く方が、子どもが話しやすいことがあります。\n\n次に過去問を見るとき、試してみますか？",
+    "suggested_datetime": "2026-10-21T21:00:00+09:00",
+    "reasoning": "水21:00の声かけ型枠。好調な過去問テーマと接続した角度に変更。",
+    "sources": [],
+    "category": "声かけ型",
+    "expected_engagement": "imp 15〜25",
+    "destination_url": ""
+  }
+]
