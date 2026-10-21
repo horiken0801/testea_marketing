@@ -11,15 +11,15 @@
     "destination_url": "https://testea.net/autumn-campaign-2026/"
   },
   {
-    "topic": "HP誘導(/about/・問いかけ変更)",
-    "insight": "/press/は週内最高(6.1%)を維持しているが13〜14%台から低下傾向。文言パターンの摩耗が疑われるため、今回は/about/に切り替えて新しい問いかけ文言で投入する。",
-    "post_text": "テスティーがどんな想いで指導にあたっているか、まとめているページがあります。\n\n▼こちら\nhttps://testea.net/about/\n\n指導方針、気になりますか？",
+    "topic": "HP誘導(/handashiki/・初投入)",
+    "insight": "/press/は週内最高(6.1%)を維持しているが13〜14%台から低下傾向。文言パターンの摩耗が疑われるため、今回は未投入の/handashiki/(塾長・繁田氏が体系化した学習メソッド『はんだ式』の紹介ページ)に切り替える。",
+    "post_text": "テスティーの指導には、塾長が約20年の指導経験から体系化した『はんだ式』という学習メソッドがあります。\n\n理解・記憶・承認、それぞれの段階でやり方を決めています。\n\n▼詳しくはこちら\nhttps://testea.net/handashiki/\n\nどんな学び方か、気になりますか？",
     "suggested_datetime": "2026-10-23T12:30:00+09:00",
-    "reasoning": "金12:30のHP誘導枠。/press/の文言摩耗を踏まえ、/about/に切り替えて新しい問いかけ文言を試す。",
+    "reasoning": "金12:30のHP誘導枠。/press/の文言摩耗を踏まえ、未投入の/handashiki/(はんだ式メソッド紹介ページ)を初投入する。",
     "sources": [],
     "category": "HP誘導",
     "expected_engagement": "imp 25〜35",
-    "destination_url": "https://testea.net/about/"
+    "destination_url": "https://testea.net/handashiki/"
   },
   {
     "topic": "休止",
